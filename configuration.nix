@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       inputs.lanzaboote.nixosModules.lanzaboote
+      #./modules/nextdns.nix
     ];
 
   # Bootloader.
@@ -65,8 +66,14 @@
     };
   };
   
-  # Enable Hyprland
-  programs.hyprland.enable = true;
+  # Programs
+  programs = {
+    hyprland.enable = true;
+    gamescope.enable = true;
+    #gamescope.capSysNice = true; 
+    steam.enable = true;
+    #steam.gamescopeSession.enable = true;
+  };
 
   # Enable PipeWire
   security.rtkit.enable = true;
@@ -77,8 +84,16 @@
     pulse.enable = true;
   };
 
-  # SteamVR hardware compatability
-  hardware.steam-hardware.enable = true;
+  # Steam hardware
+  hardware.steam-hardware.enable = true; # VR
+  hardware.xone.enable = true; # XBox
+  hardware.xpadneo.enable = true;
+
+  # Razer
+  hardware.openrazer = {
+    enable = true;
+    users = [ "thatguy" ];
+  };
 
   # Enable trash folder and networking for nautilus
   services.gvfs.enable = true;
@@ -119,6 +134,7 @@
   #  wget
     (sleek-grub-theme.override { withStyle = "dark"; })
     sbctl
+    nextdns
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

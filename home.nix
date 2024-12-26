@@ -12,14 +12,13 @@ in
 {
   # Module imports
   imports = [
-    inputs.nixcord.homeManagerModules.nixcord
-
     ./modules/hyprland.nix
     ./modules/tofi.nix
     ./modules/hrtf-EQ.nix
     ./modules/gtk.nix
     ./modules/nixcord.nix
     ./modules/fonts.nix
+    ./modules/sops.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -72,6 +71,8 @@ in
     kitty
     prismlauncher
     wezterm
+    steam
+    goverlay
   ];
 
   nixpkgs.overlays = [

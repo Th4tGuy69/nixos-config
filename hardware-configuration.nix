@@ -27,6 +27,7 @@
   fileSystems."/data" =
     { device = "/dev/disk/by-uuid/8cde861b-d2a8-4dda-8190-8d2246711bff";
       fsType = "btrfs";
+      options = [ "exec" ];
     };
 
   # Enable NTFS support
