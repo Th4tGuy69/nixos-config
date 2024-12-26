@@ -64,7 +64,7 @@
       default_session.command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
     };
   };
-
+  
   # Enable Hyprland
   programs.hyprland.enable = true;
 
