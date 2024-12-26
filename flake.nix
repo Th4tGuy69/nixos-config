@@ -24,7 +24,6 @@
       modules = [
         ./configuration.nix
         inputs.home-manager.nixosModules.default
-        inputs.lanzaboote.nixosModules.lanzaboote
       ];
     };
   };

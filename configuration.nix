@@ -13,9 +13,9 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = false; # Managed by lanzaboote
+  boot.loader.systemd-boot.enable = true; # Set to false when using lanzaboote
   boot.lanzaboote = {
-    enable = true;
+    enable = false; # Not working "failed to install generation (os error 2)"
     pkiBundle = "/var/lib/sbctl";
   };
   boot.loader.efi.canTouchEfiVariables = true;
@@ -80,6 +80,9 @@
   # SteamVR hardware compatability
   hardware.steam-hardware.enable = true;
 
+  # Enable trash folder and networking for nautilus
+  services.gvfs.enable = true;
+
   # No sudo prompt for wheel
   security.sudo.wheelNeedsPassword = false;
 
@@ -91,6 +94,7 @@
     packages = with pkgs; [
       vim
     ];
+    shell = pkgs.nushell;
   };
 
   # Home manager

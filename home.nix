@@ -49,7 +49,6 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    kitty
     inputs.zen-browser.packages.x86_64-linux.specific
     spotify
     pavucontrol
@@ -64,14 +63,30 @@ in
     nautilus
     awf
     git
-    warp-terminal
     lapce
     fontpreview
     gh
+    zoxide
+    microfetch
+    fd
+    kitty
+    prismlauncher
+    wezterm
   ];
 
-  # possible fix for home.sessionVariables
-  programs.kitty.enable = true;
+  nixpkgs.overlays = [
+    # Add support for nautilus trash and networking
+    (self: super: {
+      gnome = super.gnome.overrideScope' (gself: gsuper: {
+        nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
+          buildInputs = nsuper.buildInputs ++ (with pkgs.gst_all_1; [
+            gst-plugins-good
+            gst-plugins-bad
+          ]);
+        });
+      });
+    })
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

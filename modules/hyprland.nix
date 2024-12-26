@@ -2,7 +2,7 @@
 
 let
   # Define reusable variables
-  terminal = "kitty";
+  terminal = "wezterm";
   fileManager = "nautilus";
   launcher = "tofi-drun | xargs hyprctl dispatch exec --";
 
@@ -41,6 +41,8 @@ windowrulev2 = monitor HDMI-A-1, class:discord
 windowrulev2 = monitor HDMI-A-1, class:Spotify
 # Float file picker
 windowrulev2 = float, class:xdg-desktop-portal-gtk
+# Float Prism windows
+windowrulev2 = float, class:org.prismlauncher.PrismLauncher
 
 # Environment Variables
 env = XCURSOR_THEME,${toString cursorTheme}
@@ -131,6 +133,7 @@ in
       # Keybindings
       bind = [
         "SUPER, q, exec, ${terminal}"
+        "SUPER SHIFT, q, exec, kitty"
         "SUPER, e, exec, ${fileManager}"
         "SUPER, space, exec, ${launcher}"
 	"SUPER, w, killactive,"
