@@ -2,7 +2,7 @@
 
 let
   # Define reusable variables
-  terminal = "wezterm";
+  terminal = "ghostty";
   fileManager = "nautilus";
   launcher = "tofi-drun | xargs hyprctl dispatch exec --";
 
@@ -27,9 +27,9 @@ let
   # Extra options
   extraOptions = ''
 # Startup apps
+exec-once = zen
 exec-once = discord
 exec-once = spotify
-exec-once = zen
 
 # Window Rules
 # Ignore maximize requests from apps. You'll probably like this.
