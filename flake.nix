@@ -20,11 +20,12 @@
     };
 
     ghostty.url = "github:ghostty-org/ghostty";
+    ghostty-hm.url = "github:clo4/ghostty-hm-module";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nixcord.url = "github:kaylorben/nixcord";
   };
 
-  outputs = { self, nixpkgs, sops-nix, ghostty, ... }@inputs: {
+  outputs = { self, nixpkgs, sops-nix, ghostty, ghostty-hm, ... }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [

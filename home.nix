@@ -19,6 +19,8 @@ in
     ./modules/nixcord.nix
     ./modules/fonts.nix
     ./modules/sops.nix
+    ./modules/ghostty.nix
+    ./modules/xdg.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -73,6 +75,10 @@ in
     wezterm
     steam
     goverlay
+    kodi-wayland
+    stremio
+    playerctl
+    via
   ];
 
   nixpkgs.overlays = [

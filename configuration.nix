@@ -21,6 +21,9 @@
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Kernel modules
+  boot.kernelModules = [ "nct6775" ];  
+
   # GRUB theme
   boot.loader.grub.theme = "${pkgs.sleek-grub-theme}";
 
@@ -70,9 +73,8 @@
   programs = {
     hyprland.enable = true;
     gamescope.enable = true;
-    #gamescope.capSysNice = true; 
     steam.enable = true;
-    #steam.gamescopeSession.enable = true;
+    coolercontrol.enable = true;  
   };
 
   # Enable PipeWire
@@ -134,8 +136,7 @@
   #  wget
     (sleek-grub-theme.override { withStyle = "dark"; })
     sbctl
-    nextdns
-    inputs.ghostty.packages.x86_64-linux.default
+    openrgb-with-all-plugins
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -147,6 +148,10 @@
   # };
 
   # List services that you want to enable:
+  services = {
+    hardware.openrgb.enable = true;
+    udev.packages = [ pkgs.via ];
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh = {

@@ -330,7 +330,7 @@
          };
          volumeBooster = {
            enable = true;
-           multiplier = 5;
+           multiplier = 2;
          };
          webKeybinds.enable = true;
          webScreenShareFixes.enable = true;
