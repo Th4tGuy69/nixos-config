@@ -16,7 +16,7 @@ in
     ./modules/tofi.nix
     ./modules/hrtf-EQ.nix
     ./modules/gtk.nix
-    ./modules/nixcord.nix
+    #./modules/nixcord.nix
     ./modules/fonts.nix
     ./modules/sops.nix
     ./modules/ghostty.nix
@@ -79,6 +79,9 @@ in
     stremio
     playerctl
     via
+    grimblast
+    #equicord # Doesn't work?
+    equibop
   ];
 
   nixpkgs.overlays = [

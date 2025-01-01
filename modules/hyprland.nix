@@ -5,6 +5,8 @@ let
   terminal = "ghostty";
   fileManager = "nautilus";
   launcher = "tofi-drun | xargs hyprctl dispatch exec --";
+  #screenshot = "hyprshot --clipboard-only -m region";
+  screenshot = "grimblast copy area";
 
   # Appearance options
   gapsIn = 5;
@@ -28,7 +30,7 @@ let
   extraOptions = ''
 # Startup apps
 exec-once = zen
-exec-once = discord
+exec-once = equibop
 exec-once = spotify
 
 # Window Rules
@@ -136,6 +138,7 @@ in
         "SUPER SHIFT, q, exec, kitty"
         "SUPER, e, exec, ${fileManager}"
         "SUPER, space, exec, ${launcher}"
+        "SUPER SHIFT, s, exec, ${screenshot}"
 	"SUPER, w, killactive,"
         "SUPER, f, fullscreen,"
         "SUPER SHIFT, f, togglefloating,"
@@ -181,6 +184,12 @@ in
         "SUPER, mouse:272, movewindow"
         "SUPER, mouse:273, resizewindow"
       ];
+      
+      bindl = [
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
+        ", XF86AudioNext, exec, playerctl next"
+      ]; 
     };
 
     extraConfig = extraOptions;
