@@ -19,6 +19,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprpanel = {
+      url = "github:jas-singhfsu/hyprpanel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    color-schemes = {
+      url = "github:mbadolato/iTerm2-Color-Schemes";
+      flake = false;
+    };
+
     ghostty.url = "github:ghostty-org/ghostty";
     ghostty-hm.url = "github:clo4/ghostty-hm-module";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";

@@ -17,18 +17,18 @@ in
     enable = true;
     theme = {
       package = pkgs.colloid-gtk-theme.override { themeVariants = [ "grey" ]; tweaks = [ "black" "rimless" "normal" ];  };
-      name = "Colloid-Dark";
+      name = "Colloid-Grey-Dark";
     };
     iconTheme = {
       package = pkgs.colloid-icon-theme.override { colorVariants = [ "grey" ]; };
-      name = "Colloid-Dark";
+      name = "Colloid-Grey-Dark";
     };
     cursorTheme = {
       package = future-cursors;
       name = "Future-cursors";
     };
-    gtk3.extraConfig.Settings = "gtk-application-prefer-dark-theme=1";
-    gtk4.extraConfig.Settings = "gtk-application-prefer-dark-theme=1";
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
   };
 
   home.sessionVariables = {

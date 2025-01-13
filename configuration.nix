@@ -27,15 +27,35 @@
   # GRUB theme
   boot.loader.grub.theme = "${pkgs.sleek-grub-theme}";
 
-  networking.hostName = "nixos"; # Define your hostname.
+  # Networking.
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    nameservers = [ "10.0.0.194" ];
+    dhcpcd.extraConfig = "nohook resolv.conf";
+    networkmanager.dns = "none";
+    #networkmanager.insertNameservers = [ "9.9.9.9" ];  
+  
+    # Firewall
+    #firewall = {
+    #  allowedTCPPorts = [ 
+    #    8384 22000 22067 22070 # Syncthing
+    #  ];
+    #  allowedUDPPorts = [ 
+    #    22000 21027 # Syncthing
+    #    57621 # Spotify
+    #  ];
+    #};
+  };
+
+  #environment.etc = {
+  #  "resolv.conf".text = "nameserver 9.9.9.9\n";
+  #};
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -100,8 +120,12 @@
   # Enable trash folder and networking for nautilus
   services.gvfs.enable = true;
 
-  # No sudo prompt for wheel
-  security.sudo.wheelNeedsPassword = false;
+  security = {
+    # No sudo prompt for wheel
+    sudo.wheelNeedsPassword = false;
+    # Polkit
+    polkit.enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.thatguy = {
@@ -137,7 +161,10 @@
     (sleek-grub-theme.override { withStyle = "dark"; })
     sbctl
     openrgb-with-all-plugins
+    curlFull
   ];
+
+  nix.extraOptions = ''download-buffer-size = 1073741824'';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -165,8 +192,8 @@
       PermitRootLogin = "no";
     };
   };
-
-  # Open ports in the firewall.
+ 
+  # Open ports in the firewall. 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.

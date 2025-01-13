@@ -1,4 +1,4 @@
-{ programs, ... }:
+{ programs, pkgs, ... }:
 
 let
   # Define reusable variables
@@ -9,21 +9,22 @@ let
   screenshot = "grimblast copy area";
 
   # Appearance options
-  gapsIn = 5;
-  gapsOut = 20;
+  gapsIn = 6;
+  gapsOut = 0;
   borderSize = 2;
-  rounding = 10;
+  rounding = 12;
   activeOpacity = 1.0;
   inactiveOpacity = 1.0;
   cursorTheme = "Future-cursors";
   cursorSize = 24;
+  shadowEnabled = false;
   shadowOffset = "0 5";
   shadowColor = "rgba(1a1a1aee)";
-  activeBorderColor = "rgba(33ccffee)";
-  inactiveBorderColor = "rgba(595959aa)";
+  activeBorderColor = "rgba(757575ff)";
+  inactiveBorderColor = "rgba(00000000)";
   blurEnabled = true;
-  blurSize = 3;
-  blurPasses = 1;
+  blurSize = 2;
+  blurPasses = 2;
   vibrancy = 0.1696;
 
   # Extra options
@@ -32,6 +33,8 @@ let
 exec-once = zen
 exec-once = equibop
 exec-once = spotify
+
+exec-once = systemctl --user start hyprpolkitagent
 
 # Window Rules
 # Ignore maximize requests from apps. You'll probably like this.
@@ -45,7 +48,9 @@ windowrulev2 = monitor HDMI-A-1, class:Spotify
 windowrulev2 = float, class:xdg-desktop-portal-gtk
 # Float Prism windows
 windowrulev2 = float, class:org.prismlauncher.PrismLauncher
-
+# Disable animations for app launcher
+windowrulev2 = noanim 1, class:tofi-drun
+ 
 # Environment Variables
 env = XCURSOR_THEME,${toString cursorTheme}
 env = XCURSOR_SIZE,${toString cursorSize}
@@ -55,9 +60,24 @@ monitor = DP-3, preferred, 0x0, 1
 monitor = desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-635, 1, transform, 1
 monitor = , preferred, auto, 1
   '';
+
+  hyprwatch = import ../packages/hyprwatch.nix { pkgs = pkgs; };
 in 
 
 {
+  imports = [ 
+    #./hyprpanel.nix # Not working 
+  ];
+
+  home.packages = with pkgs; [
+    hyprnotify
+    hyprpolkitagent
+    #hyprwatch
+  ];
+
+  services.hypridle.enable = true;
+  programs.hyprlock.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -82,7 +102,7 @@ in
         active_opacity = activeOpacity;
         inactive_opacity = inactiveOpacity;
         shadow = {
-          enabled = true;
+          enabled = shadowEnabled;
           range = 4;
           render_power = 3;
           color = shadowColor;
@@ -93,6 +113,16 @@ in
           passes = blurPasses;
           vibrancy = vibrancy;
         };
+      };
+
+      misc = {
+	disable_hyprland_logo = true;
+        background_color = "rgba(000000FF)";
+        middle_click_paste = false;
+      };
+
+      cursor = {
+        hide_on_key_press = true;
       };
 
       # Animation settings
@@ -175,9 +205,9 @@ in
         "SUPER SHIFT, 9, movetoworkspace, 9"
         "SUPER SHIFT, 0, movetoworkspace, 10"
 	"SUPER SHIFT, escape, movetoworkspace, special:magic"
-
-	# Global keybind passthrough
-        ", insert, pass, class:discord"
+	
+        # Global keybind passthrough
+        ", insert, sendshortcut, CTRL SHIFT, d, class:equibop"
       ];
 
       bindm = [

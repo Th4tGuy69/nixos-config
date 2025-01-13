@@ -21,6 +21,13 @@ in
     ./modules/sops.nix
     ./modules/ghostty.nix
     ./modules/xdg.nix
+    ./modules/git.nix
+    ./modules/wine.nix
+    ./modules/syncthing.nix
+    ./modules/gpg.nix
+    ./modules/mako.nix
+    ./modules/nushell.nix
+    ./modules/starship.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -63,7 +70,6 @@ in
     hyprsunset
     nautilus
     awf
-    git
     lapce
     fontpreview
     gh
@@ -72,7 +78,6 @@ in
     fd
     kitty
     prismlauncher
-    wezterm
     steam
     goverlay
     kodi-wayland
@@ -82,6 +87,15 @@ in
     grimblast
     #equicord # Doesn't work?
     equibop
+    celluloid
+    darling
+    p7zip
+    thunderbird-latest
+    obsidian
+    bitwarden-desktop
+    keyguard
+    goldwarden
+    libnotify
   ];
 
   nixpkgs.overlays = [

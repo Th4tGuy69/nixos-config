@@ -6,8 +6,10 @@
   programs.ghostty = {
     enable = true;
     package = inputs.ghostty.packages.x86_64-linux.default;
+    settings.config-file = [ (inputs.color-schemes + "/ghostty/Wez") ];
     keybindings = {
       "ctrl+shift+c" = "text:\\x03";
+      "ctrl+e" = "equalize_splits";
       "ctrl+t" = "new_tab";
       "ctrl+tab" = "next_tab"; 
       "ctrl+shift+tab" = "previous_tab";

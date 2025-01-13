@@ -4,5 +4,5 @@ let
 in
 
 {
-  colloid-gtk-theme = pkgs.callPackage ./colloid-gtk-theme.nix {};
+  hyprwatch = pkgs.callPackage ./hyprwatch.nix {};
 }
