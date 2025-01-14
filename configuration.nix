@@ -5,13 +5,11 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-      inputs.lanzaboote.nixosModules.lanzaboote
-      #./modules/nextdns.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
+    inputs.lanzaboote.nixosModules.lanzaboote
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true; # Set to false when using lanzaboote

@@ -30,6 +30,7 @@ let
   # Extra options
   extraOptions = ''
 # Startup apps
+exec-once = hyprpanel
 exec-once = zen
 exec-once = equibop
 exec-once = spotify
@@ -66,7 +67,7 @@ in
 
 {
   imports = [ 
-    #./hyprpanel.nix # Not working 
+    ./hyprpanel.nix 
   ];
 
   home.packages = with pkgs; [

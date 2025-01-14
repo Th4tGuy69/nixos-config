@@ -25,7 +25,7 @@ in
     ./modules/wine.nix
     ./modules/syncthing.nix
     ./modules/gpg.nix
-    ./modules/mako.nix
+    #./modules/mako.nix
     ./modules/nushell.nix
     ./modules/starship.nix
   ];
@@ -69,6 +69,7 @@ in
     protonup-qt
     hyprsunset
     nautilus
+    nautilus-open-any-terminal
     awf
     lapce
     fontpreview
@@ -96,6 +97,18 @@ in
     keyguard
     goldwarden
     libnotify
+    unityhub
+    turtle
+    sushi
+    qemu
+    quickemu
+    (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
+     qemu-system-x86_64 \
+      -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+      "$@"
+    '')
+    socat
+    baobab
   ];
 
   nixpkgs.overlays = [

@@ -42,6 +42,7 @@
         ./configuration.nix
         inputs.home-manager.nixosModules.default
         sops-nix.nixosModules.sops
+        { nixpkgs.overlays = [ inputs.hyprpanel.overlay ]; }
       ];
     };
   };
