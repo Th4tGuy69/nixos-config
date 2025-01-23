@@ -29,6 +29,11 @@
       flake = false;
     };
 
+    anyrun = {
+      url = "github:anyrun-org/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ghostty.url = "github:ghostty-org/ghostty";
     ghostty-hm.url = "github:clo4/ghostty-hm-module";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -37,6 +42,7 @@
 
   outputs = { self, nixpkgs, sops-nix, ghostty, ghostty-hm, ... }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix

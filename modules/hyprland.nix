@@ -4,7 +4,8 @@ let
   # Define reusable variables
   terminal = "ghostty";
   fileManager = "nautilus";
-  launcher = "tofi-drun | xargs hyprctl dispatch exec --";
+  launcher = "anyrun";
+  #launcher = "tofi-drun | xargs hyprctl dispatch exec --";
   #screenshot = "hyprshot --clipboard-only -m region";
   screenshot = "grimblast copy area";
 
@@ -30,10 +31,12 @@ let
   # Extra options
   extraOptions = ''
 # Startup apps
-exec-once = hyprpanel
+#exec-once = hyprpanel
 exec-once = zen
 exec-once = equibop
 exec-once = spotify
+exec-once = seanime
+exec-once = steam -silent
 
 exec-once = systemctl --user start hyprpolkitagent
 
@@ -51,6 +54,10 @@ windowrulev2 = float, class:xdg-desktop-portal-gtk
 windowrulev2 = float, class:org.prismlauncher.PrismLauncher
 # Disable animations for app launcher
 windowrulev2 = noanim 1, class:tofi-drun
+# Float Qalculate
+windowrulev2 = float, class:qalculate-gtk
+# QEMU
+windowrulev2 = fullscreen, title:QEMU
  
 # Environment Variables
 env = XCURSOR_THEME,${toString cursorTheme}
@@ -67,7 +74,9 @@ in
 
 {
   imports = [ 
-    ./hyprpanel.nix 
+    ./hyprpanel.nix
+    ./eww.nix
+    ./anyrun.nix
   ];
 
   home.packages = with pkgs; [

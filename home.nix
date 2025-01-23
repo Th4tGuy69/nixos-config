@@ -2,18 +2,40 @@
 
 let
   # Locally defined packages
-  future-cursors = import ./packages/future-cursors.nix { 
-    lib = pkgs.lib; 
-    stdenvNoCC = pkgs.stdenvNoCC;
-    fetchFromGitHub = pkgs.fetchFromGitHub; 
+  gitbutler-local = import ./packages/gitbutler.nix {
+    lib = pkgs.lib;
+    stdenv = pkgs.stdenv;
+    cacert = pkgs.cacert;
+    cargo-tauri = pkgs.cargo-tauri;
+    cmake = pkgs.cmake;
+    curl = pkgs.curl;
+    desktop-file-utils = pkgs.desktop-file-utils;
+    fetchFromGitHub = pkgs.fetchFromGitHub;
+    git = pkgs.git;
+    glib-networking = pkgs.glib-networking;
+    jq = pkgs.jq;
+    libgit2 = pkgs.libgit2;
+    makeBinaryWrapper = pkgs.makeBinaryWrapper;
+    moreutils = pkgs.moreutils;
+    nix-update-script = pkgs.nix-update-script;
+    nodejs = pkgs.nodejs;
+    openssl = pkgs.openssl;
+    pkg-config = pkgs.pkg-config;
+    pnpm_9 = pkgs.pnpm_9;
+    rust = pkgs.rust;
+    rustPlatform = pkgs.rustPlatform;
+    turbo = pkgs.turbo;
+    webkitgtk_4_1 = pkgs.webkitgtk_4_1;
+    wrapGAppsHook4 = pkgs.wrapGAppsHook4;
+    yq = pkgs.yq; 
   };
+  seanime-local = import ./packages/seanime.nix { pkgs = pkgs; };
 in
 
 {
   # Module imports
   imports = [
     ./modules/hyprland.nix
-    ./modules/tofi.nix
     ./modules/hrtf-EQ.nix
     ./modules/gtk.nix
     #./modules/nixcord.nix
@@ -28,6 +50,9 @@ in
     #./modules/mako.nix
     ./modules/nushell.nix
     ./modules/starship.nix
+    ./modules/vscode.nix
+    ./modules/celluloid.nix
+    ./modules/bevy.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -88,7 +113,6 @@ in
     grimblast
     #equicord # Doesn't work?
     equibop
-    celluloid
     darling
     p7zip
     thunderbird-latest
@@ -109,6 +133,13 @@ in
     '')
     socat
     baobab
+    #gitbutler
+    gitbutler-local
+    github-desktop
+    jetbrains.rider
+    qalculate-gtk
+    seanime-local
+    zoom-us
   ];
 
   nixpkgs.overlays = [

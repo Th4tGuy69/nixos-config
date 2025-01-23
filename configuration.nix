@@ -93,6 +93,7 @@
     gamescope.enable = true;
     steam.enable = true;
     coolercontrol.enable = true;  
+    appimage.binfmt = true; # Enable running appimages directly
   };
 
   # Enable PipeWire
@@ -176,6 +177,7 @@
   services = {
     hardware.openrgb.enable = true;
     udev.packages = [ pkgs.via ];
+    gnome.gnome-keyring.enable = true;
   };
 
   # Enable the OpenSSH daemon.
