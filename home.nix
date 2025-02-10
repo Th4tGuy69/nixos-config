@@ -30,6 +30,7 @@ let
     yq = pkgs.yq; 
   };
   seanime-local = import ./packages/seanime.nix { pkgs = pkgs; };
+  seanime-desktop-local = import ./packages/seanime-desktop.nix { pkgs = pkgs; };
 in
 
 {
@@ -53,6 +54,8 @@ in
     ./modules/vscode.nix
     ./modules/celluloid.nix
     ./modules/bevy.nix
+    ./modules/qemu.nix
+    ./modules/env.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -82,7 +85,7 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    inputs.zen-browser.packages.x86_64-linux.specific
+    inputs.zen-browser.packages.x86_64-linux.zen-browser
     spotify
     pavucontrol
     tofi
@@ -111,9 +114,12 @@ in
     playerctl
     via
     grimblast
-    #equicord # Doesn't work?
+    #(discord.override {
+    #  withOpenASAR = true;
+    #  withVencord = true;
+    #  #withEquicord = true;
+    #})
     equibop
-    darling
     p7zip
     thunderbird-latest
     obsidian
@@ -124,22 +130,23 @@ in
     unityhub
     turtle
     sushi
-    qemu
-    quickemu
-    (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
-     qemu-system-x86_64 \
-      -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
-      "$@"
-    '')
     socat
     baobab
+    libgit2
     #gitbutler
-    gitbutler-local
+    #gitbutler-local
     github-desktop
     jetbrains.rider
     qalculate-gtk
     seanime-local
+    mpv
     zoom-us
+    feishin
+    gnome-system-monitor
+    android-studio
+    android-tools
+    flutter
+    gimp
   ];
 
   nixpkgs.overlays = [
@@ -154,6 +161,7 @@ in
         });
       });
     })
+    (import ./overlays/equicord.nix)
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

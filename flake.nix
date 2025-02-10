@@ -19,36 +19,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprpanel = {
-      url = "github:jas-singhfsu/hyprpanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    color-schemes = {
-      url = "github:mbadolato/iTerm2-Color-Schemes";
-      flake = false;
-    };
-
     anyrun = {
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ghostty.url = "github:ghostty-org/ghostty";
-    ghostty-hm.url = "github:clo4/ghostty-hm-module";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nixcord.url = "github:kaylorben/nixcord";
+
+    zen-browser = {
+      type = "path";
+      path = "/etc/nixos/flakes/zen-browser";
+    };
   };
 
-  outputs = { self, nixpkgs, sops-nix, ghostty, ghostty-hm, ... }@inputs: {
+  outputs = { self, nixpkgs, sops-nix, ... }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
         inputs.home-manager.nixosModules.default
         sops-nix.nixosModules.sops
-        { nixpkgs.overlays = [ inputs.hyprpanel.overlay ]; }
       ];
     };
   };

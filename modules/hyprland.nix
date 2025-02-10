@@ -65,7 +65,7 @@ env = XCURSOR_SIZE,${toString cursorSize}
 
 # Monitors
 monitor = DP-3, preferred, 0x0, 1
-monitor = desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-635, 1, transform, 1
+monitor = desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-430, 1, transform, 1
 monitor = , preferred, auto, 1
   '';
 
@@ -74,7 +74,7 @@ in
 
 {
   imports = [ 
-    ./hyprpanel.nix
+    #./hyprpanel.nix
     ./eww.nix
     ./anyrun.nix
   ];
