@@ -2,33 +2,6 @@
 
 let
   # Locally defined packages
-  gitbutler-local = import ./packages/gitbutler.nix {
-    lib = pkgs.lib;
-    stdenv = pkgs.stdenv;
-    cacert = pkgs.cacert;
-    cargo-tauri = pkgs.cargo-tauri;
-    cmake = pkgs.cmake;
-    curl = pkgs.curl;
-    desktop-file-utils = pkgs.desktop-file-utils;
-    fetchFromGitHub = pkgs.fetchFromGitHub;
-    git = pkgs.git;
-    glib-networking = pkgs.glib-networking;
-    jq = pkgs.jq;
-    libgit2 = pkgs.libgit2;
-    makeBinaryWrapper = pkgs.makeBinaryWrapper;
-    moreutils = pkgs.moreutils;
-    nix-update-script = pkgs.nix-update-script;
-    nodejs = pkgs.nodejs;
-    openssl = pkgs.openssl;
-    pkg-config = pkgs.pkg-config;
-    pnpm_9 = pkgs.pnpm_9;
-    rust = pkgs.rust;
-    rustPlatform = pkgs.rustPlatform;
-    turbo = pkgs.turbo;
-    webkitgtk_4_1 = pkgs.webkitgtk_4_1;
-    wrapGAppsHook4 = pkgs.wrapGAppsHook4;
-    yq = pkgs.yq; 
-  };
   seanime-local = import ./packages/seanime.nix { pkgs = pkgs; };
   seanime-desktop-local = import ./packages/seanime-desktop.nix { pkgs = pkgs; };
 in
@@ -69,33 +42,15 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    #pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
     inputs.zen-browser.packages.x86_64-linux.zen-browser
     spotify
     pavucontrol
-    tofi
     lutris
     mangohud
     gamemode
     gamescope
     protonplus # Doesn't work?
     protonup-qt
-    hyprsunset
     nautilus
     nautilus-open-any-terminal
     awf
@@ -125,7 +80,7 @@ in
     obsidian
     bitwarden-desktop
     keyguard
-    goldwarden
+    #goldwarden
     libnotify
     unityhub
     turtle

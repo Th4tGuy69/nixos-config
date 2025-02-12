@@ -44,7 +44,7 @@ in
 
   qt = {
     enable = true;
-    platformTheme.name = "qt5ct";
+    platformTheme.name = "qtct";
     style = {
       package = pkgs.colloid-kde;
       name = "ColloidDark";

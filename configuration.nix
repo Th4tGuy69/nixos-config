@@ -12,18 +12,19 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true; # Set to false when using lanzaboote
-  boot.lanzaboote = {
-    enable = false; # Not working "failed to install generation (os error 2)"
-    pkiBundle = "/var/lib/sbctl";
+  boot = {
+    loader = {
+      systemd-boot.enable = true; # Set to false when using lanzaboote
+      efi.canTouchEfiVariables = true;
+      grub.theme = "${pkgs.sleek-grub-theme.override { withStyle = "dark"; }}/theme.txt";
+    };
+
+    kernelModules = [ "nct6775" ];  
+    lanzaboote = {
+      enable = false; # Not working "failed to install generation (os error 2)"
+      pkiBundle = "/var/lib/sbctl";
+    };
   };
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Kernel modules
-  boot.kernelModules = [ "nct6775" ];  
-
-  # GRUB theme
-  boot.loader.grub.theme = "${pkgs.sleek-grub-theme}";
 
   # Networking.
   networking = {
@@ -94,6 +95,8 @@
     steam.enable = true;
     coolercontrol.enable = true;  
     appimage.binfmt = true; # Enable running appimages directly
+    goldwarden.enable = true;
+    goldwarden.useSshAgent = true;
   };
 
   # Enable PipeWire
@@ -122,8 +125,6 @@
   security = {
     # No sudo prompt for wheel
     sudo.wheelNeedsPassword = false;
-    # Polkit
-    polkit.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -157,7 +158,6 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-    (sleek-grub-theme.override { withStyle = "dark"; })
     sbctl
     openrgb-with-all-plugins
     curlFull

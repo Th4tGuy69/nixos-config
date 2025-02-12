@@ -24,20 +24,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixcord.url = "github:kaylorben/nixcord";
-
     zen-browser = {
       type = "path";
       path = "/etc/nixos/flakes/zen-browser";
     };
   };
 
-  outputs = { self, nixpkgs, sops-nix, ... }@inputs: {
+  outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
-      modules = [
+      modules = with inputs; [
         ./configuration.nix
-        inputs.home-manager.nixosModules.default
+        home-manager.nixosModules.default
         sops-nix.nixosModules.sops
       ];
     };
