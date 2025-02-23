@@ -4,6 +4,7 @@ let
   # Locally defined packages
   seanime-local = import ./packages/seanime.nix { pkgs = pkgs; };
   seanime-desktop-local = import ./packages/seanime-desktop.nix { pkgs = pkgs; };
+  gitbutler-local = import ./packages/gitbutler.nix { pkgs = pkgs; };
 in
 
 {
@@ -80,16 +81,14 @@ in
     obsidian
     bitwarden-desktop
     keyguard
-    #goldwarden
     libnotify
     unityhub
     turtle
     sushi
     socat
     baobab
-    libgit2
     #gitbutler
-    #gitbutler-local
+    gitbutler-local
     github-desktop
     jetbrains.rider
     qalculate-gtk
@@ -102,6 +101,8 @@ in
     android-tools
     flutter
     gimp
+    r2modman
+    obs-studio
   ];
 
   nixpkgs.overlays = [

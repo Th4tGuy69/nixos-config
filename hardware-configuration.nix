@@ -20,12 +20,12 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/C614-05BC";
+    { device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
     };
 
   fileSystems."/data" =
-    { device = "/dev/disk/by-uuid/8cde861b-d2a8-4dda-8190-8d2246711bff";
+    { device = "/dev/disk/by-label/Data";
       fsType = "btrfs";
       options = [ "exec" ];
     };
@@ -34,7 +34,7 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/windows" =
-    { device = "/dev/disk/by-uuid/004CDEE14CDED090";
+    { device = "/dev/disk/by-label/Windows";
       fsType = "ntfs-3g";
       options = [ "rw" "uid=1000" ];
     };

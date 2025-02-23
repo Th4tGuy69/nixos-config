@@ -7,7 +7,7 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
+    #inputs.home-manager.nixosModules.default
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
@@ -16,7 +16,10 @@
     loader = {
       systemd-boot.enable = true; # Set to false when using lanzaboote
       efi.canTouchEfiVariables = true;
-      grub.theme = "${pkgs.sleek-grub-theme.override { withStyle = "dark"; }}/theme.txt";
+      grub = {
+        theme = "${(pkgs.sleek-grub-theme.override { withStyle = "dark"; })}"; # /theme.txt ?
+        useOSProber = true;
+      };
     };
 
     kernelModules = [ "nct6775" ];  
@@ -80,14 +83,35 @@
     variant = "";
   };
 
+  environment.etc."greetd/hyprland.conf".text = ''
+    exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
+
+    animations {
+      enabled = false
+    }
+
+    misc {
+        disable_hyprland_logo = true
+        disable_splash_rendering = true
+        disable_hyprland_qtutils_check = true
+    }
+  '';
+
   # Greeter
   services.greetd = {
     enable = true;
     settings = {
-      default_session.command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+      #default_session.command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+      default_session.command = "Hyprland --config /etc/greetd/hyprland.conf";
     };
   };
-  
+ 
+  programs.regreet = {
+    enable = true;
+    theme.package = pkgs.colloid-gtk-theme.override { themeVariants = [ "grey" ]; tweaks = [ "black" "rimless" "normal" ]; };
+    theme.name = "Colloid-Grey-Dark";
+  };
+ 
   # Programs
   programs = {
     hyprland.enable = true;
@@ -95,8 +119,6 @@
     steam.enable = true;
     coolercontrol.enable = true;  
     appimage.binfmt = true; # Enable running appimages directly
-    goldwarden.enable = true;
-    goldwarden.useSshAgent = true;
   };
 
   # Enable PipeWire

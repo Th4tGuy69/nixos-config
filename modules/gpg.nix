@@ -5,6 +5,6 @@
 
   services.gpg-agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry-bemenu;
+    pinentryPackage = pkgs.pinentry-all;
   };
 }

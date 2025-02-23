@@ -16,7 +16,7 @@ in
   gtk = {
     enable = true;
     theme = {
-      package = pkgs.colloid-gtk-theme.override { themeVariants = [ "grey" ]; tweaks = [ "black" "rimless" "normal" ];  };
+      package = pkgs.colloid-gtk-theme.override { themeVariants = [ "grey" ]; tweaks = [ "black" "rimless" "normal" ]; };
       name = "Colloid-Grey-Dark";
     };
     #iconTheme = {

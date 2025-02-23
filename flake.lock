@@ -222,11 +222,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1739214665,
-        "narHash": "sha256-26L8VAu3/1YRxS8MHgBOyOM8xALdo6N0I04PgorE7UM=",
+        "lastModified": 1740126099,
+        "narHash": "sha256-ozoOtE2hGsqh4XkTJFsrTkNxkRgShxpQxDynaPZUGxk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "64e75cd44acf21c7933d61d7721e812eac1b5a0a",
+        "rev": "32fb99ba93fea2798be0e997ea331dd78167f814",
         "type": "github"
       },
       "original": {
@@ -353,8 +353,8 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1739141173,
-        "narHash": "sha256-mBUQBUS2Ou27RSKbl0GH06K9cK4pLa91CzI0g5+sNVo=",
+        "lastModified": 1740336156,
+        "narHash": "sha256-MrKP+RCdljb0owB2PJ0PrT0lv7GYWozWBVbfXUjSOZE=",
         "path": "/etc/nixos/flakes/zen-browser",
         "type": "path"
       },
