@@ -17,7 +17,7 @@
       systemd-boot.enable = true; # Set to false when using lanzaboote
       efi.canTouchEfiVariables = true;
       grub = {
-        theme = "${(pkgs.sleek-grub-theme.override { withStyle = "dark"; })}"; # /theme.txt ?
+        theme = "${(pkgs.sleek-grub-theme.override { withStyle = "dark"; })}/theme.txt";
         useOSProber = true;
       };
     };

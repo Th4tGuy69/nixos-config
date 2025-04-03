@@ -2,11 +2,11 @@
 
 pkgs.appimageTools.wrapType2 rec {
   pname = "seanime-desktop";
-  version = "2.7.2";
+  version = "2.7.5";
 
   src = pkgs.fetchurl {
     url = "https://github.com/5rahim/seanime/releases/download/v${version}/seanime-desktop-${version}_Linux_x86_64.AppImage";
-    hash = "sha256-9T8YC5jzC1fe77JFo6L7FT+ZWyGIhtg0zJoKEY24tfA=";
+    hash = "sha256-4EHSill73l7+19/NoCrQxag+ThZFBDx4z872Jt+8P9k=";
   };
 
   # https://github.com/5rahim/seanime/issues/205

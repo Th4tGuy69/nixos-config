@@ -6,30 +6,32 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium.fhs;
-    extensions = with pkgs.vscode-extensions; [
-      ms-dotnettools.vscodeintellicode-csharp
-      ms-dotnettools.vscode-dotnet-runtime
-      ms-dotnettools.csharp
-      ms-dotnettools.csdevkit
-      file-icons.file-icons
-      supermaven.supermaven
-    ];
-    userSettings = {
-      "workbench.sideBar.location" = "right";
-      "window.menuBarVisibility" = "toggle";
-      "workbench.activityBar.location" = "top";
-      "editor.fontFamily" = "FiraCode Nerd Font Mono";
-      "editor.fontLigatures" = "'cv01','cv02','cv30','ss02','ss03','ss04','ss07','ss09','zero'";
-      "editor.fontSize" = 14;
-      "editor.fontWeight" = "500";
-      "editor.wordWrap" = "on";
-      "sync.gist" = "5061f38bb742e73dfcb0b0419b9fd7da";
-      "workbench.welcomePage.extraAnnouncements" = false;
-      "workbench.startupEditor" = "none";
-      "files.autoSave" = "afterDelay";
-      "workbench.colorTheme" = "Noir Poimandres Black";
-      "workbench.statusBar.visible" = false;
-      "workbench.iconTheme" = "file-icons";
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        ms-dotnettools.vscodeintellicode-csharp
+        ms-dotnettools.vscode-dotnet-runtime
+        ms-dotnettools.csharp
+        ms-dotnettools.csdevkit
+        file-icons.file-icons
+        supermaven.supermaven
+      ];
+      userSettings = {
+        "workbench.sideBar.location" = "right";
+        "window.menuBarVisibility" = "toggle";
+        "workbench.activityBar.location" = "top";
+        "editor.fontFamily" = "FiraCode Nerd Font Mono";
+        "editor.fontLigatures" = "'cv01','cv02','cv30','ss02','ss03','ss04','ss07','ss09','zero'";
+        "editor.fontSize" = 14;
+        "editor.fontWeight" = "500";
+        "editor.wordWrap" = "on";
+        "sync.gist" = "5061f38bb742e73dfcb0b0419b9fd7da";
+        "workbench.welcomePage.extraAnnouncements" = false;
+        "workbench.startupEditor" = "none";
+        "files.autoSave" = "afterDelay";
+        "workbench.colorTheme" = "Noir Poimandres Black";
+        "workbench.statusBar.visible" = false;
+        "workbench.iconTheme" = "file-icons";
+      };
     };
   };
 

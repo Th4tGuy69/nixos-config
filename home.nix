@@ -62,7 +62,14 @@ in
     microfetch
     fd
     kitty
-    prismlauncher
+    (prismlauncher.override {
+      jdks = [
+        graalvmPackages.graalvm-ce
+        zulu8
+        zulu17
+        zulu
+      ];
+    })
     steam
     goverlay
     kodi-wayland
@@ -75,7 +82,9 @@ in
     #  withVencord = true;
     #  #withEquicord = true;
     #})
-    equibop
+    #discord
+    #equibop
+    goofcord
     p7zip
     thunderbird-latest
     obsidian
@@ -88,11 +97,12 @@ in
     socat
     baobab
     #gitbutler
-    gitbutler-local
+    #gitbutler-local
     github-desktop
     jetbrains.rider
     qalculate-gtk
     seanime-local
+    #seanime-desktop-local
     mpv
     zoom-us
     feishin
@@ -103,6 +113,8 @@ in
     gimp
     r2modman
     obs-studio
+    blender
+    libgcc
   ];
 
   nixpkgs.overlays = [

@@ -33,7 +33,7 @@ let
 # Startup apps
 #exec-once = hyprpanel
 exec-once = zen
-exec-once = equibop
+exec-once = goofcord
 exec-once = spotify
 exec-once = seanime
 exec-once = steam -silent
@@ -46,7 +46,7 @@ windowrulev2 = suppressevent maximize, class:.*
 # Fix some dragging issues with XWayland
 windowrulev2 = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 # Open apps on second monitor
-windowrulev2 = monitor HDMI-A-1, class:discord
+windowrulev2 = monitor HDMI-A-1, class:goofcord
 windowrulev2 = monitor HDMI-A-1, class:Spotify
 # Float file picker
 windowrulev2 = float, class:xdg-desktop-portal-gtk
