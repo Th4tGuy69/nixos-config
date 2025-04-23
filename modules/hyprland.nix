@@ -66,6 +66,7 @@ env = XCURSOR_SIZE,${toString cursorSize}
 # Monitors
 monitor = DP-3, preferred, 0x0, 1
 monitor = desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-430, 1, transform, 1
+monitor = desc:Hisense Electric Co. Ltd. HISENSE 0x00000001, 3840x2160@60, 0x0, 2
 monitor = , preferred, auto, 1
   '';
 

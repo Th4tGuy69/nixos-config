@@ -4,7 +4,6 @@ let
   # Locally defined packages
   seanime-local = import ./packages/seanime.nix { pkgs = pkgs; };
   seanime-desktop-local = import ./packages/seanime-desktop.nix { pkgs = pkgs; };
-  gitbutler-local = import ./packages/gitbutler.nix { pkgs = pkgs; };
 in
 
 {
@@ -70,7 +69,7 @@ in
         zulu
       ];
     })
-    steam
+    #steam
     goverlay
     kodi-wayland
     stremio
@@ -82,7 +81,7 @@ in
     #  withVencord = true;
     #  #withEquicord = true;
     #})
-    #discord
+    discord
     #equibop
     goofcord
     p7zip
@@ -96,10 +95,10 @@ in
     sushi
     socat
     baobab
-    #gitbutler
-    #gitbutler-local
+    gitbutler
     github-desktop
     jetbrains.rider
+    jetbrains.clion
     qalculate-gtk
     seanime-local
     #seanime-desktop-local
@@ -114,7 +113,9 @@ in
     r2modman
     obs-studio
     blender
-    libgcc
+    gcc
+    wlx-overlay-s
+    bottles
   ];
 
   nixpkgs.overlays = [
@@ -145,11 +146,6 @@ in
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  };
-
-  # Home Manager managed environment variables 
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1"; # Hint Electron apps to use Wayland
   };
 
   # Let Home Manager install and manage itself.

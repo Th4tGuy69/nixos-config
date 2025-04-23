@@ -22,11 +22,22 @@
       };
     };
 
-    kernelModules = [ "nct6775" ];  
     lanzaboote = {
       enable = false; # Not working "failed to install generation (os error 2)"
       pkiBundle = "/var/lib/sbctl";
     };
+
+    kernelModules = [ "nct6775" ];  
+    #kernelPatches = [
+    #  {
+    #    name = "amdgpu-ignore-ctx-privileges";
+    #    patch = pkgs.fetchpatch {
+    #      name = "cap_sys_nice_begone.patch";
+    #      url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+    #      hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+    #    };
+    #  }
+    #];
   };
 
   # Networking.
@@ -116,10 +127,34 @@
   programs = {
     hyprland.enable = true;
     gamescope.enable = true;
-    steam.enable = true;
+    gamemode.enable = true;
     coolercontrol.enable = true;  
     appimage.binfmt = true; # Enable running appimages directly
   };
+
+  # GPU Driver
+  hardware.graphics = {
+    ## radv: an open-source Vulkan driver from freedesktop
+    enable32Bit = true;
+
+    ## amdvlk: an open-source Vulkan driver from AMD
+    extraPackages = [ pkgs.amdvlk ];
+    extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+  };
+
+  # Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    gamescopeSession.enable = true;
+  };
+
+  # Steam hardware
+  hardware.steam-hardware.enable = true; # VR
+  hardware.xone.enable = true; # XBox
+  hardware.xpadneo.enable = true;
 
   # Enable PipeWire
   security.rtkit.enable = true;
@@ -129,11 +164,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
-  # Steam hardware
-  hardware.steam-hardware.enable = true; # VR
-  hardware.xone.enable = true; # XBox
-  hardware.xpadneo.enable = true;
 
   # Razer
   hardware.openrazer = {
