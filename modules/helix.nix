@@ -1,0 +1,8 @@
+{ ... }:
+
+{
+  programs.helix = {
+    enable = true;
+    
+  };
+}

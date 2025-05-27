@@ -16,8 +16,6 @@ let
   rounding = 12;
   activeOpacity = 1.0;
   inactiveOpacity = 1.0;
-  cursorTheme = "Future-cursors";
-  cursorSize = 24;
   shadowEnabled = false;
   shadowOffset = "0 5";
   shadowColor = "rgba(1a1a1aee)";
@@ -33,7 +31,7 @@ let
 # Startup apps
 #exec-once = hyprpanel
 exec-once = zen
-exec-once = goofcord
+exec-once = discord
 exec-once = spotify
 exec-once = seanime
 exec-once = steam -silent
@@ -45,8 +43,11 @@ exec-once = systemctl --user start hyprpolkitagent
 windowrulev2 = suppressevent maximize, class:.*
 # Fix some dragging issues with XWayland
 windowrulev2 = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
-# Open apps on second monitor
+# Start apps on primary monitor
+windowrulev2 = monitor DP-3, class:zen
+# Start apps on second monitor
 windowrulev2 = monitor HDMI-A-1, class:goofcord
+windowrulev2 = monitor HDMI-A-1, class:discord
 windowrulev2 = monitor HDMI-A-1, class:Spotify
 # Float file picker
 windowrulev2 = float, class:xdg-desktop-portal-gtk
@@ -58,10 +59,10 @@ windowrulev2 = noanim 1, class:tofi-drun
 windowrulev2 = float, class:qalculate-gtk
 # QEMU
 windowrulev2 = fullscreen, title:QEMU
- 
-# Environment Variables
-env = XCURSOR_THEME,${toString cursorTheme}
-env = XCURSOR_SIZE,${toString cursorSize}
+# Unity Popups
+windowrulev2 = allowsinput, title:UnityEditor.Searcher.SearcherWindow
+windowrulev2 = move cursor -50% -5%, title:Color
+windowrulev2 = center, title:Project Settings
 
 # Monitors
 monitor = DP-3, preferred, 0x0, 1

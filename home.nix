@@ -29,6 +29,13 @@ in
     ./modules/bevy.nix
     ./modules/qemu.nix
     ./modules/env.nix
+    ./modules/aliases.nix
+    ./modules/zoxide.nix
+    ./modules/yazi.nix
+    ./modules/helix.nix
+    ./modules/ssh.nix
+    ./modules/direnv.nix
+    ./modules/cursor.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -57,7 +64,6 @@ in
     lapce
     fontpreview
     gh
-    zoxide
     microfetch
     fd
     kitty
@@ -116,6 +122,7 @@ in
     gcc
     wlx-overlay-s
     bottles
+    networkmanagerapplet
   ];
 
   nixpkgs.overlays = [

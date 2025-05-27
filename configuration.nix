@@ -40,13 +40,21 @@
     #];
   };
 
+  # Fix open file limit for system updates/upgrades
+  systemd.extraConfig = ''
+    DefaultLimitNOFILE=4096
+  '';
+
   # Networking.
   networking = {
     hostName = "nixos";
-    networkmanager.enable = true;
     nameservers = [ "10.0.0.194" ];
     dhcpcd.extraConfig = "nohook resolv.conf";
-    networkmanager.dns = "none";
+    networkmanager = {
+      enable = true;
+      dns = "none";
+      plugins = [ pkgs.networkmanager-openconnect ];
+    };
     #networkmanager.insertNameservers = [ "9.9.9.9" ];  
   
     # Firewall
@@ -134,12 +142,22 @@
 
   # GPU Driver
   hardware.graphics = {
+    enable = true;
     ## radv: an open-source Vulkan driver from freedesktop
     enable32Bit = true;
 
     ## amdvlk: an open-source Vulkan driver from AMD
     extraPackages = [ pkgs.amdvlk ];
     extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+  };
+
+  hardware.amdgpu = {
+    opencl.enable = true;
+    initrd.enable = true;
+    amdvlk = {
+      enable = true;
+      supportExperimental.enable = true;
+    };
   };
 
   # Steam

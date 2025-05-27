@@ -16,6 +16,7 @@
         supermaven.supermaven
       ];
       userSettings = {
+        "debug.onTaskErrors" = "abort";
         "workbench.sideBar.location" = "right";
         "window.menuBarVisibility" = "toggle";
         "workbench.activityBar.location" = "top";
@@ -24,13 +25,15 @@
         "editor.fontSize" = 14;
         "editor.fontWeight" = "500";
         "editor.wordWrap" = "on";
-        "sync.gist" = "5061f38bb742e73dfcb0b0419b9fd7da";
         "workbench.welcomePage.extraAnnouncements" = false;
         "workbench.startupEditor" = "none";
         "files.autoSave" = "afterDelay";
         "workbench.colorTheme" = "Noir Poimandres Black";
         "workbench.statusBar.visible" = false;
         "workbench.iconTheme" = "file-icons";
+        "git.openRepositoryInParentFolders" = "never";
+	      "errorLens.excludeBySource" = [ "cSpell" ];
+        "cSpell.diagnosticLevel" = "Hint";
       };
     };
   };

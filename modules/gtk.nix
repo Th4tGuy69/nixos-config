@@ -1,11 +1,11 @@
 { pkgs, ... }:
 
 let
-  future-cursors = import ../packages/future-cursors.nix { 
-    lib = pkgs.lib; 
-    stdenvNoCC = pkgs.stdenvNoCC;
-    fetchFromGitHub = pkgs.fetchFromGitHub; 
-  };
+  #future-cursors = import ../packages/future-cursors.nix { 
+  #  lib = pkgs.lib; 
+  #  stdenvNoCC = pkgs.stdenvNoCC;
+  #  fetchFromGitHub = pkgs.fetchFromGitHub; 
+  #};
 in
 
 {
@@ -23,10 +23,10 @@ in
     #  package = pkgs.colloid-icon-theme.override { colorVariants = [ "grey" ]; };
     #  name = "Colloid-Grey-Dark";
     #};
-    cursorTheme = {
-      package = future-cursors;
-      name = "Future-cursors";
-    };
+    #cursorTheme = {
+    #  package = future-cursors;
+    #  name = "Future-cursors";
+    #};
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
     gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
   };
