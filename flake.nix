@@ -28,14 +28,38 @@
       type = "path";
       path = "/etc/nixos/flakes/zen-browser";
     };
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    hyprchroma = {
+      url = "github:alexhulbert/Hyprchroma";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+    nixosConfigurations.default = nixpkgs.lib.nixosSystem rec {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs system; };
       modules = with inputs; [
         ./configuration.nix
         home-manager.nixosModules.default
+        stylix.nixosModules.stylix
         sops-nix.nixosModules.sops
       ];
     };

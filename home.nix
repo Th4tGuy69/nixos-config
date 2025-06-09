@@ -11,7 +11,7 @@ in
   imports = [
     ./modules/hyprland.nix
     ./modules/hrtf-EQ.nix
-    ./modules/gtk.nix
+    #./modules/gtk.nix
     #./modules/nixcord.nix
     ./modules/fonts.nix
     ./modules/sops.nix
@@ -36,6 +36,8 @@ in
     ./modules/ssh.nix
     ./modules/direnv.nix
     ./modules/cursor.nix
+    ./modules/stylix.nix
+    ./modules/quickshell.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -49,7 +51,8 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    inputs.zen-browser.packages.x86_64-linux.zen-browser
+    inputs.zen-browser.packages.${system}.zen-browser
+    
     spotify
     pavucontrol
     lutris
@@ -94,14 +97,14 @@ in
     thunderbird-latest
     obsidian
     bitwarden-desktop
-    keyguard
+    #keyguard
     libnotify
     unityhub
     turtle
     sushi
     socat
     baobab
-    gitbutler
+    #gitbutler
     github-desktop
     jetbrains.rider
     jetbrains.clion

@@ -1,4 +1,4 @@
-{ programs, pkgs, ... }:
+{ pkgs, programs, inputs, system, ... }:
 
 let
   # Define reusable variables
@@ -29,14 +29,16 @@ let
   # Extra options
   extraOptions = ''
 # Startup apps
+exec-once = systemctl --user start hyprpolkitagent
+exec-once = systemctl --user enable --now hyprsunset.service
+
 #exec-once = hyprpanel
 exec-once = zen
 exec-once = discord
 exec-once = spotify
 exec-once = seanime
 exec-once = steam -silent
-
-exec-once = systemctl --user start hyprpolkitagent
+exec-once = nerdshade -loop -gammaNight 100 -latitude 44.5646 -longitude 123.2620 -tempNight 1600
 
 # Window Rules
 # Ignore maximize requests from apps. You'll probably like this.
@@ -64,6 +66,20 @@ windowrulev2 = allowsinput, title:UnityEditor.Searcher.SearcherWindow
 windowrulev2 = move cursor -50% -5%, title:Color
 windowrulev2 = center, title:Project Settings
 
+# Games
+# Allow tearing on all steam games
+windowrulev2 = immediate, class:(steam_app).*
+# Elden Ring Nightreign
+windowrulev2 = renderunfocused, class:steam_app_2622380
+windowrulev2 = fullscreenstate:* 3, class:steam_app_2622380
+# CS2
+windowrulev2 = immediate, class:cs2
+# TF2
+windowrulev2 = immediate, class:tf_linux64
+
+# Hyprchroma (transparency)
+# windowrulev2 = plugin:chromakey, fullscreen:0 chromakey_background = 7,8,17
+
 # Monitors
 monitor = DP-3, preferred, 0x0, 1
 monitor = desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-430, 1, transform, 1
@@ -72,6 +88,7 @@ monitor = , preferred, auto, 1
   '';
 
   hyprwatch = import ../packages/hyprwatch.nix { pkgs = pkgs; };
+  nerdshade = import ../packages/nerdshade.nix { pkgs = pkgs; };
 in 
 
 {
@@ -84,8 +101,10 @@ in
   home.packages = with pkgs; [
     hyprnotify
     hyprpolkitagent
-    hyprsunset
+    hyprpicker
+    wl-clipboard
     #hyprwatch
+    nerdshade
   ];
 
   services.hypridle.enable = true;
@@ -93,6 +112,12 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
+
+    plugins = with inputs.hyprland-plugins.packages.${system}; [
+      #inputs.hyprchroma.packages.${system}.Hypr-DarkWindow # Doesn't seem to work
+      #hyprfocus # Broken
+      hyprwinwrap
+    ];
 
     settings = {
       "$mod" = "SUPER"; # Set the main modifier key
@@ -102,10 +127,10 @@ in
         "gaps_in" = gapsIn;
         "gaps_out" = gapsOut;
         "border_size" = borderSize;
-        "col.active_border" = activeBorderColor;
-        "col.inactive_border" = inactiveBorderColor;
+        #"col.active_border" = activeBorderColor;
+        #"col.inactive_border" = inactiveBorderColor;
         "resize_on_border" = false;
-        "allow_tearing" = false;
+        "allow_tearing" = true;
         "layout" = "dwindle";
       };
 
@@ -118,7 +143,7 @@ in
           enabled = shadowEnabled;
           range = 4;
           render_power = 3;
-          color = shadowColor;
+          # color = shadowColor;
         };
         blur = {
           enabled = blurEnabled;
@@ -129,9 +154,12 @@ in
       };
 
       misc = {
-	disable_hyprland_logo = true;
-        background_color = "rgba(000000FF)";
+      	disable_hyprland_logo = true;
+        #background_color = "rgba(000000FF)";
         middle_click_paste = false;
+        vrr = 3;
+        mouse_move_enables_dpms = true;
+        key_press_enables_dpms = true;
       };
 
       cursor = {
@@ -182,7 +210,9 @@ in
         "SUPER, e, exec, ${fileManager}"
         "SUPER, space, exec, ${launcher}"
         "SUPER SHIFT, s, exec, ${screenshot}"
-	"SUPER, w, killactive,"
+        "SUPER, c, exec, hyprpicker -a"
+        #"SUPER SHIFT, c, togglechromakey"
+	      "SUPER, w, killactive,"
         "SUPER, f, fullscreen,"
         "SUPER SHIFT, f, togglefloating,"
         "SUPER, m, exit,"
@@ -192,10 +222,10 @@ in
         "SUPER, right, movefocus, r"
         "SUPER, up, movefocus, u"
         "SUPER, down, movefocus, d"
-	"SUPER SHIFT, left, movewindow, l"
-	"SUPER SHIFT, right, movewindow, r"
-	"SUPER SHIFT, up, movewindow, u"
-	"SUPER SHIFT, down, movefocus, d"
+	      "SUPER SHIFT, left, movewindow, l"
+	      "SUPER SHIFT, right, movewindow, r"
+	      "SUPER SHIFT, up, movewindow, u"
+	      "SUPER SHIFT, down, movefocus, d"
         "SUPER, 1, workspace, 1"
         "SUPER, 2, workspace, 2"
         "SUPER, 3, workspace, 3"
@@ -206,7 +236,7 @@ in
         "SUPER, 8, workspace, 8"
         "SUPER, 9, workspace, 9"
         "SUPER, 0, workspace, 10"
-	"SUPER, escape, togglespecialworkspace, magic"
+	      "SUPER, escape, togglespecialworkspace, magic"
         "SUPER SHIFT, 1, movetoworkspace, 1"
         "SUPER SHIFT, 2, movetoworkspace, 2"
         "SUPER SHIFT, 3, movetoworkspace, 3"
@@ -217,10 +247,10 @@ in
         "SUPER SHIFT, 8, movetoworkspace, 8"
         "SUPER SHIFT, 9, movetoworkspace, 9"
         "SUPER SHIFT, 0, movetoworkspace, 10"
-	"SUPER SHIFT, escape, movetoworkspace, special:magic"
+	      "SUPER SHIFT, escape, movetoworkspace, special:magic"
 	
         # Global keybind passthrough
-        ", insert, sendshortcut, CTRL SHIFT, d, class:equibop"
+        ", insert, sendshortcut, CTRL SHIFT, d, class:discord"
       ];
 
       bindm = [
