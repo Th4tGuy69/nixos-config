@@ -33,10 +33,11 @@ in
       soundService = "pipewire-pulse";
 
       extraOptions = [
+        "-v"
         "-m" "alsa_raw"
         "-o" "audio.alsa.device=hw:M2,0"
         "-o" "midi.alsa.device=hw:M2,0"
-        "-g" "1.5"
+        "-g" "1"
       ];
     };
 
