@@ -38,7 +38,8 @@ exec-once = discord
 exec-once = spotify
 exec-once = seanime
 exec-once = steam -silent
-exec-once = nerdshade -loop -gammaNight 100 -latitude 44.5646 -longitude 123.2620 -tempNight 1600
+exec-once = nerdshade -loop -gammaNight 75 -latitude 44.564568 -longitude -123.262047 -tempNight 1600
+exec-once = quickshell
 
 # Window Rules
 # Ignore maximize requests from apps. You'll probably like this.

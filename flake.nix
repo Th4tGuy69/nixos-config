@@ -50,6 +50,8 @@
       url = "github:alexhulbert/Hyprchroma";
       inputs.hyprland.follows = "hyprland";
     };
+
+    musnix = { url = "github:musnix/musnix"; };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
@@ -61,6 +63,7 @@
         home-manager.nixosModules.default
         stylix.nixosModules.stylix
         sops-nix.nixosModules.sops
+        musnix.nixosModules.musnix
       ];
     };
   };

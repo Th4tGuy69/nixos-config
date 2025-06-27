@@ -7,7 +7,6 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    #inputs.home-manager.nixosModules.default
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
@@ -38,14 +37,13 @@
     #    };
     #  }
     #];
-
-    plymouth.enable = true;
-    #plymouth = {
-    #  enable = true;
+    
+    plymouth = {
+      enable = true;
 
       # theme = ;
       # font = ;
-    #};
+    };
   };
 
   # Fix open file limit for system updates/upgrades
@@ -138,6 +136,20 @@
     #theme.package = pkgs.colloid-gtk-theme.override { themeVariants = [ "grey" ]; tweaks = [ "black" "rimless" "normal" ]; };
     #theme.name = "Colloid-Grey-Dark";
   };
+
+  # Musnix
+  musnix = {
+    enable = true;
+
+    alsaSeq.enable = true;
+    ffado.enable = false;
+    rtcqs.enable = true;
+
+    kernel = {
+      realtime = true;
+      packages = pkgs.linuxPackages_latest_rt;
+    };
+  };
  
   # Programs
   programs = {
@@ -182,14 +194,19 @@
   hardware.xone.enable = true; # XBox
   hardware.xpadneo.enable = true;
 
-  # Enable PipeWire
+  # Audio
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
+  services.pulseaudio.extraConfig = [
+    "load-module module-null-sink"
+  ];
 
   # Razer
   hardware.openrazer = {

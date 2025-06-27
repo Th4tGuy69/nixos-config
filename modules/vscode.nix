@@ -1,40 +1,128 @@
 { pkgs, ... }:
 
+let
+  defaultExtensions = with pkgs.vscode-extensions; [
+    usernamehw.errorlens
+    thenuprojectcontributors.vscode-nushell-lang
+    jnoortheen.nix-ide
+    arrterian.nix-env-selector
+    mkhl.direnv
+    streetsidesoftware.code-spell-checker
+    formulahendry.code-runner
+    file-icons.file-icons
+    supermaven.supermaven
+  ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    {
+      name = "noir-theme-bundle";
+      publisher = "andrewberty";
+      version = "1.6.0";
+      sha256 = "sha256-vKQhUEvapX6gJ9sFJzOTyPG4iUEBgVUhM4z2FgUt/Q4=";
+    }
+    {
+      name = "vscode-text-tools";
+      publisher = "biati";
+      version = "1.2.2";
+      sha256 = "sha256-HNvRYOJlNZaFfNU0ubmnxLMdgYH/ATyGh6PxD3+EKuI=";
+    }
+  ];
+
+  defaultUserSettings = {
+    "debug.onTaskErrors" = "abort";
+    "workbench.sideBar.location" = "right";
+    "window.menuBarVisibility" = "toggle";
+    "workbench.activityBar.location" = "top";
+    "editor.fontFamily" = "FiraCode Nerd Font Mono";
+    "editor.fontLigatures" = "'cv01','cv02','cv30','ss02','ss03','ss04','ss07','ss09','zero'";
+    "editor.fontSize" = 14;
+    "editor.fontWeight" = "500";
+    "editor.wordWrap" = "on";
+    "workbench.welcomePage.extraAnnouncements" = false;
+    "workbench.startupEditor" = "none";
+    "files.autoSave" = "afterDelay";
+    "workbench.colorTheme" = "Noir Poimandres Black";
+    "workbench.statusBar.visible" = false;
+    "workbench.iconTheme" = "file-icons";
+    "git.openRepositoryInParentFolders" = "never";
+    "errorLens.excludeBySource" = [ "cSpell" ];
+    "cSpell.diagnosticLevel" = "Hint";
+    "cSpell.userWords" = [ "nixpkgs" "pkgs" ];
+    "window.newWindowProfile" = "Default";
+  };
+
+  defaultKeybindings = [
+    {
+      key = "ctrl+tab";
+      command = "workbench.action.nextEditor";
+      when = "!activeEditorGroupEmpty";
+    }
+    {
+      key = "ctrl+tab";
+      command = "-workbench.action.quickOpenPreviousRecentlyUsededitorInGroup";
+      when = "!activeEditorGroupEmpty";
+    }   
+    {
+      key = "ctrl+shift+tab";
+      command = "workbench.action.previousEditor";
+      when = "!activeEditorGroupEmpty";
+    }
+    {
+      key = "ctrl+shift+tab";
+      command = "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup";
+      when = "!activeEditorGroupEmpty";
+    }
+  ];
+in
+
 {
   home.packages = [ pkgs.dotnet-sdk ];
 
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium.fhs;
-    profiles.default = {
-      extensions = with pkgs.vscode-extensions; [
-        ms-dotnettools.vscodeintellicode-csharp
-        ms-dotnettools.vscode-dotnet-runtime
-        ms-dotnettools.csharp
-        ms-dotnettools.csdevkit
-        file-icons.file-icons
-        supermaven.supermaven
-      ];
-      userSettings = {
-        "debug.onTaskErrors" = "abort";
-        "workbench.sideBar.location" = "right";
-        "window.menuBarVisibility" = "toggle";
-        "workbench.activityBar.location" = "top";
-        "editor.fontFamily" = "FiraCode Nerd Font Mono";
-        "editor.fontLigatures" = "'cv01','cv02','cv30','ss02','ss03','ss04','ss07','ss09','zero'";
-        "editor.fontSize" = 14;
-        "editor.fontWeight" = "500";
-        "editor.wordWrap" = "on";
-        "workbench.welcomePage.extraAnnouncements" = false;
-        "workbench.startupEditor" = "none";
-        "files.autoSave" = "afterDelay";
-        "workbench.colorTheme" = "Noir Poimandres Black";
-        "workbench.statusBar.visible" = false;
-        "workbench.iconTheme" = "file-icons";
-        "git.openRepositoryInParentFolders" = "never";
-	      "errorLens.excludeBySource" = [ "cSpell" ];
-        "cSpell.diagnosticLevel" = "Hint";
+    mutableExtensionsDir = false;
+    
+    profiles = {
+      default = {
+        extensions = defaultExtensions;
+        userSettings = defaultUserSettings;
+        keybindings = defaultKeybindings;
       };
+
+      Quickshell = {
+        extensions = defaultExtensions ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [        
+          {
+            name = "qt-core";
+            publisher = "theqtcompany";
+            version = "1.4.0";
+            sha256 = "sha256-QiZc6WNh4Q67beyFuiSqkG5G4zRMNmyjuZhWW7ZATO0=";
+          }
+          {
+            name = "qt-qml";
+            publisher = "theqtcompany";
+            version = "1.4.0";
+            sha256 = "sha256-9C0EC4vnulg0OjGNU0SfMA2R6+OaHVCqDsipY2TAqxo=";
+          }
+          {
+            name = "qml-format";
+            publisher = "delgan";
+            version = "1.1.0";
+            sha256 = "sha256-QOovj9loSWAgaBCwW3HBPD/Wr7GwVppSRcCJ4R5X/as=";
+          }
+        ];
+        
+        userSettings = defaultUserSettings // {
+          "qmlFormat.extraArguments" = [ "-w 2" ];
+          "qt-qml.doNotAskForQmllsDownload" = true;
+        };
+
+        keybindings = defaultKeybindings;
+      };
+
+      Unity = {};
+
+      C = {};
+
+      Python = {};
     };
   };
 
@@ -61,7 +149,7 @@
 	// Do not edit this value.
 	"crash-reporter-id": "333f7930-7b01-445d-aaab-09302f68c149",
 
-        // Set password store as GNOME Keyring
+  // Set password store as GNOME Keyring
 	"password-store": "gnome-libsecret" 
 }
   '';

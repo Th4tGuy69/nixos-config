@@ -6,7 +6,7 @@ pkgs.stdenv.mkDerivation rec {
 
   src = pkgs.fetchurl {
     url = "https://github.com/sstark/nerdshade/releases/latest/download/nerdshade";
-    sha256 = "sha256-mSpYRdjeQvBTK7njO3SnDzPdoNVrzT3BvV7ynKPdo6E="; # replace with correct hash
+    sha256 = "sha256-ADS3/Ux9p99ZOY4PYUWhy6FaMuStmnhshklJcUfrzBM="; 
   };
 
   dontUnpack = true;

@@ -38,6 +38,7 @@ in
     ./modules/cursor.nix
     ./modules/stylix.nix
     ./modules/quickshell.nix
+    ./modules/music.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -64,7 +65,7 @@ in
     nautilus
     nautilus-open-any-terminal
     awf
-    lapce
+    #lapce
     fontpreview
     gh
     microfetch
@@ -80,7 +81,7 @@ in
     })
     #steam
     goverlay
-    kodi-wayland
+    #kodi-wayland
     stremio
     playerctl
     via
@@ -92,37 +93,37 @@ in
     #})
     discord
     #equibop
-    goofcord
+    #goofcord
     p7zip
     thunderbird-latest
     obsidian
     bitwarden-desktop
     #keyguard
     libnotify
-    unityhub
+    #unityhub
     turtle
     sushi
     socat
     baobab
     #gitbutler
-    github-desktop
-    jetbrains.rider
-    jetbrains.clion
+    #github-desktop
+    #jetbrains.rider
+    #jetbrains.clion
     qalculate-gtk
     seanime-local
     #seanime-desktop-local
     mpv
-    zoom-us
+    #zoom-us
     feishin
     gnome-system-monitor
-    android-studio
-    android-tools
-    flutter
+    #android-studio
+    #android-tools
+    #flutter
     gimp
     r2modman
     obs-studio
     blender
-    gcc
+    #gcc
     wlx-overlay-s
     bottles
     networkmanagerapplet

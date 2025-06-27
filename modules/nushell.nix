@@ -656,14 +656,14 @@ $env.config = {
         }
         {
             name: move_one_word_left
-            modifier: control
+            modifier: alt
             keycode: left
             mode: [emacs, vi_normal, vi_insert]
             event: { edit: movewordleft }
         }
         {
             name: move_one_word_right_or_take_history_hint
-            modifier: control
+            modifier: alt
             keycode: right
             mode: [emacs, vi_normal, vi_insert]
             event: {
