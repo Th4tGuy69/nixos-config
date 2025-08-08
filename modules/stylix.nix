@@ -1,4 +1,4 @@
-{ pkgs, stylix, ... }:
+{ pkgs, ... }:
 
 {
   stylix = {
@@ -68,5 +68,18 @@
         name = "Twitter-Color-Emoji-SVGinOT";
       };
     };
-  };  
+
+    cursor = {
+      name = "Posy_Cursor_Strokeless";
+      size = 16;
+      package = pkgs.posy-cursors;
+    };
+
+    icons = {
+      enable = true;
+      dark = "Colloid-Grey-Dark";
+      light = "Colloid-Grey-Light";
+      package = pkgs.colloid-icon-theme.override { colorVariants = [ "grey" ]; };
+    };
+  }; 
 }

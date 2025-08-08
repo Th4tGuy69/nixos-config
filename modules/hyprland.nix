@@ -4,7 +4,8 @@ let
   # Define reusable variables
   terminal = "ghostty";
   fileManager = "nautilus";
-  launcher = "anyrun";
+  launcher = "sherlock";
+  # launcher = "anyrun";
   #launcher = "tofi-drun | xargs hyprctl dispatch exec --";
   #screenshot = "hyprshot --clipboard-only -m region";
   screenshot = "grimblast copy area";
@@ -66,6 +67,10 @@ windowrulev2 = fullscreen, title:QEMU
 windowrulev2 = allowsinput, title:UnityEditor.Searcher.SearcherWindow
 windowrulev2 = move cursor -50% -5%, title:Color
 windowrulev2 = center, title:Project Settings
+# Android Emulator
+windowrulev2 = size 479 1038, title:Android Emulator
+windowrulev2 = maxsize 472 1038, title:Android Emulator
+windowrulev2 = minsize 472 1038, title:Android Emulator
 
 # Games
 # Allow tearing on all steam games
@@ -96,7 +101,8 @@ in
   imports = [ 
     #./hyprpanel.nix
     ./eww.nix
-    ./anyrun.nix
+    # ./anyrun.nix
+    ./sherlock.nix
   ];
 
   home.packages = with pkgs; [

@@ -3,9 +3,9 @@
 let
   bevy-script = pkgs.writeShellScriptBin "bevy-dev-script" ''
     #!/bin/bash
-    mkdir /tmp/rust-rover
+    mkdir /tmp/bevy
     cd /home/thatguy/Documents/GitHub/bevy-game
-    nix-shell ./shell.nix
+    zeditor .
   '';
 in
 

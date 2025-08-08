@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 let
-  microphoneSource = "alsa_input.usb-*";
-  mixerSinkName = "virtual-mic";
+  microphoneSource = "alsa_input.usb-MOTU_M2_M2AE1529VI-00.HiFi__Mic1__source";
+  mixerSinkName = "FluidSynth + Mic";
 in
 
 {
@@ -25,15 +25,16 @@ in
               }}
             ]
             links = [
-              { output = "mic:Out"      input = "mix:In 1" }
-              { output = "FSL:Out"    input = "mix:In 2" }
-              { output = "FSR:Out"    input = "mix:In 3" }
+              { output = "mic:Out" input = "mix:In 1" }
+              { output = "FSL:Out" input = "mix:In 2" }
+              { output = "FSR:Out" input = "mix:In 3" }
             ]
             inputs  = [ "mic:In" "FSL:In" "FSR:In" ]
             outputs = [ "mix:Out" ]
           }
           capture.props = {
-            node.name = "${microphoneSource}"
+            node.name = "Virtual Mic"
+            target.node = "${microphoneSource}"
             stream.dont-remix = true
           }
           playback.props = {
@@ -51,37 +52,39 @@ in
   home.file.".local/bin/connect-fluidsynth.sh" = {
     text = ''
       #!/usr/bin/env bash
-      
-      echo "Starting FluidSynth auto-connect monitor..."
-      
+
+      ECHO="${pkgs.coreutils}/bin/echo"
+      SLEEP="${pkgs.coreutils}/bin/sleep"
+      GREP="${pkgs.gnugrep}/bin/grep"
+      PW_CLI="${pkgs.pipewire}/bin/pw-cli"
+      PW_LINK="${pkgs.pipewire}/bin/pw-link"
+
+      $ECHO "Starting FluidSynth auto-connect monitor..."
+
       check_and_connect() {
-        # Check if both nodes exist
-        if ! pw-cli list-objects | grep -q "name.*FluidSynth" || ! pw-cli list-objects | grep -q "Virtual Mic (Mic + Synth)"; then
+        if ! $PW_CLI list-objects | $GREP -q "name.*FluidSynth" || ! $PW_CLI list-objects | $GREP -q "Virtual Mic"; then
           return 1
         fi
-        
-        # Check if connections already exist
-        local fl_connected=$(pw-link -l | grep -c "FluidSynth:output_FL.*->.*Virtual Mic:input_2")
-        local fr_connected=$(pw-link -l | grep -c "FluidSynth:output_FR.*->.*Virtual Mic:input_3")
-        
-        # Connect if not already connected
+
+        local fl_connected=$($PW_LINK -l | $GREP -c "FluidSynth:output_FL.*->.*Virtual Mic:input_2")
+        local fr_connected=$($PW_LINK -l | $GREP -c "FluidSynth:output_FR.*->.*Virtual Mic:input_3")
+
         if [ "$fl_connected" -eq 0 ]; then
-          if pw-link "FluidSynth:output_FL" "Virtual Mic (Mic + Synth):input_2" 2>/dev/null; then
-            echo "$(date): Connected FluidSynth:output_FL -> Virtual Mic:input_2"
+          if $PW_LINK "FluidSynth:output_FL" "Virtual Mic:input_2" 2>/dev/null; then
+            $ECHO "$($coreutils)/bin/date): Connected FluidSynth:output_FL -> Virtual Mic:input_2"
           fi
         fi
-        
+
         if [ "$fr_connected" -eq 0 ]; then
-          if pw-link "FluidSynth:output_FR" "Virtual Mic (Mic + Synth):input_3" 2>/dev/null; then
-            echo "$(date): Connected FluidSynth:output_FR -> Virtual Mic:input_3"
+          if $PW_LINK "FluidSynth:output_FR" "Virtual Mic:input_3" 2>/dev/null; then
+            $ECHO "$($coreutils)/bin/date): Connected FluidSynth:output_FR -> Virtual Mic:input_3"
           fi
         fi
       }
-      
-      # Monitor loop
+
       while true; do
         check_and_connect
-        sleep 5  # Check every 5 seconds
+        $SLEEP 5
       done
     '';
     executable = true;
@@ -104,4 +107,11 @@ in
       WantedBy = [ "default.target" ];
     };
   };
+
+  # Packages required for the service
+  home.packages = with pkgs; [
+    pipewire # pw-cli
+    coreutils # sleep
+    gnugrep # grep
+  ];
 }

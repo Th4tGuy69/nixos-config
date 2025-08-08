@@ -35,10 +35,11 @@ in
     ./modules/helix.nix
     ./modules/ssh.nix
     ./modules/direnv.nix
-    ./modules/cursor.nix
+    # ./modules/cursor.nix
     ./modules/stylix.nix
     ./modules/quickshell.nix
     ./modules/music.nix
+    ./modules/zed.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -48,6 +49,10 @@ in
 
   # Enable unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "libsoup-2.74.3"
+  ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -86,12 +91,12 @@ in
     playerctl
     via
     grimblast
-    #(discord.override {
-    #  withOpenASAR = true;
-    #  withVencord = true;
-    #  #withEquicord = true;
-    #})
-    discord
+    (discord.override {
+      withOpenASAR = true;
+      vencord = pkgs.equicord;
+      withVencord = false;
+      enableAutoscroll = true;
+    })    
     #equibop
     #goofcord
     p7zip
@@ -127,6 +132,9 @@ in
     wlx-overlay-s
     bottles
     networkmanagerapplet
+    helvum
+    devenv
+    pakku
   ];
 
   nixpkgs.overlays = [

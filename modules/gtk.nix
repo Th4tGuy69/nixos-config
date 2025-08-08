@@ -19,14 +19,14 @@ in
       package = pkgs.colloid-gtk-theme.override { themeVariants = [ "grey" ]; tweaks = [ "black" "rimless" "normal" ]; };
       name = "Colloid-Grey-Dark";
     };
-    #iconTheme = {
-    #  package = pkgs.colloid-icon-theme.override { colorVariants = [ "grey" ]; };
-    #  name = "Colloid-Grey-Dark";
-    #};
-    #cursorTheme = {
-    #  package = future-cursors;
-    #  name = "Future-cursors";
-    #};
+    iconTheme = {
+     package = pkgs.colloid-icon-theme.override { colorVariants = [ "grey" ]; };
+     name = "Colloid-Grey-Dark";
+    };
+    cursorTheme = {
+     package = pkgs.posy-cursors;
+     name = "Posy_Cursor_Strokeless";
+    };
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
     gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
   };

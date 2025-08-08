@@ -15,15 +15,21 @@ let
       "ln -s ${sf}/share/soundfonts/* $out/"
     ) soundfonts)}
   '';
+
+  # FluidSynth startup script to assign different instruments to each MIDI channel
+  fluidsynthStartupScript = pkgs.writeText "fluidsynth-startup.scc" (builtins.concatStringsSep "\n" (
+    builtins.genList (channel:
+      let
+        program = toString (pkgs.lib.mod (channel * 4) 128);
+      in
+        "select ${toString channel} 0 0 ${program}"
+    ) 16
+  ));
 in
 
 {
   imports = [
-    (import ./virtual-mic.nix {
-      pkgs = pkgs;
-      microphoneSource = "alsa_input.usb-MOTU_M2_M2AE1529VI-00.HiFi__Mic1__source";
-      mixerSinkName = "FluidSynth + Mic";
-    })
+    ./virtual-mic.nix
   ];
 
   config = {
@@ -38,6 +44,7 @@ in
         "-o" "audio.alsa.device=hw:M2,0"
         "-o" "midi.alsa.device=hw:M2,0"
         "-g" "1"
+        "-f" (toString fluidsynthStartupScript)
       ];
     };
 
@@ -47,7 +54,7 @@ in
       qsynth
       synthesia
       neothesia
-    
+
       # DAW
       reaper
       supercollider-with-plugins
@@ -83,6 +90,7 @@ in
       samplv1
       infamousPlugins
       oxefmsynth
+      fire
     ] ++ soundfonts;
 
     home.file.".local/share/soundfonts".source = sfs;

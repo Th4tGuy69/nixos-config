@@ -3,11 +3,10 @@
 {
   services.syncthing = {
     enable = true;
-    #openDefaultPorts = true;
     settings = {
       devices = {
         "Server".id = "RI62BYO-GNPWFKL-PI5QJRQ-GX56CHA-5SYZF7Q-NAOUIK3-MWH3CTI-UETTZQO";
-        "1+8 Pro".id = "WOHYSE2-B6FMWLU-55DZMNF-ACSNXQU-CGCPM2H-CZ4ASOB-PNTECT7-MJ63UAS";
+        "1+8 Pro".id = "45YINXC-PFTLIOQ-EN6O2LO-OKHJFMX-O6A576E-YQOFOFX-XG4F5EW-DIVFGAS";
       };
       folders = {
         "Obsidian" = {
@@ -20,6 +19,7 @@
       gui.theme = "black";
       options = {
         gui.theme = "black";
+        urAccepted = 1;
       };
     };
   };

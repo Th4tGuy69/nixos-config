@@ -4,6 +4,14 @@
 
 { config, pkgs, inputs, system, ... }:
 
+let
+  subs = [
+    "https://cache.nixos.org"
+    "https://nix-community.cachix.org"
+    "https://hyprland.cachix.org"
+  ];
+in
+
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -46,20 +54,34 @@
     };
   };
 
+  # Swap file
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 8*1024; # 8 GB
+    options = [ "discard" ];
+  }];
+  
   # Fix open file limit for system updates/upgrades
-  systemd.extraConfig = ''
-    DefaultLimitNOFILE=4096
-  '';
+  systemd = {
+    settings.Manager.DefaultLimitNOFILE = 4096;
+
+    services.nix-daemon.serviceConfig = {
+      MemoryMax = "24G";
+      MemorySwapMax = "8G";
+    };
+  };
 
   # Networking.
   networking = {
     hostName = "nixos";
-    nameservers = [ "10.0.0.194" ];
+    nameservers = [
+      "10.0.0.194"
+      # "9.9.9.9"
+    ];
     dhcpcd.extraConfig = "nohook resolv.conf";
     networkmanager = {
       enable = true;
       dns = "none";
-      plugins = [ pkgs.networkmanager-openconnect ];
     };
     #networkmanager.insertNameservers = [ "9.9.9.9" ];  
   
@@ -74,6 +96,8 @@
     #  ];
     #};
   };
+
+  services.syncthing.openDefaultPorts = true;
 
   #environment.etc = {
   #  "resolv.conf".text = "nameserver 9.9.9.9\n";
@@ -109,7 +133,7 @@
   };
 
   environment.etc."greetd/hyprland.conf".text = ''
-    exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
+    exec-once = ${pkgs.regreet}/bin/regreet; hyprctl dispatch exit
 
     animations {
       enabled = false
@@ -126,15 +150,14 @@
   services.greetd = {
     enable = true;
     settings = {
-      #default_session.command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
       default_session.command = "Hyprland --config /etc/greetd/hyprland.conf";
     };
   };
  
   programs.regreet = {
     enable = true;
-    #theme.package = pkgs.colloid-gtk-theme.override { themeVariants = [ "grey" ]; tweaks = [ "black" "rimless" "normal" ]; };
-    #theme.name = "Colloid-Grey-Dark";
+    theme.package = pkgs.colloid-gtk-theme.override { themeVariants = [ "grey" ]; tweaks = [ "black" "rimless" "normal" ]; };
+    theme.name = "Colloid-Grey-Dark";
   };
 
   # Musnix
@@ -157,7 +180,8 @@
     gamescope.enable = true;
     gamemode.enable = true;
     coolercontrol.enable = true;  
-    appimage.binfmt = true; # Enable running appimages directly
+    appimage = { enable = true; binfmt = true; }; # Enable running appimages directly
+    adb.enable = true;
   };
 
   # GPU Driver
@@ -226,7 +250,7 @@
   users.users.thatguy = {
     isNormalUser = true;
     description = "That Guy";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "kvm" "adbusers" ];
     packages = with pkgs; [
       vim
     ];
@@ -267,14 +291,28 @@
 
     targets = {
       plymouth.enable = false;
+      regreet.enable = false;
     };
   };
 
+  # Nix
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ]; # Flakes
+    trusted-users = [ "root" "thatguy" "@wheel" ]; # Extra System Permissions
+
+    # Build Cache
+    substituters = subs;
+    trusted-substituters = subs;
+    
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
