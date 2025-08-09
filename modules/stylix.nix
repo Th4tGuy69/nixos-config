@@ -71,7 +71,7 @@
 
     cursor = {
       name = "Posy_Cursor_Strokeless";
-      size = 16;
+      size = 12;
       package = pkgs.posy-cursors;
     };
 
