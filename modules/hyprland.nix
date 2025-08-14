@@ -72,7 +72,7 @@ windowrulev2 = size 479 1038, title:Android Emulator
 windowrulev2 = maxsize 472 1038, title:Android Emulator
 windowrulev2 = minsize 472 1038, title:Android Emulator
 # Zed
-windowrulev2 = fullscreenstate:3 *, class:dev.zed.Zed
+windowrulev2 = stayfocused, class:dev.zed.Zed
 
 # Games
 # Allow tearing on all steam games
