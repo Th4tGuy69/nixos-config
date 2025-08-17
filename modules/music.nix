@@ -36,9 +36,9 @@ in
 
       extraOptions = [
         "-v"
-        "-m" "alsa_raw"
+        "-m" "alsa_seq"
         "-o" "audio.alsa.device=hw:M2,0"
-        "-o" "midi.alsa.device=hw:M2,0"
+        "-o" "midi.autoconnect=1"
         "-g" "1"
         "-f" (toString fluidsynthStartupScript)
       ];
