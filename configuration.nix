@@ -173,6 +173,9 @@ in
       packages = pkgs.linuxPackages_latest_rt;
     };
   };
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
  
   # Programs
   programs = {

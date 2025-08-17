@@ -10,7 +10,7 @@ in
   # Module imports
   imports = [
     ./modules/hyprland.nix
-    ./modules/hrtf-EQ.nix
+    ./modules/pipewire.nix
     #./modules/gtk.nix
     #./modules/nixcord.nix
     ./modules/fonts.nix

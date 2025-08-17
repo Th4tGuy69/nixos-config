@@ -28,10 +28,6 @@ let
 in
 
 {
-  imports = [
-    ./virtual-mic.nix
-  ];
-
   config = {
     services.fluidsynth = {
       enable = true;
