@@ -1,131 +1,127 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  # Enable ALSA MIDI bridging in PipeWire
-  home.file.".config/pipewire/pipewire.conf.d/10-alsa-midi-bridge.conf".text = ''
-    # Enable ALSA MIDI bridge
-    context.modules = [
-      {
-        name = libpipewire-module-adapter
-        args = {
-          factory.name     = api.alsa.seq.bridge
-          node.name        = "Midi-Bridge"
-          node.description = "MIDI Bridge"
-          media.class      = "Midi/Bridge"
-          api.alsa.path    = "hw:2"  # Your M2 device is on card 2
-          api.alsa.seq.server = "default"
-          api.alsa.seq.id = "PipeWire-MIDI"
-        }
-      }
-    ]
-  '';
-
-  # Alternative method: Enable via WirePlumber ALSA monitor
-  home.file.".config/wireplumber/main.lua.d/10-alsa-midi-enable.lua".text = ''
-    -- Enable ALSA MIDI monitoring and bridging
-    alsa_monitor.enabled = true
-    alsa_monitor.properties = {
-      -- Enable MIDI bridging
-      ["alsa.seq.enabled"] = true,
-      ["alsa.seq.server"] = "default",
-      
-      -- Monitor your specific card
-      ["api.alsa.card"] = "2",  -- Your M2 device
-      ["api.alsa.path"] = "hw:2",
-      
-      -- Bridge settings
-      ["node.nick"] = "ALSA-MIDI",
-      ["priority.driver"] = 100,
-      ["priority.session"] = 100,
-    }
-    
-    -- Add rule to automatically expose MIDI devices
-    midi_bridge_rule = {
-      matches = {
-        {
-          { "api.alsa.card", "equals", "2" },
-        },
-      },
-      apply_properties = {
-        ["node.autoconnect"] = false,  -- We'll handle this manually
-        ["media.class"] = "Midi/Bridge",
-        ["api.alsa.seq.enabled"] = true,
-      },
-    }
-    
-    table.insert(alsa_monitor.rules, midi_bridge_rule)
-  '';
-
-  # Updated auto-connect configuration that works with ALSA client IDs
-  home.file.".config/pipewire/pipewire.conf.d/99-MIDI-auto-connect.conf".text = ''
-    # MIDI Auto-connection using ALSA bridge
-    context.exec = [
-      {
-        path = "sh"
-        args = [
-          "-c"
-          "sleep 3 && ${config.home.homeDirectory}/.local/bin/alsa-midi-autoconnect"
-        ]
-        condition = [ { exec.session-manager = [ ] } ]
-      }
-    ]
-  '';
-
-  # Simple ALSA-based auto-connect script (more reliable)
-  home.file.".local/bin/alsa-midi-autoconnect" = {
+  # Udev rule to trigger auto-connect when MIDI device is plugged in
+  home.file.".config/udev/rules.d/99-midi-autoconnect.rules" = {
     text = ''
-      #!/usr/bin/env bash
+      # Auto-connect M2 MIDI device when plugged in
+      # This triggers when any USB MIDI device is added
+      SUBSYSTEM=="sound", KERNEL=="midiC*", ACTION=="add", TAG+="systemd", ENV{SYSTEMD_USER_WANTS}="midi-hotplug-connect.service"
       
-      # Wait for ALSA sequencer to be ready
-      sleep 2
-      
-      # Check if devices exist
-      if ! aconnect -l | grep -q "24:.*M2"; then
-        echo "M2 device (24) not found"
-        exit 1
-      fi
-      
-      if ! aconnect -l | grep -q "14:.*Midi Through"; then
-        echo "Midi Through (14) not found" 
-        exit 1
-      fi
-      
-      # Connect M2 output to Midi Through input
-      if aconnect 24:0 14:0 2>/dev/null; then
-        echo "✓ Auto-connected M2 (24:0) to Midi Through (14:0)"
-        
-        # Verify connection
-        if aconnect -l | grep -A5 "client 24" | grep -q "14:0"; then
-          echo "✓ Connection verified"
-        else
-          echo "✗ Connection verification failed"
-        fi
-      else
-        echo "✗ Failed to auto-connect M2 to Midi Through"
-      fi
-      
-      # Log current connections
-      echo "Current MIDI connections:"
-      aconnect -l | grep -A10 "client 24\|client 14"
+      # Alternative: More specific rule for your M2 device (if you know vendor/product IDs)
+      # Find with: lsusb | grep -i midi
+      # SUBSYSTEM=="usb", ATTRS{idVendor}=="XXXX", ATTRS{idProduct}=="YYYY", ACTION=="add", TAG+="systemd", ENV{SYSTEMD_USER_WANTS}="midi-hotplug-connect.service"
     '';
-    executable = true;
   };
 
-  # Systemd service to run auto-connect after boot
-  systemd.user.services.alsa-midi-autoconnect = {
+  # Systemd service that runs when MIDI device is plugged in
+  systemd.user.services.midi-hotplug-connect = {
     Unit = {
-      Description = "Auto-connect ALSA MIDI devices";
-      After = [ "pipewire.service" "sound.target" ];
-      Wants = [ "pipewire.service" ];
+      Description = "Auto-connect MIDI device when plugged in";
+      After = [ "sound.target" ];
     };
     
     Service = {
       Type = "oneshot";
-      ExecStart = "${config.home.homeDirectory}/.local/bin/alsa-midi-autoconnect";
-      RemainAfterExit = true;
-      # Restart if it fails (device might not be ready yet)
-      Restart = "on-failure";
-      RestartSec = "5s";
+      ExecStart = "${config.home.homeDirectory}/.local/bin/midi-hotplug-handler";
+      # Don't fail the service if connection fails
+      SuccessExitStatus = [ 0 1 ];
+    };
+    
+    # Don't install - triggered by udev
+    Install = { };
+  };
+
+  # Advanced hotplug handler with retry logic
+  home.file.".local/bin/midi-hotplug-handler" = {
+    text = ''
+      #!/usr/bin/env bash
+      
+      # MIDI Hotplug Connection Handler
+      echo "$(date): MIDI hotplug event detected" >> "$HOME/.local/log/midi-autoconnect.log"
+      
+      # Wait for device to be fully initialized
+      sleep 3
+      
+      # Function to attempt connection
+      try_connect() {
+        local attempt=$1
+        echo "$(date): Connection attempt $attempt" >> "$HOME/.local/log/midi-autoconnect.log"
+        
+        # Check if M2 device is available
+        if ! aconnect -l 2>/dev/null | grep -q "M2"; then
+          echo "$(date): M2 device not found in attempt $attempt" >> "$HOME/.local/log/midi-autoconnect.log"
+          return 1
+        fi
+        
+        # Check if Midi Through is available
+        if ! aconnect -l 2>/dev/null | grep -q "Midi Through"; then
+          echo "$(date): Midi Through not found in attempt $attempt" >> "$HOME/.local/log/midi-autoconnect.log"
+          return 1
+        fi
+        
+        # Get actual client IDs (they might change)
+        local m2_client=$(aconnect -l 2>/dev/null | grep "M2" | head -1 | grep -o "client [0-9]*" | grep -o "[0-9]*")
+        local through_client=$(aconnect -l 2>/dev/null | grep "Midi Through" | head -1 | grep -o "client [0-9]*" | grep -o "[0-9]*")
+        
+        if [ -n "$m2_client" ] && [ -n "$through_client" ]; then
+          echo "$(date): Found M2 client $m2_client, Through client $through_client" >> "$HOME/.local/log/midi-autoconnect.log"
+          
+          # Attempt connection
+          if aconnect "$m2_client:0" "$through_client:0" 2>/dev/null; then
+            echo "$(date): ✓ Successfully connected $m2_client:0 to $through_client:0" >> "$HOME/.local/log/midi-autoconnect.log"
+            
+            # Send notification if available
+            if command -v notify-send >/dev/null 2>&1; then
+              notify-send "MIDI Connected" "M2 device auto-connected to Midi Through"
+            fi
+            
+            return 0
+          else
+            echo "$(date): ✗ Connection failed: $m2_client:0 -> $through_client:0" >> "$HOME/.local/log/midi-autoconnect.log"
+            return 1
+          fi
+        else
+          echo "$(date): Could not determine client IDs" >> "$HOME/.local/log/midi-autoconnect.log"
+          return 1
+        fi
+      }
+      
+      # Create log directory
+      mkdir -p "$HOME/.local/log"
+      
+      # Try connection with retries
+      max_attempts=5
+      for i in $(seq 1 $max_attempts); do
+        if try_connect $i; then
+          echo "$(date): Connection successful on attempt $i" >> "$HOME/.local/log/midi-autoconnect.log"
+          exit 0
+        fi
+        
+        if [ $i -lt $max_attempts ]; then
+          echo "$(date): Waiting 2 seconds before retry..." >> "$HOME/.local/log/midi-autoconnect.log"
+          sleep 2
+        fi
+      done
+      
+      echo "$(date): All connection attempts failed" >> "$HOME/.local/log/midi-autoconnect.log"
+      exit 1
+    '';
+    executable = true;
+  };
+
+  # Alternative: Polling-based solution (more reliable but uses more resources)
+  systemd.user.services.midi-connection-monitor = {
+    Unit = {
+      Description = "Monitor for MIDI device and auto-connect";
+      After = [ "pipewire.service" ];
+    };
+    
+    Service = {
+      Type = "simple";
+      ExecStart = "${config.home.homeDirectory}/.local/bin/midi-monitor-daemon";
+      Restart = "always";
+      RestartSec = "10s";
     };
     
     Install = {
@@ -133,65 +129,169 @@
     };
   };
 
-  # Better monitoring script that works with your setup
-  home.file.".local/bin/monitor-midi-m2" = {
+  # Polling daemon that checks for MIDI device periodically
+  home.file.".local/bin/midi-monitor-daemon" = {
     text = ''
       #!/usr/bin/env bash
       
-      echo "M2 MIDI Monitor"
-      echo "==============="
+      # MIDI Connection Monitor Daemon
+      echo "Starting MIDI connection monitor daemon..."
       
-      # Show current connections
-      echo "Current ALSA MIDI connections:"
-      aconnect -l | grep -A5 -B5 "M2\|Midi Through"
-      echo
+      # Track connection state
+      connected=false
       
-      # Option 1: Monitor M2 directly (works)
-      echo "1) Monitor M2 device directly (24:0)"
-      echo "2) Monitor Midi Through port (14:0) - should show data if connected"
-      echo "3) Show connection status"
-      echo "4) Test connection"
-      echo
-      read -p "Choose option (1-4): " choice
-      
-      case $choice in
-        1)
-          echo "Monitoring M2 directly - play some notes:"
-          aseqdump -p 24:0 2>/dev/null || echo "Failed to monitor (PipeWire crash protection)"
-          ;;
-        2)
-          echo "Monitoring Midi Through - should show data if M2 is connected:"
-          # Use timeout to avoid hanging if no connection
-          timeout 15s aseqdump -p 14:0 2>/dev/null || echo "No data received or timeout"
-          ;;
-        3)
-          echo "Connection status:"
-          if aconnect -l | grep -A5 "client 24" | grep -q "14:0"; then
-            echo "✓ M2 is connected to Midi Through"
-          else
-            echo "✗ M2 is NOT connected to Midi Through"
-            echo "Run: aconnect 24:0 14:0"
+      while true; do
+        # Check if M2 device is present
+        if aconnect -l 2>/dev/null | grep -q "M2"; then
+          # Check if it's already connected to Midi Through
+          m2_client=$(aconnect -l 2>/dev/null | grep "M2" | head -1 | grep -o "client [0-9]*" | grep -o "[0-9]*")
+          
+          if [ -n "$m2_client" ]; then
+            # Check if connection exists
+            if aconnect -l 2>/dev/null | grep -A10 "client $m2_client" | grep -q "14:0"; then
+              if [ "$connected" = false ]; then
+                echo "$(date): M2 device is connected to Midi Through"
+                connected=true
+              fi
+            else
+              # Device present but not connected - try to connect
+              if [ "$connected" = true ]; then
+                echo "$(date): M2 device disconnected, attempting reconnection..."
+                connected=false
+              fi
+              
+              echo "$(date): Attempting to connect M2 device..."
+              if aconnect "$m2_client:0" "14:0" 2>/dev/null; then
+                echo "$(date): ✓ Connected M2 to Midi Through"
+                connected=true
+                
+                # Send notification
+                if command -v notify-send >/dev/null 2>&1; then
+                  notify-send "MIDI Connected" "M2 device auto-connected to Midi Through"
+                fi
+              else
+                echo "$(date): ✗ Failed to connect M2 device"
+              fi
+            fi
           fi
-          ;;
-        4)
-          echo "Testing connection..."
-          if aconnect 24:0 14:0 2>/dev/null; then
-            echo "✓ Connected for test"
-            echo "Play some MIDI notes now - monitoring for 10 seconds:"
-            timeout 10s aseqdump -p 14:0 2>/dev/null || echo "No data or timeout"
-            aconnect -d 24:0 14:0 2>/dev/null
-            echo "Test connection removed"
-          else
-            echo "✗ Test connection failed"
+        else
+          # Device not present
+          if [ "$connected" = true ]; then
+            echo "$(date): M2 device disconnected"
+            connected=false
           fi
-          ;;
-      esac
+        fi
+        
+        # Wait before next check
+        sleep 5
+      done
     '';
     executable = true;
   };
 
-  # Install required packages
+  # Manual connection/disconnection scripts
+  home.file.".local/bin/midi-connect" = {
+    text = ''
+      #!/usr/bin/env bash
+      
+      echo "Manual MIDI Connection"
+      echo "====================="
+      
+      # Find M2 device
+      m2_client=$(aconnect -l 2>/dev/null | grep "M2" | head -1 | grep -o "client [0-9]*" | grep -o "[0-9]*")
+      
+      if [ -z "$m2_client" ]; then
+        echo "✗ M2 device not found. Available devices:"
+        aconnect -l | grep -E "client [0-9]+:"
+        exit 1
+      fi
+      
+      echo "Found M2 device on client $m2_client"
+      
+      # Connect to Midi Through
+      if aconnect "$m2_client:0" "14:0" 2>/dev/null; then
+        echo "✓ Connected M2 ($m2_client:0) to Midi Through (14:0)"
+        
+        # Verify connection
+        if aconnect -l | grep -A5 "client $m2_client" | grep -q "14:0"; then
+          echo "✓ Connection verified"
+        fi
+      else
+        echo "✗ Connection failed"
+        echo "Make sure Midi Through port exists:"
+        aconnect -l | grep -i through
+      fi
+    '';
+    executable = true;
+  };
+
+  home.file.".local/bin/midi-disconnect" = {
+    text = ''
+      #!/usr/bin/env bash
+      
+      echo "Manual MIDI Disconnection"
+      echo "========================"
+      
+      # Find M2 device
+      m2_client=$(aconnect -l 2>/dev/null | grep "M2" | head -1 | grep -o "client [0-9]*" | grep -o "[0-9]*")
+      
+      if [ -n "$m2_client" ]; then
+        if aconnect -d "$m2_client:0" "14:0" 2>/dev/null; then
+          echo "✓ Disconnected M2 ($m2_client:0) from Midi Through (14:0)"
+        else
+          echo "✗ Disconnection failed (may not have been connected)"
+        fi
+      else
+        echo "M2 device not found"
+      fi
+    '';
+    executable = true;
+  };
+
+  # Status checking script
+  home.file.".local/bin/midi-status" = {
+    text = ''
+      #!/usr/bin/env bash
+      
+      echo "MIDI Connection Status"
+      echo "====================="
+      
+      # Check if M2 device exists
+      m2_client=$(aconnect -l 2>/dev/null | grep "M2" | head -1 | grep -o "client [0-9]*" | grep -o "[0-9]*")
+      
+      if [ -n "$m2_client" ]; then
+        echo "✓ M2 device found (client $m2_client)"
+        
+        # Check connection status
+        if aconnect -l | grep -A10 "client $m2_client" | grep -q "14:0"; then
+          echo "✓ M2 is connected to Midi Through"
+          echo
+          echo "Test with: aseqdump -p 14:0"
+        else
+          echo "✗ M2 is NOT connected to Midi Through"
+          echo
+          echo "Connect with: ~/.local/bin/midi-connect"
+        fi
+      else
+        echo "✗ M2 device not found"
+        echo
+        echo "Available MIDI devices:"
+        aconnect -l | grep -E "client [0-9]+.*type=kernel"
+      fi
+      
+      # Show log if exists
+      if [ -f "$HOME/.local/log/midi-autoconnect.log" ]; then
+        echo
+        echo "Recent auto-connect log:"
+        tail -5 "$HOME/.local/log/midi-autoconnect.log"
+      fi
+    '';
+    executable = true;
+  };
+
+  # Install notification support
   home.packages = with pkgs; [
+    libnotify  # for notify-send
     alsa-utils
   ];
 }
