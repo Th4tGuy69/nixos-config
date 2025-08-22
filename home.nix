@@ -95,6 +95,8 @@ in
       withOpenASAR = true;
       vencord = pkgs.equicord;
       withVencord = false;
+      withMoonlight = true;
+      withTTS = false;
       enableAutoscroll = true;
     })    
     #equibop
