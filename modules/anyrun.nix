@@ -67,26 +67,24 @@ in
 
       /* anyrun's input window - Text */
       #entry {
-        /* padding: 3px 10px; */ 
         color: @fg-col;
         background-color: @bg-col;
-        border-color: @border-col;
+        border: 2px solid @border-col;
       }
 
       /* anyrun's ouput matches entries - Base */
       #match {
         color: @fg-col;
-        /* padding: 3px; */ 
         border-radius: 10px;
         background-color: @bg-col;
-        border: 1px solid @bg-col;
+        border: 2px solid @bg-col;
       }
 
       /* anyrun's selected entry */
       #match:selected {
         border-radius: 10px;
         border-color: @border-col;
-        border: 1px solid;
+        border: 2px solid;
         color: @fg-col;
       }
 
