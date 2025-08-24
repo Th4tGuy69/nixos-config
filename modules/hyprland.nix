@@ -201,12 +201,13 @@ in
         ];
       };
 
-      hyprfocus = {
-        enabled = "yes";
-        mode = "slide";
-        fade_opacity = 0.8;
-        bounce_strength = 0.95;
-        slide_height = 20;
+      plugin = {
+        hyprfocus = {
+          mode = "slide";
+          fade_opacity = 0.8;
+          bounce_strength = 0.95;
+          slide_height = 20;
+        };
       };
 
       # Input settings
