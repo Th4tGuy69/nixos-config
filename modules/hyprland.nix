@@ -203,7 +203,7 @@ in
 
       plugin = {
         hyprfocus = {
-          mode = "slide";
+          mode = "bounce";
           fade_opacity = 0.8;
           bounce_strength = 0.95;
           slide_height = 20;
