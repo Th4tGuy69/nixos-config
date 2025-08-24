@@ -224,13 +224,13 @@ in
         #     out_speed = "3";
         # };
         # Shrink settings
-        shrink = {
-            shrink_percentage = "0.95";
-            in_bezier = "realsmooth";
-            in_speed = "1";
-            out_bezier = "realsmooth";
-            out_speed = "2";
-        };
+        # shrink = {
+        #     shrink_percentage = "0.95";
+        #     in_bezier = "realsmooth";
+        #     in_speed = "1";
+        #     out_bezier = "realsmooth";
+        #     out_speed = "2";
+        # };
       };
 
       # Input settings
