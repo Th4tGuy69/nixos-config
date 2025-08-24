@@ -46,8 +46,11 @@ in
 
     extraCss = ''
       #window {
-        background: rgba(0,0,0,0.66);
         background-color: rgba(0,0,0,0.66);
+      }
+
+      * {
+        border-color: rgba(255,0,0,1);
       }
 
       list#main, box#main, list#plugin, label#plugin, label#main-desc, {
