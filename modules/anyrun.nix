@@ -49,10 +49,6 @@ in
         background-color: rgba(0,0,0,0.66);
       }
 
-      entry#entry {
-        border-color: rgba(0,0,0,0);
-      }
-
       list#main, box#main, list#plugin, label#plugin, label#main-desc, {
         background-color: rgba(0,0,0,0);
         color: rgba(117,117,117,1);
