@@ -79,6 +79,7 @@ in
         padding: 3px; 
         border-radius: 10px;
         background-color: @bg-col;
+        border: 1px solid @bg-col;
       }
 
       /* anyrun's selected entry */
