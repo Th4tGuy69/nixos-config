@@ -101,6 +101,7 @@ in
     ./eww.nix
     ./anyrun.nix
     # ./sherlock.nix
+    ./hyprwinwrap.nix
   ];
 
   home.packages = with pkgs; [
@@ -207,6 +208,14 @@ in
           fade_opacity = 0.85;
           bounce_strength = 0.95;
           slide_height = 20;
+        };
+        hyprwinwrap = {
+          class = "kitty-bg";
+          title = "kitty-bg";
+          pos_x = 25;
+          pos_y = 30;
+          size_x = 40;
+          size_y = 70;
         };
       };
 
