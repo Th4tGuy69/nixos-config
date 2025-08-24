@@ -46,6 +46,7 @@ in
 
     extraCss = ''
       #window {
+        background: rgba(0,0,0,0.66);
         background-color: rgba(0,0,0,0.66);
       }
 
