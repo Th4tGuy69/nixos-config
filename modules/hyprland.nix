@@ -169,6 +169,12 @@ in
         key_press_enables_dpms = true;
       };
 
+      plugins = {
+        hyprfocus = {
+          mode = "slide";
+        };
+      };
+
       cursor = {
         hide_on_key_press = true;
       };
