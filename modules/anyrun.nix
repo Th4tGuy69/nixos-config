@@ -46,8 +46,8 @@ in
 
     extraCss = ''
       @define-color bg-col  rgba(0, 0, 0, 0.66);
-      @define-color border-col #757575;
-      @define-color fg-col #757575;
+      @define-color border-col #CCCCCC;
+      @define-color fg-col #CCCCCC;
 
       * {
         /* transition: 110ms ease; */
