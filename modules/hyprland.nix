@@ -117,6 +117,8 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
 
     plugins = with inputs.hyprland-plugins.packages.${system}; [
       # inputs.hyprchroma.packages.${system}.Hypr-DarkWindow # Doesn't seem to work
