@@ -45,18 +45,51 @@ in
     };
 
     extraCss = ''
-      #window {
-        background-color: rgba(0,0,0,0.66);
-      }
+      @define-color bg-col  rgba(30, 30, 46, 0.7);
+      @define-color border-col #e78284;
+      @define-color fg-col #D9E0EE;
 
       * {
-        border-color: rgba(255,0,0,1);
+        transition: 110ms ease;
+        font-family: "JetBrainsMono Nerd Font";
+        font-size: 1.3rem;
       }
 
-      list#main, box#main, list#plugin, label#plugin, label#main-desc, {
-        background-color: rgba(0,0,0,0);
-        color: rgba(117,117,117,1);
-        border-color: rgba(117,117,117,1);
+      #window {
+        background: transparent;
+      }
+
+      #plugin,
+      #main {
+        color: @fg-col;
+        background-color: transparent;
+      }
+
+      /* anyrun's input window - Text */
+      #entry {
+        padding: 3px 10px;
+        color: @fg-col;
+        background-color: @bg-col;
+        border-color: @border-col;
+      }
+
+      /* anyrun's ouput matches entries - Base */
+      #match {
+        color: @fg-col;
+        padding: 3px;
+        border-radius: 16px;
+        background-color: @bg-col;
+      }
+
+      /* anyrun's selected entry */
+      #match:selected {
+        border-radius: 16px;
+        border-color: @border-col;
+        color: @fg-col;
+      }
+
+      #entry, #plugin:hover {
+        border-radius: 16px;
       }
     '';
     
@@ -64,11 +97,10 @@ in
       // Managed by Home Manager
       Config(
         prefix: "?",
-        Custom(
+        engines: [Custom(
           name: "SearXNG",
           url: "search.that-guy.dev/search?q={}",
-        )
-        engines: [Custom,Google]
+        ), Google]
       )
     '';
 
