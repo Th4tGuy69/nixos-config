@@ -68,7 +68,7 @@ in
           name: "SearXNG",
           url: "search.that-guy.dev/search?q={}",
         )
-        engines: [SearXNG,Google]
+        engines: [Custom,Google]
       )
     '';
 
