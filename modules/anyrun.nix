@@ -53,7 +53,6 @@ in
         transition: 110ms ease; 
         font-family: "FiraCode Nerd Font Mono";
         font-size: 1rem;
-        border-size: 1rem;
       }
 
       #window {
@@ -87,6 +86,7 @@ in
         border-radius: 10px;
         border-color: #FFFFFF;
         background-color: #FFFFFF;
+        border: 1rem solid;
         color: @fg-col;
       }
 
