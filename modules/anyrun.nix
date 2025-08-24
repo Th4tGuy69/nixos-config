@@ -45,14 +45,14 @@ in
     };
 
     extraCss = ''
-      @define-color bg-col  rgba(30, 30, 46, 0.7);
-      @define-color border-col #e78284;
-      @define-color fg-col #D9E0EE;
+      @define-color bg-col  rgba(0, 0, 0, 0.66);
+      @define-color border-col #FF0000;
+      @define-color fg-col #00FF00;
 
       * {
         transition: 110ms ease;
-        font-family: "JetBrainsMono Nerd Font";
-        font-size: 1.3rem;
+        font-family: "FiraCode Nerd Font Mono";
+        font-size: 1rem;
       }
 
       #window {
@@ -77,19 +77,19 @@ in
       #match {
         color: @fg-col;
         padding: 3px;
-        border-radius: 16px;
+        border-radius: 10px;
         background-color: @bg-col;
       }
 
       /* anyrun's selected entry */
       #match:selected {
-        border-radius: 16px;
+        border-radius: 10px;
         border-color: @border-col;
         color: @fg-col;
       }
 
       #entry, #plugin:hover {
-        border-radius: 16px;
+        border-radius: 10px;
       }
     '';
     
