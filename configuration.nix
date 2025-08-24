@@ -344,6 +344,7 @@ in
     hardware.openrgb.enable = true;
     udev.packages = [ pkgs.via ];
     gnome.gnome-keyring.enable = true;
+    envfs.enable = true;
   };
 
   # Enable the OpenSSH daemon.
