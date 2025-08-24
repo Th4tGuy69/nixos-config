@@ -11,10 +11,10 @@ let
   screenshot = "grimblast copy area";
 
   # Appearance options
-  gapsIn = 6;
+  gapsIn = 1;
   gapsOut = 0;
   borderSize = 0;
-  rounding = 12;
+  rounding = 0;
   activeOpacity = 1.0;
   inactiveOpacity = 1.0;
   shadowEnabled = false;
