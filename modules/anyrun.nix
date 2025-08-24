@@ -46,11 +46,11 @@ in
 
     extraCss = ''
       @define-color bg-col  rgba(0, 0, 0, 0.66);
-      @define-color border-col #FF0000;
-      @define-color fg-col #00FF00;
+      @define-color border-col #757575;
+      @define-color fg-col #757575;
 
       * {
-        transition: 110ms ease;
+        /* transition: 110ms ease; */
         font-family: "FiraCode Nerd Font Mono";
         font-size: 1rem;
       }
@@ -67,7 +67,7 @@ in
 
       /* anyrun's input window - Text */
       #entry {
-        padding: 3px 10px;
+        /* padding: 3px 10px; */
         color: @fg-col;
         background-color: @bg-col;
         border-color: @border-col;
@@ -76,7 +76,7 @@ in
       /* anyrun's ouput matches entries - Base */
       #match {
         color: @fg-col;
-        padding: 3px;
+        /*  padding: 3px; */
         border-radius: 10px;
         background-color: @bg-col;
       }
