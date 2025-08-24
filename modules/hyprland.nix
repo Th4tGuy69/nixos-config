@@ -13,7 +13,7 @@ let
   # Appearance options
   gapsIn = 6;
   gapsOut = 0;
-  borderSize = 2;
+  borderSize = 0;
   rounding = 12;
   activeOpacity = 1.0;
   inactiveOpacity = 1.0;
@@ -120,7 +120,7 @@ in
 
     plugins = with inputs.hyprland-plugins.packages.${system}; [
       # inputs.hyprchroma.packages.${system}.Hypr-DarkWindow # Doesn't seem to work
-      hyprfocus # Broken
+      hyprfocus
       hyprwinwrap
     ];
 
