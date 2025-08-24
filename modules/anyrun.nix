@@ -50,7 +50,7 @@ in
       @define-color fg-col #CCCCCC;
 
       * {
-        /* transition: 110ms ease; */
+        transition: 110ms ease; 
         font-family: "FiraCode Nerd Font Mono";
         font-size: 1rem;
       }
@@ -67,7 +67,7 @@ in
 
       /* anyrun's input window - Text */
       #entry {
-        /* padding: 3px 10px; */
+        padding: 3px 10px; 
         color: @fg-col;
         background-color: @bg-col;
         border-color: @border-col;
@@ -76,7 +76,7 @@ in
       /* anyrun's ouput matches entries - Base */
       #match {
         color: @fg-col;
-        /*  padding: 3px; */
+        padding: 3px; 
         border-radius: 10px;
         background-color: @bg-col;
       }
@@ -85,6 +85,7 @@ in
       #match:selected {
         border-radius: 10px;
         border-color: #FFFFFF;
+        background-color: #FFFFFF;
         color: @fg-col;
       }
 
