@@ -204,7 +204,7 @@ in
       plugin = {
         hyprfocus = {
           mode = "flash";
-          fade_opacity = 0.5;
+          fade_opacity = 0.7;
           bounce_strength = 0.95;
           slide_height = 20;
         };
