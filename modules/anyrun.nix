@@ -76,7 +76,7 @@ in
       /* anyrun's ouput matches entries - Base */
       #match {
         color: @fg-col;
-        padding: 3px; 
+        /* padding: 3px; */ 
         border-radius: 10px;
         background-color: @bg-col;
         border: 1px solid @bg-col;
