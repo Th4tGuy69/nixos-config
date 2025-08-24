@@ -194,8 +194,8 @@ in
           "fadeOut, 1, 1.46, almostLinear"
           "layers, 1, 3.81, easeOutQuint"
           "workspaces, 1, 1.94, almostLinear, fade"
-          "hyprfocusIn, 1, 1.7, easeOutExpo"
-          "hyprfocusOut, 1, 1.7, easeOutExpo"
+          "hyprfocusIn, 1, 1.7, easeOutQuint"
+          # "hyprfocusOut, 1, 1.7, easeOutQuint"
         ];
       };
 
