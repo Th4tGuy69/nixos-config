@@ -4,8 +4,8 @@ let
   # Define reusable variables
   terminal = "ghostty";
   fileManager = "nautilus";
-  launcher = "sherlock";
-  # launcher = "anyrun";
+  # launcher = "sherlock";
+  launcher = "anyrun";
   #launcher = "tofi-drun | xargs hyprctl dispatch exec --";
   #screenshot = "hyprshot --clipboard-only -m region";
   screenshot = "grimblast copy area";
@@ -99,8 +99,8 @@ in
   imports = [ 
     #./hyprpanel.nix
     ./eww.nix
-    # ./anyrun.nix
-    ./sherlock.nix
+    ./anyrun.nix
+    # ./sherlock.nix
   ];
 
   home.packages = with pkgs; [

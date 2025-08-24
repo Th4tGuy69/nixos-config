@@ -38,30 +38,47 @@ in
         #stdin
         #symbols
         translate
-        #websearch # Doesn't respect config
+        websearch # Doesn't respect config
+        nix-run
+        # niri-focus
       ];
     };
 
     extraCss = ''
-#window {
-  background-color: rgba(0,0,0,0.66);
-}
+      #window {
+        background-color: rgba(0,0,0,0.66);
+      }
 
-list#main, box#main, list#plugin, label#plugin, label#main-desc {
-  background-color: rgba(0,0,0,0);
-  color: rgba(117,117,117,1);
-  border-color: rgba(117,117,117,1);
-}
+      list#main, box#main, list#plugin, label#plugin, label#main-desc {
+        background-color: rgba(0,0,0,0);
+        color: rgba(117,117,117,1);
+        border-color: rgba(117,117,117,1);
+      }
     '';
     
     extraConfigFiles."websearch.ron".text = ''
-prefix: "?",
-Custom(
-  name: "SearXNG",
-  url: "search.that-guy.dev/search?q={}",
-)
-engines: [SearXNG]
-    ''; 
+      // Managed by Home Manager
+      Config(
+        prefix: "?",
+        Custom(
+          name: "SearXNG",
+          url: "search.that-guy.dev/search?q={}",
+        )
+        engines: [SearXNG,Google]
+      )
+    '';
+
+    extraConfigFiles."nix-run.ron".text = ''
+      // Managed by Home Manager
+      Config(
+        prefix: ":nr ",
+        // Whether or not to allow unfree packages
+        allow_unfree: true,
+        // Nixpkgs channel to get the package list from
+        channel: "nixpkgs-unstable",
+        max_entries: 3,
+      )
+    '';
   };
 
   xdg.desktopEntries.shutdown = {
