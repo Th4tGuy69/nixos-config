@@ -67,7 +67,7 @@ in
 
       /* anyrun's input window - Text */
       #entry {
-        padding: 3px 10px; 
+        /* padding: 3px 10px; */ 
         color: @fg-col;
         background-color: @bg-col;
         border-color: @border-col;
