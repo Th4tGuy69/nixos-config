@@ -179,7 +179,7 @@ in
  
   # Programs
   programs = {
-    hyprland.enable = true;
+    # hyprland.enable = true;
     gamescope.enable = true;
     gamemode.enable = true;
     coolercontrol.enable = true;  
