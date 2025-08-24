@@ -1,4 +1,4 @@
-{ pkgs, programs, inputs, system, ... }:
+{ pkgs, inputs, system, ... }:
 
 let
   # Define reusable variables
@@ -18,10 +18,6 @@ let
   activeOpacity = 1.0;
   inactiveOpacity = 1.0;
   shadowEnabled = false;
-  shadowOffset = "0 5";
-  shadowColor = "rgba(1a1a1aee)";
-  activeBorderColor = "rgba(757575ff)";
-  inactiveBorderColor = "rgba(00000000)";
   blurEnabled = true;
   blurSize = 2;
   blurPasses = 2;
@@ -123,8 +119,8 @@ in
     enable = true;
 
     plugins = with inputs.hyprland-plugins.packages.${system}; [
-      #inputs.hyprchroma.packages.${system}.Hypr-DarkWindow # Doesn't seem to work
-      #hyprfocus # Broken
+      # inputs.hyprchroma.packages.${system}.Hypr-DarkWindow # Doesn't seem to work
+      hyprfocus # Broken
       hyprwinwrap
     ];
 
