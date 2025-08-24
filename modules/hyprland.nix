@@ -14,7 +14,7 @@ let
   gapsIn = 1;
   gapsOut = 0;
   borderSize = 0;
-  rounding = 12;
+  rounding = 10;
   activeOpacity = 1.0;
   inactiveOpacity = 1.0;
   shadowEnabled = false;
