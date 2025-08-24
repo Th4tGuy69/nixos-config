@@ -84,7 +84,7 @@ in
       /* anyrun's selected entry */
       #match:selected {
         border-radius: 10px;
-        border-color: @border-col;
+        border-color: #FFFFFF;
         color: @fg-col;
       }
 
