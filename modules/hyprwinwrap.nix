@@ -13,4 +13,8 @@ in
   wayland.windowManager.hyprland.settings.exec-once = [
     "${pkgs.kitty}/bin/kitty --class 'clock-bg' ${clock-bg}/bin/clock-bg"
   ];
+
+  wayland.windowManager.hyprland.settings.plugin.hyprwinwrap = {
+    class = "clock-bg";
+  };
 }
