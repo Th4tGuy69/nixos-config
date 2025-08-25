@@ -23,74 +23,6 @@ let
   blurPasses = 2;
   vibrancy = 0.1696;
 
-  # Extra options
-  extraOptions = ''
-# Startup apps
-exec-once = systemctl --user start hyprpolkitagent
-exec-once = systemctl --user enable --now hyprsunset.service
-
-#exec-once = hyprpanel
-exec-once = zen
-exec-once = discord
-exec-once = spotify
-exec-once = seanime
-exec-once = steam -silent
-exec-once = nerdshade -loop -gammaNight 75 -latitude 44.564568 -longitude -123.262047 -tempNight 1600
-exec-once = quickshell
-
-# Window Rules
-# Ignore maximize requests from apps. You'll probably like this.
-windowrulev2 = suppressevent maximize, class:.*
-# Fix some dragging issues with XWayland
-windowrulev2 = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
-# Start apps on primary monitor
-windowrulev2 = monitor DP-3, class:zen
-# Start apps on second monitor
-windowrulev2 = monitor HDMI-A-1, class:goofcord
-windowrulev2 = monitor HDMI-A-1, class:discord
-windowrulev2 = monitor HDMI-A-1, class:Spotify
-# Float file picker
-windowrulev2 = float, class:xdg-desktop-portal-gtk
-# Float Prism windows
-windowrulev2 = float, class:org.prismlauncher.PrismLauncher
-# Disable animations for app launcher
-windowrulev2 = noanim 1, class:tofi-drun
-# Float Qalculate
-windowrulev2 = float, class:qalculate-gtk
-# QEMU
-windowrulev2 = fullscreen, title:QEMU
-# Unity Popups
-windowrulev2 = allowsinput, title:UnityEditor.Searcher.SearcherWindow
-windowrulev2 = move cursor -50% -5%, title:Color
-windowrulev2 = center, title:Project Settings
-# Android Emulator
-windowrulev2 = size 479 1038, title:Android Emulator
-windowrulev2 = maxsize 472 1038, title:Android Emulator
-windowrulev2 = minsize 472 1038, title:Android Emulator
-# Zed
-windowrulev2 = renderunfocused, class:dev.zed.Zed
-
-# Games
-# Allow tearing on all steam games
-windowrulev2 = immediate, class:(steam_app).*
-# Elden Ring Nightreign
-windowrulev2 = renderunfocused, class:steam_app_2622380
-windowrulev2 = fullscreenstate:* 3, class:steam_app_2622380
-# CS2
-windowrulev2 = immediate, class:cs2
-# TF2
-windowrulev2 = immediate, class:tf_linux64
-
-# Hyprchroma (transparency)
-# windowrulev2 = plugin:chromakey, fullscreen:0 chromakey_background = 7,8,17
-
-# Monitors
-monitor = DP-3, preferred, 0x0, 1
-monitor = desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-430, 1, transform, 1
-monitor = desc:Hisense Electric Co. Ltd. HISENSE 0x00000001, 3840x2160@60, 0x0, 2
-monitor = , preferred, auto, 1
-  '';
-
   hyprwatch = import ../packages/hyprwatch.nix { pkgs = pkgs; };
   nerdshade = import ../packages/nerdshade.nix { pkgs = pkgs; };
 in 
@@ -141,7 +73,7 @@ in
         "allow_tearing" = true;
         "layout" = "dwindle";
       };
-
+      
       # Decoration
       decoration = {
         rounding = rounding;
@@ -231,6 +163,67 @@ in
         preserve_split = "true";
       };
 
+      exec-once = [ 
+        # Startup Services
+        "systemctl --user start hyprpolkitagent"
+        "systemctl --user enable --now hyprsunset.service"
+        # Startup apps
+        "zen"
+        "discord"
+        "spotify"
+        "seanime"
+        "steam -silent"
+        "nerdshade -loop -gammaNight 75 -latitude 44.564568 -longitude -123.262047 -tempNight 1600"
+        "quickshell"
+      ];
+
+      windowrulev2 = [
+        # Ignore maximize requests from apps. You'll probably like this.
+        "suppressevent maximize, class:.*"
+        # Fix some dragging issues with XWayland
+        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        # Start apps on primary monitor
+        "monitor DP-3, class:zen"
+        # Start apps on second monitor
+        "monitor HDMI-A-1, class:goofcord"
+        "monitor HDMI-A-1, class:discord"
+        "monitor HDMI-A-1, class:Spotify"
+        # Float file picker
+        "float, class:xdg-desktop-portal-gtk"
+        # Float Prism windows
+        "float, class:org.prismlauncher.PrismLauncher"
+        # Disable animations for app launcher
+        "noanim 1, class:tofi-drun"
+        # Float Qalculate
+        "float, class:qalculate-gtk"
+        # QEMU
+        "fullscreen, title:QEMU"
+        # Unity Popups
+        "allowsinput, title:UnityEditor.Searcher.SearcherWindow"
+        "move cursor -50% -5%, title:Color"
+        "center, title:Project Settings"
+        # Android Emulator
+        "size 479 1038, title:Android Emulator"
+        "maxsize 472 1038, title:Android Emulator"
+        "minsize 472 1038, title:Android Emulator"
+        # Zed
+        "renderunfocused, class:dev.zed.Zed"
+
+        # Games
+        # Allow tearing on all steam games
+        "immediate, class:(steam_app).*""
+        # Elden Ring Nightreign"
+        "renderunfocused, class:steam_app_2622380"
+        "fullscreenstate:* 3, class:steam_app_2622380"
+        # CS2
+        "immediate, class:cs2"
+        # TF2
+        "immediate, class:tf_linux64"
+
+        # Hyprchroma (transparency)
+        # "plugin:chromakey, fullscreen:0 chromakey_background = 7,8,17"
+      ];
+
       # Keybindings
       bind = [
         "SUPER, q, exec, ${terminal}"
@@ -290,10 +283,14 @@ in
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioNext, exec, playerctl next"
-      ]; 
+      ];
+
+      monitor = [
+         "DP-3, preferred, 0x0, 1"
+         "desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-430, 1, transform, 1"
+         "desc:Hisense Electric Co. Ltd. HISENSE 0x00000001, 3840x2160@60, 0x0, 2"
+         ", preferred, auto, 1"
+      ];
     };
-
-    extraConfig = extraOptions;
   };
- }
-
+}
