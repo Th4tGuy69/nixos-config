@@ -211,8 +211,8 @@ in
 
         # Games
         # Allow tearing on all steam games
-        "immediate, class:(steam_app).*""
-        # Elden Ring Nightreign"
+        "immediate, class:(steam_app).*"
+        # Elden Ring Nightreign
         "renderunfocused, class:steam_app_2622380"
         "fullscreenstate:* 3, class:steam_app_2622380"
         # CS2
