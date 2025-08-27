@@ -11,7 +11,7 @@ in
   home.packages = [ pkgs.clock-rs pkgs.kitty ];
 
   wayland.windowManager.hyprland.settings.exec-once = [
-    "TZ=America/Los_Angeles ${pkgs.kitty}/bin/kitty --class 'clock-bg' ${clock-bg}/bin/clock-bg"
+    "${pkgs.kitty}/bin/kitty --class 'clock-bg' ${clock-bg}/bin/clock-bg"
   ];
 
   wayland.windowManager.hyprland.settings.plugin.hyprwinwrap = {
