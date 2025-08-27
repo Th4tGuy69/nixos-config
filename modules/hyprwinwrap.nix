@@ -3,6 +3,7 @@
 let
   clock-bg = pkgs.writeShellScriptBin "clock-bg" ''
     #!${pkgs.bash}/bin/bash  
+    export TZ=America/Los_Angeles
     clock-rs -bst --fmt "%A, %B %d, %Y"
   '';  
 in

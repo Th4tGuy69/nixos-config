@@ -10,5 +10,5 @@ pkgs.appimageTools.wrapType2 rec {
   };
 
   # https://github.com/5rahim/seanime/issues/205
-  # meta.broken = true;
+  meta.broken = true;
 }

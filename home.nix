@@ -118,7 +118,7 @@ in
     #jetbrains.clion
     qalculate-gtk
     seanime-local
-    seanime-desktop-local
+    # seanime-desktop-local
     mpv
     #zoom-us
     feishin
