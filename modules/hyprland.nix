@@ -43,6 +43,10 @@ in
     wl-clipboard
     #hyprwatch
     nerdshade
+
+    # For background
+    kitty
+    clock-rs
   ];
 
   services.hypridle.enable = true;
@@ -56,7 +60,6 @@ in
     plugins = with inputs.hyprland-plugins.packages.${system}; [
       # inputs.hyprchroma.packages.${system}.Hypr-DarkWindow # Doesn't seem to work
       hyprfocus
-      hyprwinwrap
     ];
 
     settings = {
@@ -160,7 +163,7 @@ in
         "systemctl --user start hyprpolkitagent"
         "systemctl --user enable --now hyprsunset.service"
         # Background
-        "kitten panel --edge=background clock-rs -bts --fmt '%A, %B %d, %Y'"
+        "${pkgs.kitty}/bin/kitten panel --edge=background ${pkgs.clock-rs}/bin/clock-rs -bts --fmt '%A, %B %d, %Y'"
         # Startup apps
         "zen"
         "discord"
