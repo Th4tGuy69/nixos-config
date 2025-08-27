@@ -185,7 +185,8 @@ in
         "monitor HDMI-A-1, class:discord"
         "monitor HDMI-A-1, class:Spotify"
         # Give floating windows a border
-        "bordercolor rgba(FF0000) rgba(00FF00),floating:1"
+        "bordercolor rgba(FFFFFF99) rgba(FFFFFF33), floating:1"
+        "bordersize 2, floating:1"
         # Float file picker
         "float, class:xdg-desktop-portal-gtk"
         # Float Prism windows
