@@ -3,8 +3,7 @@
 let
   clock-bg = pkgs.writeShellScriptBin "clock-bg" ''
     #!${pkgs.bash}/bin/bash
-    sleep 3s
-    clock-rs -bt --fmt "%A, %B %d, %Y"
+    clock-rs -bst --fmt "%A, %B %d, %Y"
   '';  
 in
 

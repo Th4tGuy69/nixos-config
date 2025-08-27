@@ -33,7 +33,7 @@ in
     ./eww.nix
     ./anyrun.nix
     # ./sherlock.nix
-    ./hyprwinwrap.nix
+    # ./hyprwinwrap.nix
   ];
 
   home.packages = with pkgs; [
@@ -159,6 +159,8 @@ in
         # Startup Services
         "systemctl --user start hyprpolkitagent"
         "systemctl --user enable --now hyprsunset.service"
+        # Background
+        "kitten panel --edge=background clock-rs -bts --fmt '%A, %B %d, %Y'"
         # Startup apps
         "zen"
         "discord"
