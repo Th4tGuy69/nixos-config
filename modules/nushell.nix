@@ -100,6 +100,10 @@ let
 in
 
 {
+  imports = [
+    ./pay-respects.nix
+  ];
+
   programs.nushell = {
     enable = true;
 

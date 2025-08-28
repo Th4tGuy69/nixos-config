@@ -93,8 +93,8 @@ in
     (discord.override {
       withOpenASAR = true;
       vencord = pkgs.equicord;
-      withVencord = false;
-      withMoonlight = true;
+      withVencord = true;
+      withMoonlight = false;
       withTTS = false;
       enableAutoscroll = true;
     })    
@@ -135,6 +135,9 @@ in
     helvum
     devenv
     # pakku
+    gdu
+    btop
+    # bottom
   ];
 
   nixpkgs.overlays = [
