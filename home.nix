@@ -93,7 +93,7 @@ in
     (discord.override {
       withOpenASAR = true;
       vencord = pkgs.equicord;
-      withVencord = true;
+      withVencord = false;
       withMoonlight = false;
       withTTS = false;
       enableAutoscroll = true;
