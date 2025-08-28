@@ -65,11 +65,11 @@ in
     mangohud
     gamemode
     gamescope
-    protonplus # Doesn't work?
-    protonup-qt
+    # protonplus 
+    # protonup-qt
     nautilus
     nautilus-open-any-terminal
-    awf
+    # awf
     #lapce
     fontpreview
     gh
@@ -87,10 +87,9 @@ in
     #steam
     goverlay
     #kodi-wayland
-    stremio
+    # stremio
     playerctl
     via
-    grimblast
     (discord.override {
       withOpenASAR = true;
       vencord = pkgs.equicord;
@@ -102,7 +101,7 @@ in
     #equibop
     #goofcord
     p7zip
-    thunderbird-latest
+    # thunderbird-latest
     obsidian
     bitwarden-desktop
     #keyguard
@@ -110,8 +109,7 @@ in
     #unityhub
     turtle
     sushi
-    socat
-    baobab
+    kdePackages.filelight
     #gitbutler
     #github-desktop
     #jetbrains.rider
@@ -121,7 +119,7 @@ in
     # seanime-desktop-local
     mpv
     #zoom-us
-    feishin
+    # feishin
     gnome-system-monitor
     #android-studio
     #android-tools
@@ -133,10 +131,10 @@ in
     #gcc
     wlx-overlay-s
     bottles
-    networkmanagerapplet
+    # networkmanagerapplet
     helvum
     devenv
-    pakku
+    # pakku
   ];
 
   nixpkgs.overlays = [

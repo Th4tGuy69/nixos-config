@@ -50,6 +50,7 @@ in
       qsynth
       synthesia
       neothesia
+      sonusmix
 
       # DAW
       reaper

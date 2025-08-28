@@ -5,7 +5,8 @@ let
   terminal = "ghostty";
   fileManager = "nautilus";
   # launcher = "sherlock";
-  launcher = "anyrun";
+  # launcher = "anyrun"; # Broken rn
+  launcher = "walker";
   #launcher = "tofi-drun | xargs hyprctl dispatch exec --";
   #screenshot = "hyprshot --clipboard-only -m region";
   screenshot = "grimblast copy area";
@@ -31,7 +32,8 @@ in
   imports = [ 
     #./hyprpanel.nix
     ./eww.nix
-    ./anyrun.nix
+    # ./anyrun.nix
+    ./walker.nix
     # ./sherlock.nix
     # ./hyprwinwrap.nix
   ];
@@ -43,6 +45,7 @@ in
     wl-clipboard
     #hyprwatch
     nerdshade
+    grimblast
 
     # For background
     kitty
