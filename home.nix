@@ -37,7 +37,7 @@ in
     ./modules/direnv.nix
     # ./modules/cursor.nix
     ./modules/stylix.nix
-    ./modules/quickshell.nix
+    # ./modules/quickshell.nix
     ./modules/music.nix
     ./modules/zed.nix
   ];
@@ -73,7 +73,6 @@ in
     #lapce
     fontpreview
     gh
-    microfetch
     fd
     kitty
     (prismlauncher.override {

@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ pkgs, ... }:
 
 {
   programs.ghostty = {
@@ -31,7 +31,7 @@
     };
 
     settings = {
-      initial-command = "microfetch; echo; nu";
+      initial-command = "${pkgs.microfetch}/bin/microfetch; echo; nu";
    
       theme = "Wez";
  

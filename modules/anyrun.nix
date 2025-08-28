@@ -24,7 +24,7 @@ in
       ignoreExclusiveZones = false;
       layer = "overlay";
       hidePluginInfo = true;
-      closeOnClick = false;
+      closeOnClick = true;
       showResultsImmediately = true;
       maxEntries = null;
 
@@ -38,9 +38,9 @@ in
         #stdin
         #symbols
         translate
-        websearch # Doesn't respect config
+        websearch
         nix-run
-        # niri-focus
+        niri-focus
       ];
     };
 
