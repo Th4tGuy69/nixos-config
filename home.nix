@@ -137,6 +137,7 @@ in
     gdu
     btop
     # bottom
+    lumafly
   ];
 
   nixpkgs.overlays = [
