@@ -184,7 +184,15 @@ in
     gamescope.enable = true;
     gamemode.enable = true;
     coolercontrol.enable = true;  
-    appimage = { enable = true; binfmt = true; }; # Enable running appimages directly
+    appimage = {
+      enable = true;
+      binfmt = true;
+      package = pkgs.appimage-run.override {
+        extraPkgs = pkgs: [
+          pkgs.xorg.libxshmfence
+        ];
+      };
+    }; 
     adb.enable = true;
   };
 
