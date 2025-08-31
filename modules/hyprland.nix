@@ -289,7 +289,7 @@ in
 
       monitor = [
          "DP-3, preferred, 0x0, 1"
-         "desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-430, 1, transform, 1"
+         "desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-56, 1, transform, 1"
          "desc:Hisense Electric Co. Ltd. HISENSE 0x00000001, 3840x2160@60, 0x0, 2"
          ", preferred, auto, 1"
       ];
