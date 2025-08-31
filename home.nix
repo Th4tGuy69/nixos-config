@@ -93,7 +93,7 @@ in
       withOpenASAR = true;
       vencord = pkgs.equicord;
       withVencord = false;
-      withMoonlight = false;
+      withMoonlight = true;
       withTTS = false;
       enableAutoscroll = true;
     })    
