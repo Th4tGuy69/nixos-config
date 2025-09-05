@@ -212,6 +212,11 @@ in
         "renderunfocused, class:dev.zed.Zed"
 
         # Games
+        # Fix Steam Big Picture for Steam link
+        "maxsize 1920 1080, title:Steam Big Picture Mode"
+        "minsize 1920 1080, title:Steam Big Picture Mode"
+        "float, title:Steam Big Picture Mode"
+        "fullscreenstate 3 *, title: Steam Big Picture Mode"
         # Allow tearing on all steam games
         "immediate, class:(steam_app).*"
         # Elden Ring Nightreign
