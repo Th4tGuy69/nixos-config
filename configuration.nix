@@ -58,7 +58,7 @@ in
   # Swap file
   swapDevices = [{
     device = "/var/lib/swapfile";
-    size = 16*1024; # 16 GB
+    size = 24*1024; # 16 GB
     options = [ "discard" ];
   }];
   
