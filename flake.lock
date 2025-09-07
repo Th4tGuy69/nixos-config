@@ -1175,8 +1175,8 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1757262033,
-        "narHash": "sha256-cXjwLSQocKyR9r8PEDVQN4zEZxC8n2CalyWBROckqXY=",
+        "lastModified": 1757262251,
+        "narHash": "sha256-NatgengRZggR46yK7fL9Zyw2iGtw/s8T3WD1CBFzfng=",
         "path": "/etc/nixos/flakes/zen-browser",
         "type": "path"
       },
