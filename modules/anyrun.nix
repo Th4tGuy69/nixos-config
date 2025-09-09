@@ -50,6 +50,7 @@ in
 
       * {
         font-family: "FiraCode Nerd Font Mono";
+        font-weight: 500;
       }
 
       window {
