@@ -50,7 +50,7 @@ in
       qsynth
       synthesia
       neothesia
-      sonusmix
+      # sonusmix # Unmaintained :(
 
       # DAW
       reaper
