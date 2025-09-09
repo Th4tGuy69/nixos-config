@@ -158,7 +158,7 @@ in
       };
 
       dwindle = {
-        preserve_split = "true";
+        smart_split = true;
       };
 
       exec-once = [ 
