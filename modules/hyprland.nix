@@ -13,7 +13,7 @@ let
 
   # Appearance options
   gapsIn = 1;
-  gapsOut = 0;
+  gapsOut = 2;
   borderSize = 0;
   rounding = 10;
   activeOpacity = 1.0;
@@ -152,7 +152,7 @@ in
       # Input settings
       input = {
         "kb_layout" = "us";
-        follow_mouse = 1;
+        follow_mouse = 0;
         sensitivity = -0.5;
         accel_profile = "flat";
       };
@@ -253,7 +253,7 @@ in
 	      "SUPER SHIFT, left, movewindow, l"
 	      "SUPER SHIFT, right, movewindow, r"
 	      "SUPER SHIFT, up, movewindow, u"
-	      "SUPER SHIFT, down, movefocus, d"
+	      "SUPER SHIFT, down, movewindow, d"
         "SUPER, 1, workspace, 1"
         "SUPER, 2, workspace, 2"
         "SUPER, 3, workspace, 3"
