@@ -45,51 +45,74 @@ in
     };
 
     extraCss = ''
-      @define-color bg-col  rgba(0, 0, 0, 0.66);
-      @define-color border-col #CCCCCC;
-      @define-color fg-col #CCCCCC;
+      @define-color theme_selected_bg_color #CCCCCC;
+      @define-color theme_bg_color #000000;
 
       * {
-        transition: 110ms ease; 
         font-family: "FiraCode Nerd Font Mono";
-        font-size: 1rem;
       }
 
-      #window {
+      window {
         background: transparent;
       }
 
-      #plugin,
-      #main {
-        color: @fg-col;
-        background-color: transparent;
-      }
-
-      /* anyrun's input window - Text */
-      #entry {
-        color: @fg-col;
-        background-color: @bg-col;
-        border: 2px solid @border-col;
-      }
-
-      /* anyrun's ouput matches entries - Base */
-      #match {
-        color: @fg-col;
+      box.main {
+        padding: 5px;
+        margin: 10px;
         border-radius: 10px;
-        background-color: @bg-col;
-        border: 2px solid @bg-col;
+        border: 2px solid @theme_selected_bg_color;
+        background-color: @theme_bg_color;
+        box-shadow: 0 0 5px black;
       }
 
-      /* anyrun's selected entry */
-      #match:selected {
-        border-radius: 10px;
-        border-color: @border-col;
-        border: 2px solid;
-        color: @fg-col;
+      text {
+        min-height: 30px;
+        padding: 5px;
+        border-radius: 5px;
       }
 
-      #entry, #plugin:hover {
+      .matches {
+        background-color: rgba(0, 0, 0, 0);
         border-radius: 10px;
+      }
+
+      box.plugin:first-child {
+        margin-top: 5px;
+      }
+
+      box.plugin.info {
+        min-width: 200px;
+      }
+
+      list.plugin {
+        background-color: rgba(0, 0, 0, 0);
+      }
+
+      label.match.description {
+        font-size: 10px;
+      }
+
+      label.plugin.info {
+        font-size: 14px;
+      }
+
+      .match {
+        background: transparent;
+      }
+
+      .match:selected {
+        background: transparent;
+        color: white;
+      }
+
+      @keyframes fade {
+        0% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
       }
     '';
     
