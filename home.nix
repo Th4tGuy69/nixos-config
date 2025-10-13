@@ -63,7 +63,7 @@ in
     
     spotify
     pavucontrol
-    # lutris
+    lutris
     mangohud
     gamemode
     gamescope
