@@ -57,8 +57,8 @@ in
 
   # Swap file
   swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 16*1024; # 16 GB
+    device = "/data/swapfile";
+    size = 32*1024; # 32 GB
     options = [ "discard" ];
   }];
   
@@ -76,8 +76,9 @@ in
   networking = {
     hostName = "nixos";
     nameservers = [
-      "10.0.0.194"
-      # "9.9.9.9"
+      # "dns.that-guy.dev"
+      "9.9.9.9"
+      "1.1.1.1"
     ];
     dhcpcd.extraConfig = "nohook resolv.conf";
     networkmanager = {
@@ -201,19 +202,11 @@ in
     enable = true;
     ## radv: an open-source Vulkan driver from freedesktop
     enable32Bit = true;
-
-    ## amdvlk: an open-source Vulkan driver from AMD
-    extraPackages = [ pkgs.amdvlk ];
-    extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
   };
 
   hardware.amdgpu = {
     opencl.enable = true;
     initrd.enable = true;
-    amdvlk = {
-      enable = true;
-      supportExperimental.enable = true;
-    };
   };
 
   # Steam

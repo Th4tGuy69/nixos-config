@@ -54,28 +54,28 @@ in
 
       # DAW
       reaper
-      supercollider-with-plugins
+      # supercollider-with-plugins # Broken (>3.5 CMake)
 
       # Plugins
       vital
-      surge-XT
+      # surge-XT # Broken (>3.5 CMake)
       cardinal
       helm
       distrho-ports
-      zynaddsubfx
+      # zynaddsubfx # Broken (>3.5 CMake)
       dragonfly-reverb
       calf
       talentedhack
       bristol
       picoloop
       synthv1
-      sorcer
+      # sorcer # Broken (>3.5 CMake)
       ams
       # ams-lv2 # Broken
       xsynth_dssi
-      opnplug
-      adlplug
-      odin2
+      # opnplug # Broken (>3.5 CMake)
+      # adlplug # Broken (>3.5 CMake)
+        odin2
       # fmsynth # Unstable
       padthv1
       tunefish
@@ -83,9 +83,9 @@ in
       aeolus
       gnaural
       drumkv1
-      fmtoy
+      # fmtoy # Broken (>3.5 CMake)
       samplv1
-      infamousPlugins
+      # infamousPlugins # Broken (>3.5 CMake)
       oxefmsynth
       fire
     ] ++ soundfonts;
