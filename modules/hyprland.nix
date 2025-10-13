@@ -68,6 +68,8 @@ in
     settings = {
       "$mod" = "SUPER"; # Set the main modifier key
 
+      ecosysem.no_update_news = true; # Disable update dialog
+
       # General settings
       general = {
         "gaps_in" = gapsIn;
