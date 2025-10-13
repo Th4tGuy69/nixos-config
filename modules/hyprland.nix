@@ -221,7 +221,7 @@ in
         "immediate, class:(steam_app).*"
         # Elden Ring Nightreign
         "renderunfocused, class:steam_app_2622380"
-        "fullscreenstate:* 3, class:steam_app_2622380"
+        "fullscreenstate * 3, class:steam_app_2622380"
         # CS2
         "immediate, class:cs2"
         # TF2
