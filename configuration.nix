@@ -73,7 +73,7 @@ in
   };
 
   # Networking
-  services.dnscrypt-proxy2 = {
+  services.dnscrypt-proxy = {
     enable = true;
     settings = {
       listen_addresses = [ "127.0.0.1:53" "[::1]:53" ];
