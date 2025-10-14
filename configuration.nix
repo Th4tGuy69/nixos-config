@@ -74,25 +74,18 @@ in
 
   # Networking
   services.dnscrypt-proxy = {
-    enable = true;
+    enable = false;
     settings = {
       listen_addresses = [ "127.0.0.1:53" "[::1]:53" ];
 
       bootstrap_resolvers = [ "9.9.9.9:53" "149.112.112.112:53" ];
       
-      ipv6_servers = false; # IPv6 support
-      http3 = true; # HTTPS w/ QUIC support
+      ipv6_servers = true; # IPv6 support
+      http3 = false; # HTTPS w/ QUIC support
 
       # Allow DNS logs and filters
       require_nolog = false;
       require_nofilter = false;
-
-      # Testing
-      require_dnssec = false;
-      timeout = 5000;
-      keepalive = 30;
-      dnscrypt_servers = false;
-      doh_servers = true;
 
       # Multiple server names - dnscrypt-proxy will try them in order
       # Mix your custom server with public fallbacks
