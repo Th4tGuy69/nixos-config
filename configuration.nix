@@ -74,7 +74,7 @@ in
 
   # Networking
   services.dnscrypt-proxy = {
-    enable = true;
+    enable = false;
     settings = {
       listen_addresses = [ "127.0.0.1:53" "[::1]:53" ];
 
@@ -103,10 +103,10 @@ in
   networking = {
     hostName = "nixos";
     nameservers = [
-      # "9.9.9.9"
-      # "1.1.1.1"
-      "127.0.0.1"
-      "::1"
+      "9.9.9.9"
+      "1.1.1.1"
+      # "127.0.0.1"
+      # "::1"
     ];
     dhcpcd.extraConfig = "nohook resolv.conf";
     networkmanager = {
