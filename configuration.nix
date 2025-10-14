@@ -72,21 +72,46 @@ in
     };
   };
 
-  # Networking.
+  # Networking
+  services.dnscrypt-proxy2 = {
+    enable = true;
+    settings = {
+      listen_addresses = [ "127.0.0.1:53" "[::1]:53" ];
+
+      bootstrap_resolvers = [ "9.9.9.9" "149.112.112.112" ];
+      
+      ipv6_servers = true; # IPv6 support
+      http3 = true; # QUIC support
+
+      # Allow DNS logs and filters
+      require_nolog = false;
+      require_nofilter = false;
+
+      # Multiple server names - dnscrypt-proxy will try them in order
+      # Mix your custom server with public fallbacks
+      server_names = [ "DoH" "DoT" ];
+
+      static = {
+        "DoH".stamp = "sdns://AgEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAQZG5zLnRoYXQtZ3V5LmRldgovZG5zLXF1ZXJ5";
+        "DoT".stamp = "sdns://AwEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAQZG5zLnRoYXQtZ3V5LmRldg";
+      };
+    };
+  };
+   
   networking = {
     hostName = "nixos";
     nameservers = [
-      # "dns.that-guy.dev"
-      "9.9.9.9"
-      "1.1.1.1"
+      # "9.9.9.9"
+      # "1.1.1.1"
+      "127.0.0.1"
+      "::1"
     ];
     dhcpcd.extraConfig = "nohook resolv.conf";
     networkmanager = {
       enable = true;
       dns = "none";
     };
-    #networkmanager.insertNameservers = [ "9.9.9.9" ];  
-  
+      
     # Firewall
     #firewall = {
     #  allowedTCPPorts = [ 
