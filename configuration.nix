@@ -80,16 +80,23 @@ in
 
       bootstrap_resolvers = [ "9.9.9.9:53" "149.112.112.112:53" ];
       
-      ipv6_servers = true; # IPv6 support
+      ipv6_servers = false; # IPv6 support
       http3 = true; # HTTPS w/ QUIC support
 
       # Allow DNS logs and filters
       require_nolog = false;
       require_nofilter = false;
 
+      # Testing
+      require_dnssec = false;
+      timeout = 5000;
+      keepalive = 30;
+      dnscrypt_servers = false;
+      doh_servers = true;
+
       # Multiple server names - dnscrypt-proxy will try them in order
       # Mix your custom server with public fallbacks
-      server_names = [ "DoH" ];
+      server_names = [ "DoH" "quad9" ];
 
       static = {
         # "QUIC".stamp = "sdns://BAEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAUZG5zLnRoYXQtZ3V5LmRldjo4NTM"; # Not supported
