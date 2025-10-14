@@ -81,7 +81,7 @@ in
       bootstrap_resolvers = [ "9.9.9.9:53" "149.112.112.112:53" ];
       
       ipv6_servers = true; # IPv6 support
-      http3 = false; # HTTPS w/ QUIC support
+      http3 = true; # HTTPS w/ QUIC support
 
       # Allow DNS logs and filters
       require_nolog = false;
