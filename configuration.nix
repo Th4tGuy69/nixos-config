@@ -89,12 +89,12 @@ in
 
       # Multiple server names - dnscrypt-proxy will try them in order
       # Mix your custom server with public fallbacks
-      server_names = [ "DoH" "DoT" "DNS" ];
+      server_names = [ "DoH" "DNS" ];
 
       static = {
         # "QUIC".stamp = "sdns://BAEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAUZG5zLnRoYXQtZ3V5LmRldjo4NTM"; # Not supported
         "DoH".stamp = "sdns://AgEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAUZG5zLnRoYXQtZ3V5LmRldjo0NDMKL2Rucy1xdWVyeQ";
-        "DoT".stamp = "sdns://AwEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAUZG5zLnRoYXQtZ3V5LmRldjo4NTM";
+        # "DoT".stamp = "sdns://AwEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAUZG5zLnRoYXQtZ3V5LmRldjo4NTM"; # Malformed or not supported
         "DNS".stamp = "sdns://AAEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3Mg";
       };
     };
