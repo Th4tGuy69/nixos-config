@@ -93,7 +93,7 @@ in
 
       static = {
         # "QUIC".stamp = "sdns://BAEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAUZG5zLnRoYXQtZ3V5LmRldjo4NTM"; # Not supported
-        "DoH".stamp = "sdns://AgEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAQZG5zLnRoYXQtZ3V5LmRldgovZG5zLXF1ZXJ5";
+        "DoH".stamp = "sdns://AgEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgARZG5zLnRoYXQtZ3V5LmRldi8JZG5zLXF1ZXJ5";
         # "DoT".stamp = "sdns://AwEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAUZG5zLnRoYXQtZ3V5LmRldjo4NTM"; # Malformed or not supported
         # "DNS".stamp = "sdns://AAEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3Mg";
       };
