@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  services.hyprsunset.enable = true;
+}

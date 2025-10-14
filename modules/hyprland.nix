@@ -36,6 +36,7 @@ in
     # ./walker.nix
     # ./sherlock.nix
     # ./hyprwinwrap.nix
+    ./hyprsunset.nix
   ];
 
   home.packages = with pkgs; [
