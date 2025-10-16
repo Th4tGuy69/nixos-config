@@ -34,8 +34,8 @@
         };
         
         profiles = {
-          write.project_notifications = true;
-          ask.project_notifications = true;
+          write.tools.project_notifications = true;
+          ask.tools.project_notifications = true;
         };
       };
       
@@ -96,13 +96,13 @@
 
       # UI Font
       ui_font_family = "Arial";
-      ui_font_fallbacks = [ "Zed Plex Sans" ];
+      ui_font_fallbacks = [ ".ZedMono" ];
       # ui_font_size = 16;
       agent_font_size = 16;
 
       # Editor Font
       buffer_font_family = "FiraCode Nerd Font Mono";
-      buffer_font_fallbacks = [ "Zed Plex Mono" ];
+      buffer_font_fallbacks = [ ".ZedMono" ];
       # buffer_font_size = 16;
       
       # Misc
