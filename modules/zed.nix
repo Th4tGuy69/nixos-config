@@ -137,8 +137,6 @@
 
       git.inline_blame.enabled = true;
 
-      load_direnv = "shell_hook";
-
       terminal = {
         blinking = "on";
         scrollbar.show = "never";
