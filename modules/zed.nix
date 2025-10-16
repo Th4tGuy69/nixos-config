@@ -156,7 +156,7 @@
 
       soft_wrap = "editor_width";
 
-      
+      profiles = {};
     };
   };
 
