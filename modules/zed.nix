@@ -20,7 +20,14 @@
         context = "Editor";
         bindings = {
           "ctrl-tab" = "pane::ActivateNextItem";
-          "ctrl-shift-tab" = "pane::ActivatePrevItem";
+          "ctrl-shift-tab" = "pane::ActivatePreviousItem";
+        };
+      }
+      {
+        context = "Workspace";
+        bindings = {
+          "ctrl-tab" = null;
+          "ctrl-shift-tab" = null;
         };
       }
     ];
