@@ -41,8 +41,15 @@
         };
         
         profiles = {
-          write.tools.project_notifications = true;
-          ask.tools.project_notifications = true;
+          write = {
+            name = "Write";
+            tools.project_notifications = true;
+          };
+
+          ask = {
+            name = "Ask";
+            tools.project_notifications = true;
+          };
         };
       };
       
