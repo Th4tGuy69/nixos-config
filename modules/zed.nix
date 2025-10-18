@@ -13,6 +13,7 @@
       "toml"
       "nu"
       "git-firefly"
+      "codebook"
     ];
 
     userKeymaps = [
