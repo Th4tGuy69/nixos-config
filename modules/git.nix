@@ -1,11 +1,17 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # https://nixos.wiki/wiki/Git
-  programs.git = {
+  programs.git = rec {
     enable = true;
+    package = pkgs.git.override { withLibsecret = true; };
     lfs.enable = true;
-    userName = "That Guy";
-    userEmail = "ThatGuyTF3@outlook.com";
+
+    userName = "that-guy.dev";
+    userEmail = "admin@that-guy.dev";
+
+    extraConfig = {
+      credential.helper = "${package}/bin/git-credential-libsecret";
+    };
   };
 }
