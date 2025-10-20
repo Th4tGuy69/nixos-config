@@ -4,6 +4,7 @@ let
   # Locally defined packages
   seanime-local = import ./packages/seanime.nix { pkgs = pkgs; };
   seanime-desktop-local = import ./packages/seanime-desktop.nix { pkgs = pkgs; };
+  helium = import ./packages/helium.nix { pkgs = pkgs; };
 in
 
 {
@@ -139,6 +140,7 @@ in
     gdu
     # bottom
     lumafly
+    helium
   ];
 
   nixpkgs.overlays = [
