@@ -3,7 +3,8 @@
 let
   clock-bg = pkgs.writeShellScriptBin "clock-bg" ''
     #!${pkgs.bash}/bin/bash
-    clock-rs -bst --fmt "%A, %B %d, %Y"
+    # clock-rs -bst --fmt "%A, %B %d, %Y"
+    /home/thatguy/Documents/Projects/rinow/target/debug/rinow
   '';  
 in
 
