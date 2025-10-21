@@ -14,7 +14,6 @@ in
 pkgs.appimageTools.wrapType2 {
   inherit pname version src;
 
-  # Add the desktop entry and icon from the extracted AppImage
   extraInstallCommands = ''
     # Copy desktop entry
     install -Dm644 ${appimageContents}/helium.desktop \
