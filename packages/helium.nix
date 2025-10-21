@@ -1,33 +1,28 @@
 { pkgs, ... }:
 
 let
-  pname = "Helium";
+  pname = "helium";
   version = "0.5.7.1";
 
   src = pkgs.fetchurl {
     url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-x86_64.AppImage";
     hash = "sha256:03e7cd716eee8db798a8e6fe831cd0d29d7d275e1cb1f172a24d11551171a3ad";
   };
+
+  appimageContents = pkgs.appimageTools.extractType2 { inherit pname version src; };
 in
-pkgs.appimageTools.wrapType2 rec {
+pkgs.appimageTools.wrapType2 {
   inherit pname version src;
 
+  # Add the desktop entry and icon from the extracted AppImage
   extraInstallCommands = ''
-    mkdir -p $out/share/applications
-    cat > $out/share/applications/${pname}.desktop <<EOF
-    [Desktop Entry]
-    Version=1.0
-    Name=Helium
-    Comment=Browse the web with Helium
-    Exec=${pname} %U
-    Terminal=false
-    Icon=${pname}
-    Type=Application
-    Categories=Network;WebBrowser;
-    MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/mailto;
-    StartupNotify=true
-    StartupWMClass=Helium
-    EOF
+    # Copy desktop entry
+    install -Dm644 ${appimageContents}/helium.desktop \
+      $out/share/applications/helium.desktop
+
+    # Copy icon
+    install -Dm644 ${appimageContents}/helium.png \
+      $out/share/icons/hicolor/256x256/apps/helium.png
   '';
 
   meta = with pkgs.lib; {
@@ -39,4 +34,3 @@ pkgs.appimageTools.wrapType2 rec {
     mainProgram = pname;
   };
 }
-
