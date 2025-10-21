@@ -15,9 +15,10 @@ pkgs.appimageTools.wrapType2 {
   inherit pname version src;
 
   extraInstallCommands = ''
-    # Copy desktop entry
-    install -Dm644 ${appimageContents}/helium.desktop \
-      $out/share/applications/helium.desktop
+    # Copy and patch desktop entry
+    mkdir -p $out/share/applications
+    sed "s|Exec=helium|Exec=$out/bin/helium|" ${appimageContents}/helium.desktop \
+      > $out/share/applications/helium.desktop
 
     # Copy icon
     install -Dm644 ${appimageContents}/helium.png \
