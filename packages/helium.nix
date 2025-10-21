@@ -9,28 +9,24 @@ let
     hash = "sha256:03e7cd716eee8db798a8e6fe831cd0d29d7d275e1cb1f172a24d11551171a3ad";
   };
 
-  appimageContents = pkgs.appimageTools.extractType2 { inherit pname version src; };
+  extracted = pkgs.appimageTools.extractType2 { inherit pname version src; };
 in
 pkgs.appimageTools.wrapType2 {
   inherit pname version src;
 
+  # Create a proper executable in $out/bin/helium that launches the wrapped AppImage
+  mainProgram = "helium";
+
   extraInstallCommands = ''
-    # Copy and patch desktop entry
     mkdir -p $out/share/applications
-    sed "s|Exec=helium|Exec=$out/bin/helium|" ${appimageContents}/helium.desktop \
+    mkdir -p $out/share/icons/hicolor/256x256/apps
+
+    # Copy the existing desktop file from the AppImage
+    sed "s|Exec=helium|Exec=$out/bin/helium|" ${extracted}/helium.desktop \
       > $out/share/applications/helium.desktop
 
-    # Copy icon
-    install -Dm644 ${appimageContents}/helium.png \
+    # Copy the icon from the AppImage
+    install -Dm644 ${extracted}/helium.png \
       $out/share/icons/hicolor/256x256/apps/helium.png
   '';
-
-  meta = with pkgs.lib; {
-    description = "Helium — a lightweight Chrome fork for web browsing";
-    homepage = "https://helium.computer";
-    downloadPage = "https://github.com/imputnet/helium?tab=readme-ov-file#downloads";
-    license = licenses.gpl3;
-    platforms = [ "x86_64-linux" ];
-    mainProgram = pname;
-  };
 }
