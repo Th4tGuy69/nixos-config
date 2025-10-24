@@ -113,7 +113,7 @@
       ui_font_family = "Arial";
       ui_font_fallbacks = [ ".ZedMono" ];
       # ui_font_size = 16;
-      agent_font_size = 16;
+      agent_buffer_font_size = 16;
 
       # Editor Font
       buffer_font_family = "FiraCode Nerd Font Mono";
