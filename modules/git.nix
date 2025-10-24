@@ -7,10 +7,10 @@
     package = pkgs.git.override { withLibsecret = true; };
     lfs.enable = true;
 
-    userName = "that-guy.dev";
-    userEmail = "admin@that-guy.dev";
+    settings = {
+      user.name = "that-guy.dev";
+      user.email = "admin@that-guy.dev";
 
-    extraConfig = {
       credential.helper = "${package}/bin/git-credential-libsecret";
     };
   };
