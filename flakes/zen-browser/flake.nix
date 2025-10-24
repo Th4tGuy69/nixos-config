@@ -10,11 +10,11 @@
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems f;
 
-      version = "1.17.1b";
+      version = "1.17.2b";
       downloadUrl = {
         "x86_64-linux" = {
           url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
-          sha256 = "sha256:0nk55z0nh8nab903yyqjpm55b6ljn076hbpvbbm9p9rz3srww7vk";
+          sha256 = "sha256:19ffqi4qbpl2gwr8c41401v1090pjkgf578l4vg91pzshmbah9s3";
         };
         "aarch64-linux" = {
           url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-aarch64.tar.xz";
