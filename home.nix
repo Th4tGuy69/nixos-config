@@ -2,8 +2,6 @@
 
 let
   # Locally defined packages
-  seanime-local = import ./packages/seanime.nix { pkgs = pkgs; };
-  seanime-desktop-local = import ./packages/seanime-desktop.nix { pkgs = pkgs; };
   helium = import ./packages/helium.nix { pkgs = pkgs; };
 in
 
@@ -42,6 +40,8 @@ in
     ./modules/music.nix
     ./modules/zed.nix
     ./modules/btop.nix
+    ./modules/mpv.nix
+    ./modules/zen-browser.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -59,9 +59,7 @@ in
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    inputs.zen-browser.packages.${system}.zen-browser
-    
+  home.packages = with pkgs; [ 
     spotify
     pavucontrol
     lutris
@@ -117,9 +115,6 @@ in
     #jetbrains.rider
     #jetbrains.clion
     qalculate-gtk
-    seanime-local
-    # seanime-desktop-local
-    mpv
     #zoom-us
     # feishin
     gnome-system-monitor
