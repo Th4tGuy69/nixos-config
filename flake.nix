@@ -62,7 +62,7 @@
         ./configuration.nix
         home-manager.nixosModules.default
         stylix.nixosModules.stylix
-        sops-nix.nixosModules.sops
+        # sops-nix.nixosModules.sops
         musnix.nixosModules.musnix
       ];
     };
