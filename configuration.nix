@@ -17,7 +17,9 @@ in
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.lanzaboote.nixosModules.lanzaboote
-    # ./modules/newt.nix
+    ./secrets/sops.nix
+
+    ./modules/newt.nix
   ];
 
   # Bootloader.

@@ -8,40 +8,41 @@ in
 {
   # Module imports
   imports = [
-    ./modules/hyprland.nix
-    ./modules/pipewire.nix
-    #./modules/gtk.nix
-    #./modules/nixcord.nix
-    ./modules/fonts.nix
-    ./modules/sops.nix
-    ./modules/ghostty.nix
-    ./modules/xdg.nix
-    ./modules/git.nix
-    ./modules/wine.nix
-    ./modules/syncthing.nix
-    ./modules/gpg.nix
-    #./modules/mako.nix
-    ./modules/nushell.nix
-    ./modules/starship.nix
-    ./modules/vscode.nix
-    ./modules/celluloid.nix
-    ./modules/bevy.nix
-    ./modules/qemu.nix
-    ./modules/env.nix
-    ./modules/aliases.nix
-    ./modules/zoxide.nix
-    ./modules/yazi.nix
-    ./modules/helix.nix
-    ./modules/ssh.nix
-    ./modules/direnv.nix
-    # ./modules/cursor.nix
-    ./modules/stylix.nix
-    # ./modules/quickshell.nix
-    ./modules/music.nix
-    ./modules/zed.nix
-    ./modules/btop.nix
-    ./modules/mpv.nix
-    ./modules/zen-browser.nix
+    ./secrets/sops-hm.nix
+    
+    ./hm-modules/hyprland.nix
+    ./hm-modules/pipewire.nix
+    #./hm-modules/gtk.nix
+    #./hm-modules/nixcord.nix
+    ./hm-modules/fonts.nix
+    ./hm-modules/ghostty.nix
+    ./hm-modules/xdg.nix
+    ./hm-modules/git.nix
+    ./hm-modules/wine.nix
+    ./hm-modules/syncthing.nix
+    ./hm-modules/gpg.nix
+    #./hm-modules/mako.nix
+    ./hm-modules/nushell.nix
+    ./hm-modules/starship.nix
+    ./hm-modules/vscode.nix
+    ./hm-modules/celluloid.nix
+    ./hm-modules/bevy.nix
+    ./hm-modules/qemu.nix
+    ./hm-modules/env.nix
+    ./hm-modules/aliases.nix
+    ./hm-modules/zoxide.nix
+    ./hm-modules/yazi.nix
+    ./hm-modules/helix.nix
+    ./hm-modules/ssh.nix
+    ./hm-modules/direnv.nix
+    # ./hm-modules/cursor.nix
+    ./hm-modules/stylix.nix
+    # ./hm-modules/quickshell.nix
+    ./hm-modules/music.nix
+    ./hm-modules/zed.nix
+    ./hm-modules/btop.nix
+    ./hm-modules/mpv.nix
+    ./hm-modules/zen-browser.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

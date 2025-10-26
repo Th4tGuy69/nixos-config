@@ -1,7 +1,9 @@
 { config, ... }:
 
 {
-  sops.secrets.newt = {};
+  sops.secrets.newt-id = {};
+  sops.secrets.newt-secret = {};
+
   sops.templates."newt-credentials.env".content = ''
       NEWT_ID=${config.sops.placeholder.newt-id}
       NEWT_SECRET=${config.sops.placeholder.newt-secret}
