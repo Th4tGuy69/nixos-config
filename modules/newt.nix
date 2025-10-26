@@ -3,6 +3,6 @@
 {
   services.newt = {
     enable = true;
-    environmentFile = "/home/thatguy/.config/newt-client/config.json";
+    environmentFile = "/home/thatguy/.config/newt-client/credentials.env";
   }; 
 }
