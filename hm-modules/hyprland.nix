@@ -174,7 +174,6 @@ in
         "zen"
         "discord"
         "spotify"
-        "seanime"
         "steam -silent"
         "nerdshade -loop -gammaNight 75 -latitude 44.564568 -longitude -123.262047 -tempNight 1600"
       ];

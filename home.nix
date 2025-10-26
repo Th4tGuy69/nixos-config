@@ -43,6 +43,7 @@ in
     ./hm-modules/btop.nix
     ./hm-modules/mpv.nix
     ./hm-modules/zen-browser.nix
+    ./hm-modules/seanime.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
