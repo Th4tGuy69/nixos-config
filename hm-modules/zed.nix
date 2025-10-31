@@ -14,6 +14,7 @@
       "nu"
       "git-firefly"
       "codebook"
+      "log"
     ];
 
     userKeymaps = [

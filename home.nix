@@ -94,8 +94,8 @@ in
     via
     (discord.override {
       withOpenASAR = true;
-      vencord = pkgs.equicord;
-      withVencord = false;
+      withVencord = true;
+      withEquicord = false;
       withMoonlight = false;
       withTTS = false;
       enableAutoscroll = true;
@@ -152,7 +152,6 @@ in
         });
       });
     })
-    (import ./overlays/equicord.nix)
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
