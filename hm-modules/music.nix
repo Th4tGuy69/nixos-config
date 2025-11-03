@@ -54,6 +54,7 @@ in
 
       # DAW
       reaper
+      bitwig-studio
       # supercollider-with-plugins # Broken (>3.5 CMake)
 
       # Plugins
