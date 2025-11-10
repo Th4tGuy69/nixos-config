@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     corefonts
-    vistafonts
+    vista-fonts
     nerd-fonts.fira-code
     twemoji-color-font
   ];

@@ -54,7 +54,7 @@
       };
 
       sansSerif = {
-        package = vistafonts;
+        package = vista-fonts;
         name = "Arial";
       };
 
