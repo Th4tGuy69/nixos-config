@@ -8,5 +8,5 @@ in
 {
   home.packages = [ seanime seanime-denshi ];
 
-  wayland.windowManager.hyprland.settings.exec-once = [ "seanime" ];
+  # wayland.windowManager.hyprland.settings.exec-once = [ "seanime" ];
 }
