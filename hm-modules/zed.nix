@@ -18,8 +18,6 @@
       "nvim-nightfox"
     ];
 
-    # theme = "Carbonfox - blurred";
-
     userKeymaps = [
       {
         context = "Editor";
@@ -38,6 +36,8 @@
     ];
 
     userSettings = {
+      theme = "Carbonfox - blurred";
+      
       # AI
       agent = {
         default_model = {
