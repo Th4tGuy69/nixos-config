@@ -6,6 +6,7 @@
 
     targets = {
       vscode.enable = false;
+      zed.enable = false;
       starship.enable = false;
     };
 

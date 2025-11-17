@@ -15,7 +15,10 @@
       "git-firefly"
       "codebook"
       "log"
+      "nvim-nightfox"
     ];
+
+    # theme = "Carbonfox - blurred";
 
     userKeymaps = [
       {

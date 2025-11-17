@@ -49,7 +49,7 @@ in
       alsa-utils
       qsynth
       synthesia
-      neothesia
+      # neothesia
       # sonusmix # Unmaintained :(
 
       # DAW

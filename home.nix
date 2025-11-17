@@ -89,7 +89,7 @@ in
     #steam
     goverlay
     #kodi-wayland
-    stremio
+    # stremio
     playerctl
     via
     (discord.override {
