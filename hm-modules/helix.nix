@@ -14,7 +14,7 @@
       };
 
       keys.normal = {
-        "C-_" = "toggle_comments";
+        "C-/" = "toggle_comments";
       };
     };
 
