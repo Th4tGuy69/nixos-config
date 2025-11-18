@@ -8,6 +8,7 @@
       vscode.enable = false;
       zed.enable = false;
       starship.enable = false;
+      helix.enable = false;
     };
 
     # base16Scheme = { # Poimandres original
