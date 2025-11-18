@@ -17,8 +17,6 @@
         "ctrl+shift+tab=previous_tab"
         "ctrl+f=toggle_split_zoom"
         "ctrl+w=close_surface"
-        "ctrl+c=copy_to_clipboard"
-        "ctrl+v=paste_from_clipboard"
         "ctrl+up=goto_split:top"
         "ctrl+down=goto_split:bottom"
         "ctrl+left=goto_split:left"

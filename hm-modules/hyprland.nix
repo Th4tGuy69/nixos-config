@@ -1,4 +1,9 @@
-{ pkgs, inputs, system, ... }:
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 
 let
   # Define reusable variables
@@ -26,10 +31,10 @@ let
 
   hyprwatch = import ../packages/hyprwatch.nix { pkgs = pkgs; };
   nerdshade = import ../packages/nerdshade.nix { pkgs = pkgs; };
-in 
+in
 
 {
-  imports = [ 
+  imports = [
     #./hyprpanel.nix
     ./eww.nix
     ./anyrun.nix
@@ -82,7 +87,7 @@ in
         "allow_tearing" = true;
         "layout" = "dwindle";
       };
-      
+
       # Decoration
       decoration = {
         rounding = rounding;
@@ -103,7 +108,7 @@ in
       };
 
       misc = {
-      	disable_hyprland_logo = true;
+        disable_hyprland_logo = true;
         #background_color = "rgba(000000FF)";
         middle_click_paste = false;
         vrr = 3;
@@ -154,8 +159,10 @@ in
 
       # Input settings
       input = {
-        "kb_layout" = "us";
-        follow_mouse = 0;
+        kb_layout = "us";
+        repeat_rate = 25;
+        repeat_delay = 200;
+
         sensitivity = -0.5;
         accel_profile = "flat";
       };
@@ -164,7 +171,7 @@ in
         smart_split = true;
       };
 
-      exec-once = [ 
+      exec-once = [
         # Startup Services
         "systemctl --user start hyprpolkitagent"
         "systemctl --user enable --now hyprsunset.service"
@@ -242,7 +249,7 @@ in
         "SUPER SHIFT, s, exec, ${screenshot}"
         "SUPER, c, exec, hyprpicker -a"
         #"SUPER SHIFT, c, togglechromakey"
-	      "SUPER, w, killactive,"
+        "SUPER, w, killactive,"
         "SUPER, f, fullscreen,"
         "SUPER SHIFT, f, togglefloating,"
         "SUPER, m, exit,"
@@ -252,10 +259,10 @@ in
         "SUPER, right, movefocus, r"
         "SUPER, up, movefocus, u"
         "SUPER, down, movefocus, d"
-	      "SUPER SHIFT, left, movewindow, l"
-	      "SUPER SHIFT, right, movewindow, r"
-	      "SUPER SHIFT, up, movewindow, u"
-	      "SUPER SHIFT, down, movewindow, d"
+        "SUPER SHIFT, left, movewindow, l"
+        "SUPER SHIFT, right, movewindow, r"
+        "SUPER SHIFT, up, movewindow, u"
+        "SUPER SHIFT, down, movewindow, d"
         "SUPER, 1, workspace, 1"
         "SUPER, 2, workspace, 2"
         "SUPER, 3, workspace, 3"
@@ -266,7 +273,7 @@ in
         "SUPER, 8, workspace, 8"
         "SUPER, 9, workspace, 9"
         "SUPER, 0, workspace, 10"
-	      "SUPER, escape, togglespecialworkspace, magic"
+        "SUPER, escape, togglespecialworkspace, magic"
         "SUPER SHIFT, 1, movetoworkspace, 1"
         "SUPER SHIFT, 2, movetoworkspace, 2"
         "SUPER SHIFT, 3, movetoworkspace, 3"
@@ -277,8 +284,8 @@ in
         "SUPER SHIFT, 8, movetoworkspace, 8"
         "SUPER SHIFT, 9, movetoworkspace, 9"
         "SUPER SHIFT, 0, movetoworkspace, 10"
-	      "SUPER SHIFT, escape, movetoworkspace, special:magic"
-	
+        "SUPER SHIFT, escape, movetoworkspace, special:magic"
+
         # Global keybind passthrough
         ", insert, sendshortcut, CTRL SHIFT, d, class:discord"
       ];
@@ -287,7 +294,7 @@ in
         "SUPER, mouse:272, movewindow"
         "SUPER, mouse:273, resizewindow"
       ];
-      
+
       bindl = [
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
@@ -295,10 +302,10 @@ in
       ];
 
       monitor = [
-         "DP-3, preferred, 0x0, 1"
-         "desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-56, 1, transform, 1"
-         "desc:Hisense Electric Co. Ltd. HISENSE 0x00000001, 3840x2160@60, 0x0, 2"
-         ", preferred, auto, 1"
+        "DP-3, preferred, 0x0, 1"
+        "desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-56, 1, transform, 1"
+        "desc:Hisense Electric Co. Ltd. HISENSE 0x00000001, 3840x2160@60, 0x0, 2"
+        ", preferred, auto, 1"
       ];
     };
   };
