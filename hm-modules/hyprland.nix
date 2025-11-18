@@ -174,56 +174,55 @@ in
       ];
 
       windowrule = [
-
         # Ignore maximize requests from apps. You'll probably like this.
-        "match:class:.*,suppressevent:maximize"
+        "match:class .*, suppress_event maximize"
         # Fix some dragging issues with XWayland
-        "match:class:^$; title:^$; xwayland:1; floating:1; fullscreen:0; pinned:0, nofocus"
+        "match:class:^$; title:^$; xwayland:1; floating:1; fullscreen:0; pinned:0, no_focus true"
         # Start apps on primary monitor
-        "match:class:zen, monitor:DP-3"
+        "match:class zen, monitor DP-3"
         # Start apps on second monitor
-        "match:class:goofcord, monitor:HDMI-A-1"
-        "match:class:discord, monitor:HDMI-A-1"
-        "match:class:Spotify, monitor:HDMI-A-1"
+        "match:class goofcord, monitor HDMI-A-1"
+        "match:class discord, monitor HDMI-A-1"
+        "match:class Spotify, monitor HDMI-A-1"
         # Give floating windows a border
-        "match:floating:1, bordercolor:rgba(FFFFFF99) rgba(FFFFFF33)"
-        "match:floating:1, bordersize:2"
+        "match:float true, border_color rgba(FFFFFF99) rgba(FFFFFF33)"
+        "match:float true, border_size 2"
         # Float file picker
-        "match:class:xdg-desktop-portal-gtk, float"
+        "match:class xdg-desktop-portal-gtk, float true"
         # Float Prism windows
-        "match:class:org.prismlauncher.PrismLauncher, float"
+        "match:class org.prismlauncher.PrismLauncher, float true"
         # Disable animations for app launcher
-        "match:class:tofi-drun, noanim:1"
+        "match:class tofi-drun, no_anim true"
         # Float Qalculate
-        "match:class:qalculate-gtk, float"
+        "match:class qalculate-gtk, float true"
         # QEMU
-        "match:title:QEMU, fullscreen"
+        "match:title QEMU, fullscreen true"
         # Unity Popups
-        "match:title:UnityEditor.Searcher.SearcherWindow, allowsinput"
-        "match:title:Color, move:cursor -50% -5%"
-        "match:title:Project Settings, center"
+        "match:title UnityEditor.Searcher.SearcherWindow, allows_input true"
+        "match:title Color, move cursor -50% -5%"
+        "match:title Project Settings, center true"
         # Android Emulator
-        "match:title:Android Emulator, size:479 1038"
-        "match:title:Android Emulator, maxsize:472 1038"
-        "match:title:Android Emulator, minsize:472 1038"
+        "match:title Android Emulator, size 479 1038"
+        "match:title Android Emulator, max_size 472 1038"
+        "match:title Android Emulator, min_size 472 1038"
         # Zed
-        "match:class:dev.zed.Zed, renderunfocused"
+        "match:class dev.zed.Zed, render_unfocused true"
 
         # Games
         # Fix Steam Big Picture for Steam link
-        "match:title:Steam Big Picture Mode, maxsize:1920 1080"
-        "match:title:Steam Big Picture Mode, minsize:1920 1080"
-        "match:title:Steam Big Picture Mode, float"
-        "match:title:Steam Big Picture Mode, fullscreenstate:3 *"
+        "match:title Steam Big Picture Mode, max_size 1920 1080"
+        "match:title Steam Big Picture Mode, min_size 1920 1080"
+        "match:title Steam Big Picture Mode, float true"
+        "match:title Steam Big Picture Mode, fullscreen_state 3 *"
         # Allow tearing on all steam games
-        "match:class:(steam_app).*, immediate"
+        "match:class (steam_app).*, immediate true"
         # Elden Ring Nightreign
-        "match:class:steam_app_2622380, renderunfocused"
-        "match:class:steam_app_2622380, fullscreenstate:* 3"
+        "match:class steam_app_2622380, render_unfocused true"
+        "match:class steam_app_2622380, fullscreen_state * 3"
         # CS2
-        "match:class:cs2, immediate"
+        "match:class cs2, immediate true"
         # TF2
-        "match:class:tf_linux64, immediate"
+        "match:class tf_linux64, immediate true"
       ];
 
       # Keybindings
