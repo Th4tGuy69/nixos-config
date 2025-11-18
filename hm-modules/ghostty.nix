@@ -27,7 +27,7 @@
         "ctrl+alt+shift+up=resize_split:up,20"
         "ctrl+alt+shift+down=resize_split:down,20"
         "ctrl+alt+shift+left=resize_split:left,20"
-        "ctrl+alt+shift+right=resize_split:right"
+        "ctrl+alt+shift+right=resize_split:right,20"
       ];
     };
   };
