@@ -48,6 +48,7 @@
 
     hypr-darkwindow = {
       url = "github:micha4w/Hypr-DarkWindow/tags/v0.36.0";
+      # url = "github:micha4w/Hypr-DarkWindow";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -59,9 +60,8 @@
   outputs =
     { self, nixpkgs, ... }@inputs:
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs system; };
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
         modules = with inputs; [
           ./configuration.nix
           home-manager.nixosModules.default

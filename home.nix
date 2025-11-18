@@ -11,6 +11,8 @@ let
 in
 
 {
+  _module.args.system = pkgs.stdenv.hostPlatform.system;
+  
   # Module imports
   imports = [
     ./secrets/sops-hm.nix

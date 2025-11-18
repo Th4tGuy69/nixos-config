@@ -2,7 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, system, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 
 let
   subs = [
@@ -14,13 +20,16 @@ let
 in
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.lanzaboote.nixosModules.lanzaboote
     ./secrets/sops.nix
 
     ./modules/newt.nix
   ];
+
+  _module.args.system = pkgs.stdenv.hostPlatform.system;
 
   # Bootloader.
   boot = {
@@ -38,7 +47,7 @@ in
       pkiBundle = "/var/lib/sbctl";
     };
 
-    kernelModules = [ "nct6775" ];  
+    kernelModules = [ "nct6775" ];
     #kernelPatches = [
     #  {
     #    name = "amdgpu-ignore-ctx-privileges";
@@ -49,7 +58,7 @@ in
     #    };
     #  }
     #];
-    
+
     plymouth = {
       enable = true;
 
@@ -59,12 +68,14 @@ in
   };
 
   # Swap file
-  swapDevices = [{
-    device = "/data/swapfile";
-    size = 32*1024; # 32 GB
-    options = [ "discard" ];
-  }];
-  
+  swapDevices = [
+    {
+      device = "/data/swapfile";
+      size = 32 * 1024; # 32 GB
+      options = [ "discard" ];
+    }
+  ];
+
   # Fix open file limit for system updates/upgrades
   systemd = {
     settings.Manager.DefaultLimitNOFILE = 4096;
@@ -79,10 +90,16 @@ in
   services.dnscrypt-proxy = {
     enable = false;
     settings = {
-      listen_addresses = [ "127.0.0.1:53" "[::1]:53" ];
+      listen_addresses = [
+        "127.0.0.1:53"
+        "[::1]:53"
+      ];
 
-      bootstrap_resolvers = [ "9.9.9.9:53" "149.112.112.112:53" ];
-      
+      bootstrap_resolvers = [
+        "9.9.9.9:53"
+        "149.112.112.112:53"
+      ];
+
       ipv6_servers = true; # IPv6 support
       http3 = true; # HTTPS w/ QUIC support
 
@@ -92,7 +109,10 @@ in
 
       # Multiple server names - dnscrypt-proxy will try them in order
       # Mix your custom server with public fallbacks
-      server_names = [ "DoH" "quad9" ];
+      server_names = [
+        "DoH"
+        "quad9"
+      ];
 
       static = {
         # "QUIC".stamp = "sdns://BAEAAAAAAAAADzE3Mi4yNDUuMTQ4LjE3MgAUZG5zLnRoYXQtZ3V5LmRldjo4NTM"; # Not supported
@@ -102,7 +122,7 @@ in
       };
     };
   };
-   
+
   networking = {
     hostName = "nixos";
     nameservers = [
@@ -116,13 +136,13 @@ in
       enable = true;
       dns = "none";
     };
-      
+
     # Firewall
     #firewall = {
-    #  allowedTCPPorts = [ 
+    #  allowedTCPPorts = [
     #    8384 22000 22067 22070 # Syncthing
     #  ];
-    #  allowedUDPPorts = [ 
+    #  allowedUDPPorts = [
     #    22000 21027 # Syncthing
     #    57621 # Spotify
     #  ];
@@ -185,10 +205,17 @@ in
       default_session.command = "Hyprland --config /etc/greetd/hyprland.conf";
     };
   };
- 
+
   programs.regreet = {
     enable = true;
-    theme.package = pkgs.colloid-gtk-theme.override { themeVariants = [ "grey" ]; tweaks = [ "black" "rimless" "normal" ]; };
+    theme.package = pkgs.colloid-gtk-theme.override {
+      themeVariants = [ "grey" ];
+      tweaks = [
+        "black"
+        "rimless"
+        "normal"
+      ];
+    };
     theme.name = "Colloid-Grey-Dark";
   };
 
@@ -208,13 +235,13 @@ in
 
   # Bluetooth
   hardware.bluetooth.enable = true;
- 
+
   # Programs
   programs = {
     hyprland.enable = true;
     gamescope.enable = true;
     gamemode.enable = true;
-    coolercontrol.enable = true;  
+    coolercontrol.enable = true;
     appimage = {
       enable = true;
       binfmt = true;
@@ -223,7 +250,7 @@ in
           pkgs.xorg.libxshmfence
         ];
       };
-    }; 
+    };
     adb.enable = true;
   };
 
@@ -285,7 +312,13 @@ in
   users.users.thatguy = {
     isNormalUser = true;
     description = "That Guy";
-    extraGroups = [ "networkmanager" "wheel" "audio" "kvm" "adbusers" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "kvm"
+      "adbusers"
+    ];
     packages = with pkgs; [
       vim
     ];
@@ -335,13 +368,20 @@ in
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ]; # Flakes
-    trusted-users = [ "root" "thatguy" "@wheel" ]; # Extra System Permissions
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ]; # Flakes
+    trusted-users = [
+      "root"
+      "thatguy"
+      "@wheel"
+    ]; # Extra System Permissions
 
     # Build Cache
     substituters = subs;
     trusted-substituters = subs;
-    
+
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -353,8 +393,8 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
     sbctl
     openrgb-with-all-plugins
     curlFull
@@ -390,8 +430,8 @@ in
       PermitRootLogin = "no";
     };
   };
- 
-  # Open ports in the firewall. 
+
+  # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.

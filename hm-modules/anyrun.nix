@@ -1,11 +1,16 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  system,
+  ...
+}:
 
 let
   shutdown-script = pkgs.writeShellScriptBin "shutdown" ''
     #!/bin/bash
     shutdown now
   '';
-  
+
   reboot-script = pkgs.writeShellScriptBin "reboot" ''
     #!/bin/bash
     reboot
@@ -16,10 +21,18 @@ in
   programs.anyrun = {
     enable = true;
     config = {
-      x = { fraction = 0.5; };
-      y = { fraction = 0.3; };
-      width = { fraction = 0.3; };
-      height = { absolute = 0; };
+      x = {
+        fraction = 0.5;
+      };
+      y = {
+        fraction = 0.3;
+      };
+      width = {
+        fraction = 0.3;
+      };
+      height = {
+        absolute = 0;
+      };
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
@@ -28,7 +41,7 @@ in
       showResultsImmediately = true;
       maxEntries = null;
 
-      plugins = with inputs.anyrun.packages.${pkgs.system}; [
+      plugins = with inputs.anyrun.packages.${system}; [
         applications
         dictionary
         #kidex # Need to install kidex daemon first (not in nixpkgs)
@@ -116,7 +129,7 @@ in
         }
       }
     '';
-    
+
     extraConfigFiles."websearch.ron".text = ''
       // Managed by Home Manager
       Config(
