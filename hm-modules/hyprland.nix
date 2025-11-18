@@ -177,7 +177,7 @@ in
         # Ignore maximize requests from apps. You'll probably like this.
         "match:class .*, suppress_event maximize"
         # Fix some dragging issues with XWayland
-        "match:class:^$; title:^$; xwayland:1; floating:1; fullscreen:0; pinned:0, no_focus true"
+        "match:class ^$; title:^$; xwayland:1; floating:1; fullscreen:0; pinned:0, no_focus true"
         # Start apps on primary monitor
         "match:class zen, monitor DP-3"
         # Start apps on second monitor
