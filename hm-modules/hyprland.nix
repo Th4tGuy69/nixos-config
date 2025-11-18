@@ -160,7 +160,7 @@ in
       # Input settings
       input = {
         kb_layout = "us";
-        repeat_rate = 25;
+        repeat_rate = 35;
         repeat_delay = 200;
 
         sensitivity = -0.5;
