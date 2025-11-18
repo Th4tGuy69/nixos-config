@@ -30,23 +30,43 @@
     #   base0F = "ed64a6"; # Deprecated, Opening/Closing Embedded Language Tags (pink)
     # };
 
-    base16Scheme = { # Poimandres Black
-      base00 = "000000"; # Default Background (pure black for OLED)
-      base01 = "171717"; # Lighter Background (very dark gray)
-      base02 = "2e2e2e"; # Selection Background (dark gray)
-      base03 = "4b4b4b"; # Comments, Invisibles (medium gray)
-      base04 = "787878"; # Dark Foreground (medium gray)
-      base05 = "a0a0a0"; # Default Foreground (light gray - OLED safe)
-      base06 = "b8b8b8"; # Light Foreground (lighter gray - OLED safe)
-      base07 = "d0d0d0"; # Light Background (light gray - OLED safe)
-      base08 = "e53e3e"; # Variables, XML Tags, Markup Link Text (coral/red)
-      base09 = "dd6b20"; # Integers, Boolean, Constants (orange)
-      base0A = "f6e05e"; # Classes, Markup Bold, Search Text Background (light yellow)
-      base0B = "48bb78"; # Strings, Inherited Class, Markup Code (mint green)
-      base0C = "38b2ac"; # Support, Regular Expressions (teal)
-      base0D = "4299e1"; # Functions, Methods, Attribute IDs (sky blue)
-      base0E = "9f7aea"; # Keywords, Storage, Selector (purple)
-      base0F = "ed64a6"; # Deprecated, Opening/Closing Embedded Language Tags (pink)
+    # base16Scheme = { # Poimandres Black
+    #   base00 = "000000"; # Default Background (pure black for OLED)
+    #   base01 = "171717"; # Lighter Background (very dark gray)
+    #   base02 = "2e2e2e"; # Selection Background (dark gray)
+    #   base03 = "4b4b4b"; # Comments, Invisibles (medium gray)
+    #   base04 = "787878"; # Dark Foreground (medium gray)
+    #   base05 = "a0a0a0"; # Default Foreground (light gray - OLED safe)
+    #   base06 = "b8b8b8"; # Light Foreground (lighter gray - OLED safe)
+    #   base07 = "d0d0d0"; # Light Background (light gray - OLED safe)
+    #   base08 = "e53e3e"; # Variables, XML Tags, Markup Link Text (coral/red)
+    #   base09 = "dd6b20"; # Integers, Boolean, Constants (orange)
+    #   base0A = "f6e05e"; # Classes, Markup Bold, Search Text Background (light yellow)
+    #   base0B = "48bb78"; # Strings, Inherited Class, Markup Code (mint green)
+    #   base0C = "38b2ac"; # Support, Regular Expressions (teal)
+    #   base0D = "4299e1"; # Functions, Methods, Attribute IDs (sky blue)
+    #   base0E = "9f7aea"; # Keywords, Storage, Selector (purple)
+    #   base0F = "ed64a6"; # Deprecated, Opening/Closing Embedded Language Tags (pink)
+    # };
+
+    base16Scheme = {
+      # Carbonfox
+      base00 = "282828";
+      base01 = "335396";
+      base02 = "25be6a";
+      base03 = "08bdba";
+      base04 = "78a9ff";
+      base05 = "be95ff";
+      base06 = "33b1ff";
+      base07 = "dfdfe0";
+      base08 = "484848";
+      base09 = "f16da6";
+      base0A = "46c880";
+      base0B = "2dc7c4";
+      base0C = "8cb6ff";
+      base0D = "c8a5ff";
+      base0E = "52bdff";
+      base0F = "e4e4e5";
     };
 
     fonts = with pkgs; {
@@ -83,5 +103,5 @@
       light = "Colloid-Grey-Light";
       package = pkgs.colloid-icon-theme.override { colorVariants = [ "grey" ]; };
     };
-  }; 
+  };
 }

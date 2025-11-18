@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   # Locally defined packages
@@ -9,7 +14,7 @@ in
   # Module imports
   imports = [
     ./secrets/sops-hm.nix
-    
+
     ./hm-modules/hyprland.nix
     ./hm-modules/pipewire.nix
     #./hm-modules/gtk.nix
@@ -61,14 +66,14 @@ in
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
     spotify
     pavucontrol
     lutris
     mangohud
     gamemode
     gamescope
-    # protonplus 
+    # protonplus
     # protonup-qt
     nautilus
     nautilus-open-any-terminal
@@ -99,7 +104,7 @@ in
       withMoonlight = false;
       withTTS = false;
       enableAutoscroll = true;
-    })    
+    })
     #equibop
     #goofcord
     p7zip
@@ -143,14 +148,18 @@ in
   nixpkgs.overlays = [
     # Add support for nautilus trash and networking
     (self: super: {
-      gnome = super.gnome.overrideScope' (gself: gsuper: {
-        nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
-          buildInputs = nsuper.buildInputs ++ (with pkgs.gst_all_1; [
-            gst-plugins-good
-            gst-plugins-bad
-          ]);
-        });
-      });
+      gnome = super.gnome.overrideScope' (
+        gself: gsuper: {
+          nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
+            buildInputs =
+              nsuper.buildInputs
+              ++ (with pkgs.gst_all_1; [
+                gst-plugins-good
+                gst-plugins-bad
+              ]);
+          });
+        }
+      );
     })
   ];
 
