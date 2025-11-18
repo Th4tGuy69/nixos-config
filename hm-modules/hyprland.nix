@@ -44,6 +44,7 @@ in
     ./hyprsunset.nix
     # ./hyprfocus.nix
     # ./hyprdarkwindow.nix
+    # ./hyprchroma.nix
   ];
 
   home.packages = with pkgs; [

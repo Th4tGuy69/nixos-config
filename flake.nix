@@ -52,6 +52,11 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    hyprchroma = {
+      url = "github:alexhulbert/Hyprchroma";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     musnix = {
       url = "github:musnix/musnix";
     };
