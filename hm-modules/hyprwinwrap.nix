@@ -8,8 +8,8 @@
 let
   clock-bg = pkgs.writeShellScriptBin "clock-bg" ''
     #!${pkgs.bash}/bin/bash
-    ${pkgs.coreutils}/bin/sleep 1 && ${pkgs.cava}/bin/cava
-    # clock-rs -bst --fmt "%A, %B %d, %Y"
+    # ${pkgs.coreutils}/bin/sleep 1 && ${pkgs.cava}/bin/cava
+    ${pkgs.clock-rs}/bin/clock-rs -bst --fmt "%A, %B %d, %Y"
     # /home/thatguy/Documents/Projects/rinow/target/debug/rinow
   '';
 in

@@ -178,7 +178,7 @@ in
         "systemctl --user start hyprpolkitagent"
         "systemctl --user enable --now hyprsunset.service"
         # Background
-        "${pkgs.kitty}/bin/kitten panel --edge=background ${pkgs.clock-rs}/bin/clock-rs -bts --fmt '%A, %B %d, %Y'"
+        # "${pkgs.kitty}/bin/kitten panel --edge=background ${pkgs.clock-rs}/bin/clock-rs -bts --fmt '%A, %B %d, %Y'"
         # Startup apps
         "zen"
         "discord"
