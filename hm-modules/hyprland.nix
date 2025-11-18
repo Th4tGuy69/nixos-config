@@ -69,6 +69,7 @@ in
     plugins = with inputs.hyprland-plugins.packages.${system}; [
       # inputs.hyprchroma.packages.${system}.Hypr-DarkWindow # Doesn't seem to work
       hyprfocus
+      hyprscrolling
     ];
 
     settings = {
@@ -86,6 +87,7 @@ in
         "resize_on_border" = false;
         "allow_tearing" = true;
         "layout" = "dwindle";
+        # layout = "scrolling";
       };
 
       # Decoration
