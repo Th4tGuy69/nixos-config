@@ -46,25 +46,29 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    hyprchroma = {
-      url = "github:alexhulbert/Hyprchroma";
+    hypr-darkwindow = {
+      url = "github:micha4w/Hypr-DarkWindow/tags/v0.36.0";
       inputs.hyprland.follows = "hyprland";
     };
 
-    musnix = { url = "github:musnix/musnix"; };
-  };
-
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs system; };
-      modules = with inputs; [
-        ./configuration.nix
-        home-manager.nixosModules.default
-        stylix.nixosModules.stylix
-        sops-nix.nixosModules.sops
-        musnix.nixosModules.musnix
-      ];
+    musnix = {
+      url = "github:musnix/musnix";
     };
   };
+
+  outputs =
+    { self, nixpkgs, ... }@inputs:
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs system; };
+        modules = with inputs; [
+          ./configuration.nix
+          home-manager.nixosModules.default
+          stylix.nixosModules.stylix
+          sops-nix.nixosModules.sops
+          musnix.nixosModules.musnix
+        ];
+      };
+    };
 }

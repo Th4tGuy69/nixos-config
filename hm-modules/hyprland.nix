@@ -42,6 +42,8 @@ in
     # ./sherlock.nix
     ./hyprwinwrap.nix
     ./hyprsunset.nix
+    ./hyprfocus.nix
+    # ./hyprdarkwindow.nix
   ];
 
   home.packages = with pkgs; [
@@ -65,12 +67,6 @@ in
     enable = true;
     package = inputs.hyprland.packages.${system}.hyprland;
     portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
-
-    plugins = with inputs.hyprland-plugins.packages.${system}; [
-      # inputs.hyprchroma.packages.${system}.Hypr-DarkWindow # Doesn't seem to work
-      hyprfocus
-      hyprscrolling
-    ];
 
     settings = {
       "$mod" = "SUPER"; # Set the main modifier key
@@ -145,18 +141,7 @@ in
           "fadeOut, 1, 1.46, almostLinear"
           "layers, 1, 3.81, easeOutQuint"
           "workspaces, 1, 1.94, almostLinear, fade"
-          "hyprfocusIn, 1, 1.7, easeOutQuint"
-          # "hyprfocusOut, 1, 1.7, easeOutQuint"
         ];
-      };
-
-      plugin = {
-        hyprfocus = {
-          mode = "flash";
-          fade_opacity = 0.85;
-          bounce_strength = 0.95;
-          slide_height = 20;
-        };
       };
 
       # Input settings
@@ -237,9 +222,6 @@ in
         "immediate, class:cs2"
         # TF2
         "immediate, class:tf_linux64"
-
-        # Hyprchroma (transparency)
-        # "plugin:chromakey, fullscreen:0 chromakey_background = 7,8,17"
       ];
 
       # Keybindings
@@ -250,7 +232,6 @@ in
         "SUPER, space, exec, ${launcher}"
         "SUPER SHIFT, s, exec, ${screenshot}"
         "SUPER, c, exec, hyprpicker -a"
-        #"SUPER SHIFT, c, togglechromakey"
         "SUPER, w, killactive,"
         "SUPER, f, fullscreen,"
         "SUPER SHIFT, f, togglefloating,"
