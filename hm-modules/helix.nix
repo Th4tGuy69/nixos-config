@@ -15,6 +15,8 @@
 
       keys.normal = {
         "C-/" = "toggle_comments";
+        "C-left" = "move_prev_word_start";
+        "C-right" = "move_next_word_end";
       };
     };
 
