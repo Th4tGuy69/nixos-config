@@ -12,17 +12,17 @@
       ###########################################
 
       palettes.default = {
-        prompt_ok  = "#8047c1";
-        prompt_err = "#e23140";
-        icon       = "#161514";
-        separator  = "#35312c";
-        background = "#35312c";
+        prompt_ok = "#25be6a";
+        prompt_err = "#ee5396";
+        icon = "#f2f4f8";
+        separator = "#1c3736";
+        background = "#1c3736";
 
-        directory  = "#9f31e2";
-        duration   = "#e26f31";
-        status     = "#e23140";
-        git_branch = "#31e268";
-        git_status = "#31e268";
+        directory = "#78a9ff";
+        duration = "#08bdba";
+        status = "#ee5396";
+        git_branch = "#33b1ff";
+        git_status = "#25be6a";
       };
 
       ###########################################
@@ -75,4 +75,3 @@
     };
   };
 }
-
