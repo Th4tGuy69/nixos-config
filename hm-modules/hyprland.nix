@@ -42,7 +42,7 @@ in
     # ./sherlock.nix
     ./hyprwinwrap.nix
     ./hyprsunset.nix
-    # ./hyprfocus.nix
+    ./hyprfocus.nix
     # ./hyprdarkwindow.nix
     # ./hyprchroma.nix
   ];
