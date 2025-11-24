@@ -2,11 +2,11 @@
 
 let
   pname = "seanime-denshi";
-  version = "3.0.4";
-  
+  version = "3.0.8";
+
   src = pkgs.fetchurl {
     url = "https://github.com/5rahim/seanime/releases/download/v${version}/seanime-denshi-${version}_Linux_x86_64.AppImage";
-    hash = "sha256-mPK4kcGISdhLjM/x1OO1bd2SuGY+2y3cffvRIJmCV7E=";
+    hash = "sha256-JJqM61A9rZyqtYZGUGxy1GhqO/VCL8Vmq2895qRfulc=";
   };
 
   appimageContents = pkgs.appimageTools.extractType2 {
@@ -20,7 +20,7 @@ pkgs.appimageTools.wrapType2 rec {
   extraInstallCommands = ''
     install -Dm644 ${appimageContents}/seanime-denshi.desktop $out/share/applications/seanime-denshi.desktop
     install -Dm644 ${appimageContents}/seanime-denshi.png $out/share/pixmaps/seanime-denshi.png
-    
+
     substituteInPlace $out/share/applications/seanime-denshi.desktop \
       --replace-fail 'Exec=AppRun' 'Exec=${pname}'
   '';
