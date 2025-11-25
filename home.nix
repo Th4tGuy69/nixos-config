@@ -12,7 +12,7 @@ in
 
 {
   _module.args.system = pkgs.stdenv.hostPlatform.system;
-  
+
   # Module imports
   imports = [
     ./secrets/sops-hm.nix
@@ -51,6 +51,7 @@ in
     ./hm-modules/mpv.nix
     ./hm-modules/zen-browser.nix
     ./hm-modules/seanime.nix
+    ./hm-modules/niri.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
