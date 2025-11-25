@@ -5,16 +5,20 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }: 
+  outputs =
+    { self, nixpkgs }:
     let
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
       forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems f;
 
-      version = "1.17.7b";
+      version = "1.17.9b";
       downloadUrl = {
         "x86_64-linux" = {
           url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
-          sha256 = "sha256:0j2m136b2a05z3l7d1dzr7iddwkp809813a280r4778wqxpixqi6";
+          sha256 = "sha256:0wzmafbs26klyqd8syvli0cndkvlk0gxqd226a214c3kqsrcclg9";
         };
         "aarch64-linux" = {
           url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-aarch64.tar.xz";
@@ -22,21 +26,62 @@
         };
       };
 
-      mkZen = system: 
+      mkZen =
+        system:
         let
           pkgs = import nixpkgs { inherit system; };
           downloadData = downloadUrl.${system};
 
-          runtimeLibs = with pkgs; [
-            libGL libGLU libevent libffi libjpeg libpng libstartup_notification libvpx libwebp
-            stdenv.cc.cc fontconfig libxkbcommon zlib freetype
-            gtk3 libxml2 dbus xcb-util-cursor alsa-lib libpulseaudio pango atk cairo gdk-pixbuf glib
-            udev libva mesa libnotify cups pciutils
-            ffmpeg libglvnd pipewire
-          ] ++ (with pkgs.xorg; [
-            libxcb libX11 libXcursor libXrandr libXi libXext libXcomposite libXdamage
-            libXfixes libXScrnSaver
-          ]);
+          runtimeLibs =
+            with pkgs;
+            [
+              libGL
+              libGLU
+              libevent
+              libffi
+              libjpeg
+              libpng
+              libstartup_notification
+              libvpx
+              libwebp
+              stdenv.cc.cc
+              fontconfig
+              libxkbcommon
+              zlib
+              freetype
+              gtk3
+              libxml2
+              dbus
+              xcb-util-cursor
+              alsa-lib
+              libpulseaudio
+              pango
+              atk
+              cairo
+              gdk-pixbuf
+              glib
+              udev
+              libva
+              mesa
+              libnotify
+              cups
+              pciutils
+              ffmpeg
+              libglvnd
+              pipewire
+            ]
+            ++ (with pkgs.xorg; [
+              libxcb
+              libX11
+              libXcursor
+              libXrandr
+              libXi
+              libXext
+              libXcomposite
+              libXdamage
+              libXfixes
+              libXScrnSaver
+            ]);
 
           zenDesktop = pkgs.writeText "zen.desktop" ''
             [Desktop Entry]
@@ -66,7 +111,8 @@
             Exec=zen --ProfileManager %u 
           '';
 
-        in pkgs.stdenv.mkDerivation {
+        in
+        pkgs.stdenv.mkDerivation {
           inherit version;
           pname = "zen-browser";
 
@@ -75,9 +121,16 @@
             sha256 = downloadData.sha256;
           };
 
-          phases = [ "installPhase" "fixupPhase" ];
+          phases = [
+            "installPhase"
+            "fixupPhase"
+          ];
 
-          nativeBuildInputs = [ pkgs.makeWrapper pkgs.copyDesktopItems pkgs.wrapGAppsHook3 ];
+          nativeBuildInputs = [
+            pkgs.makeWrapper
+            pkgs.copyDesktopItems
+            pkgs.wrapGAppsHook3
+          ];
 
           installPhase = ''
             mkdir -p $out/bin && cp -r $src/* $out/bin
@@ -98,7 +151,8 @@
           meta.mainProgram = "zen";
         };
 
-    in {
+    in
+    {
       packages = forAllSystems (system: {
         zen-browser = mkZen system;
       });
