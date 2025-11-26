@@ -70,15 +70,15 @@
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = with inputs; [
+          { nixpkgs.overlays = [ niri.overlays.niri ]; }
+
           ./configuration.nix
           home-manager.nixosModules.default
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
           lanzaboote.nixosModules.lanzaboote
           musnix.nixosModules.musnix
-          niri.nixosModules.niri
-
-          { nixpkgs.overlays = [ niri.overlays.niri ]; }
+          # niri.nixosModules.niri
         ];
       };
     };

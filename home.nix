@@ -51,7 +51,7 @@ in
     ./hm-modules/mpv.nix
     ./hm-modules/zen-browser.nix
     ./hm-modules/seanime.nix
-    # ./hm-modules/niri.nix
+    ./hm-modules/niri.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -151,7 +151,7 @@ in
   nixpkgs.overlays = [
     # Add support for nautilus trash and networking
     (self: super: {
-      gnome = super.gnome.overrideScope' (
+      gnome = super.gnome.overrideScope (
         gself: gsuper: {
           nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
             buildInputs =
