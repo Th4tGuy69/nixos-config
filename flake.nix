@@ -78,7 +78,6 @@
           sops-nix.nixosModules.sops
           lanzaboote.nixosModules.lanzaboote
           musnix.nixosModules.musnix
-          # niri.nixosModules.niri
         ];
       };
     };
