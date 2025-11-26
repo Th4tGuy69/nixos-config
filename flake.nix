@@ -74,6 +74,7 @@
           home-manager.nixosModules.default
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
+          lanzaboote.nixosModules.lanzaboote
           musnix.nixosModules.musnix
           niri.nixosModules.niri
 
