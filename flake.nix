@@ -75,6 +75,9 @@
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
           musnix.nixosModules.musnix
+          niri.nixosModules.niri
+
+          { nixpkgs.overlays = [ niri.overlays.niri ]; }
         ];
       };
     };
