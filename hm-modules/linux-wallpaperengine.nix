@@ -4,7 +4,7 @@
   services.linux-wallpaperengine = {
     enable = true;
 
-    assestsPath = "home/thatguy/.steam/steam/steamapps/workshop/content/431960";
+    assetsPath = "/home/thatguy/.steam/steam/steamapps/workshop/content/431960";
 
     wallpapers = [
       {
