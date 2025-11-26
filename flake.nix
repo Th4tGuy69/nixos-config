@@ -60,11 +60,6 @@
     musnix.url = "github:musnix/musnix";
 
     niri.url = "github:sodiboo/niri-flake";
-
-    wayvid = {
-      url = "github:YangYuS8/wayvid";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
