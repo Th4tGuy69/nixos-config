@@ -52,6 +52,7 @@ in
     ./hm-modules/zen-browser.nix
     ./hm-modules/seanime.nix
     ./hm-modules/niri.nix
+    ./hm-modules/wayvid.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
