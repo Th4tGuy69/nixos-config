@@ -72,23 +72,43 @@ in
         # focus-follows-mouse.max-scroll-amount = "0%";
       };
 
-      # outputs."eDP-1" = {
-      #   enable = false;
-      #   mode = {
-      #     width = 1920;
-      #     height = 1080;
-      #     refresh = 120.030;
-      #   };
-      #   scale = 2.0;
-      #   transform = {
-      #     flipped = false;
-      #     rotation = 0;
-      #   };
-      #   position = {
-      #     x = 1280;
-      #     y = 0;
-      #   };
-      # };
+      outputs = {
+        "DP-3" = {
+          enable = true;
+          mode = {
+            width = 1920;
+            height = 1080;
+            refresh = 144.0;
+          };
+          scale = 1.0;
+          transform = {
+            flipped = false;
+            rotation = 0;
+          };
+          position = {
+            x = 0;
+            y = 0;
+          };
+        };
+
+        "HDMI-A-1" = {
+          enable = true;
+          mode = {
+            width = 1920;
+            height = 1080;
+            refresh = 144.0;
+          };
+          scale = 1.0;
+          transform = {
+            flipped = false;
+            rotation = 90;
+          };
+          position = {
+            x = -1080;
+            y = -56;
+          };
+        };
+      };
 
       layout = {
         gaps = 16;
