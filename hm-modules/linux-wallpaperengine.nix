@@ -2,14 +2,14 @@
 
 {
   services.linux-wallpaperengine = {
-    enable = true;
-
-    assetsPath = "/home/thatguy/.steam/steam/steamapps/workshop/content/431960";
+    enable = false;
+    assetsPath = "/home/thatguy/.steam";
 
     wallpapers = [
       {
         monitor = "DP-3";
-        wallpaperId = "3522907624";
+        wallpaperId = "3565183295";
+        fps = 30;
       }
     ];
   };

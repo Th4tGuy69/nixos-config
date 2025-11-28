@@ -5,11 +5,19 @@
   ...
 }:
 
+let
+  terminal = "ghostty";
+  launcher = "anyrun";
+in
+
 {
   imports = [ inputs.niri.homeModules.niri ];
 
   home.packages = with pkgs; [
     xwayland-satellite-unstable
+    swaylock
+    playerctl
+    brightnessctl
   ];
 
   programs.niri = {
@@ -232,24 +240,24 @@
           action = show-hotkey-overlay;
         };
 
-        "Mod+T" = {
-          action = spawn "alacritty";
-          hotkey-overlay.title = "Open a Terminal: alacritty";
+        "Mod+Q" = {
+          action = spawn "${terminal}";
+          hotkey-overlay.title = "Open a Terminal: ${terminal}";
         };
-        "Mod+D" = {
-          action = spawn "fuzzel";
-          hotkey-overlay.title = "Run an Application: fuzzel";
+        "Mod+Space" = {
+          action = spawn "${launcher}";
+          hotkey-overlay.title = "Run an Application: ${launcher}";
         };
         "Super+Alt+L" = {
-          action = spawn "swaylock";
+          action = spawn "${pkgs.swaylock}/bin/swaylock";
           hotkey-overlay.title = "Lock the Screen: swaylock";
         };
 
-        "Super+Alt+S" = {
-          action = spawn-sh "pkill orca || exec orca";
-          allow-when-locked = true;
-          hotkey-overlay.hidden = true;
-        };
+        # "Super+Alt+S" = {
+        #   action = spawn-sh "pkill orca || exec orca";
+        #   allow-when-locked = true;
+        #   hotkey-overlay.hidden = true;
+        # };
 
         "XF86AudioRaiseVolume" = {
           action = spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
@@ -269,19 +277,19 @@
         };
 
         "XF86AudioPlay" = {
-          action = spawn-sh "playerctl play-pause";
+          action = spawn-sh "${pkgs.playerctl}/bin/playerctl play-pause";
           allow-when-locked = true;
         };
         "XF86AudioStop" = {
-          action = spawn-sh "playerctl stop";
+          action = spawn-sh "${pkgs.playerctl}/bin/playerctl stop";
           allow-when-locked = true;
         };
         "XF86AudioPrev" = {
-          action = spawn-sh "playerctl previous";
+          action = spawn-sh "${pkgs.playerctl}/bin/playerctl previous";
           allow-when-locked = true;
         };
         "XF86AudioNext" = {
-          action = spawn-sh "playerctl next";
+          action = spawn-sh "${pkgs.playerctl}/bin/playerctl next";
           allow-when-locked = true;
         };
 
@@ -299,7 +307,7 @@
           repeat = false;
         };
 
-        "Mod+Q" = {
+        "Mod+W" = {
           action = close-window;
           repeat = false;
         };
@@ -329,28 +337,28 @@
           action = focus-column-right;
         };
 
-        "Mod+Ctrl+Left" = {
+        "Mod+Shift+Left" = {
           action = move-column-left;
         };
-        "Mod+Ctrl+Down" = {
+        "Mod+Shift+Down" = {
           action = move-window-down;
         };
-        "Mod+Ctrl+Up" = {
+        "Mod+Shift+Up" = {
           action = move-window-up;
         };
-        "Mod+Ctrl+Right" = {
+        "Mod+Shift+Right" = {
           action = move-column-right;
         };
-        "Mod+Ctrl+H" = {
+        "Mod+Shift+H" = {
           action = move-column-left;
         };
-        "Mod+Ctrl+J" = {
+        "Mod+Shift+J" = {
           action = move-window-down;
         };
-        "Mod+Ctrl+K" = {
+        "Mod+Shift+K" = {
           action = move-window-up;
         };
-        "Mod+Ctrl+L" = {
+        "Mod+Shift+L" = {
           action = move-column-right;
         };
 
@@ -372,28 +380,28 @@
           action = move-column-to-last;
         };
 
-        "Mod+Shift+Left" = {
+        "Mod+Ctrl+Left" = {
           action = focus-monitor-left;
         };
-        "Mod+Shift+Down" = {
+        "Mod+Ctrl+Down" = {
           action = focus-monitor-down;
         };
-        "Mod+Shift+Up" = {
+        "Mod+Ctrl+Up" = {
           action = focus-monitor-up;
         };
-        "Mod+Shift+Right" = {
+        "Mod+Ctrl+Right" = {
           action = focus-monitor-right;
         };
-        "Mod+Shift+H" = {
+        "Mod+Ctrl+H" = {
           action = focus-monitor-left;
         };
-        "Mod+Shift+J" = {
+        "Mod+Ctrl+J" = {
           action = focus-monitor-down;
         };
-        "Mod+Shift+K" = {
+        "Mod+Ctrl+K" = {
           action = focus-monitor-up;
         };
-        "Mod+Shift+L" = {
+        "Mod+Ctrl+L" = {
           action = focus-monitor-right;
         };
 
@@ -566,10 +574,10 @@
         "Mod+Ctrl+R" = {
           action = reset-window-height;
         };
-        "Mod+F" = {
+        "Mod+Shift+F" = {
           action = maximize-column;
         };
-        "Mod+Shift+F" = {
+        "Mod+F" = {
           action = fullscreen-window;
         };
 
@@ -606,7 +614,7 @@
           action = switch-focus-between-floating-and-tiling;
         };
 
-        "Mod+W" = {
+        "Mod+T" = {
           action = toggle-column-tabbed-display;
         };
 
