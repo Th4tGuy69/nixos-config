@@ -30,6 +30,8 @@ in
           xkb = {
             # layout = "us,ru";
             # options = "grp:win_space_toggle,compose:ralt,ctrl:nocaps";
+            repeat-rate = 35;
+            repeat-delay = 200;
           };
           numlock = true;
         };

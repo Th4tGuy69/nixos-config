@@ -51,7 +51,7 @@ in
     ./hm-modules/mpv.nix
     ./hm-modules/zen-browser.nix
     ./hm-modules/seanime.nix
-    ./hm-modules/niri.nix
+    # ./hm-modules/niri.nix
     ./hm-modules/linux-wallpaperengine.nix
   ];
 

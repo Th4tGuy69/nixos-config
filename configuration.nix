@@ -196,7 +196,7 @@ in
     }
   '';
 
-  programs.niri.enable = true;
+  # programs.niri.enable = true;
 
   # Greeter
   services.greetd = {
