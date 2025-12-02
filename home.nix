@@ -150,7 +150,7 @@ in
   ];
 
   nixpkgs.overlays = [
-    inputs.niri.overlays.niri
+    # inputs.niri.overlays.niri
     # Add support for nautilus trash and networking
     (self: super: {
       gnome = super.gnome.overrideScope (

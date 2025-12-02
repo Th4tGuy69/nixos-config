@@ -59,7 +59,7 @@
 
     musnix.url = "github:musnix/musnix";
 
-    niri.url = "github:sodiboo/niri-flake";
+    # niri.url = "github:sodiboo/niri-flake";
   };
 
   outputs =
