@@ -64,8 +64,8 @@ in
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [
-    "libsoup-2.74.3"
-    "qtwebengine-5.15.19" # For Stremio
+    # "libsoup-2.74.3"
+    # "qtwebengine-5.15.19" # For Stremio
   ];
 
   # The home.packages option allows you to install Nix packages into your
