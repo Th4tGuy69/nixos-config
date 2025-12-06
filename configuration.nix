@@ -416,6 +416,7 @@ in
     udev.packages = [
       pkgs.via
       pkgs.vial
+      pkgs.qmk-udev-rules
     ];
     gnome.gnome-keyring.enable = true;
     envfs.enable = true;
