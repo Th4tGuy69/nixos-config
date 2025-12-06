@@ -413,7 +413,10 @@ in
   # List services that you want to enable:
   services = {
     hardware.openrgb.enable = true;
-    udev.packages = [ pkgs.via ];
+    udev.packages = [
+      pkgs.via
+      pkgs.vial
+    ];
     gnome.gnome-keyring.enable = true;
     envfs.enable = true;
   };
