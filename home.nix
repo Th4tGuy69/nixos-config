@@ -101,6 +101,7 @@ in
     # stremio
     playerctl
     via
+    vial
     (discord.override {
       withOpenASAR = true;
       withVencord = false;
