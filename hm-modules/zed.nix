@@ -1,21 +1,25 @@
 { pkgs, ... }:
 
-{  
+{
   programs.zed-editor = {
     enable = true;
     package = pkgs.zed-editor-fhs;
 
     # https://github.com/zed-industries/extensions/tree/main/extensions
     extensions = [
-      "html"
-      "nix"
       "bearded-icon-theme"
-      "toml"
-      "nu"
-      "git-firefly"
+      "biome"
       "codebook"
+      "git-firefly"
       "log"
+      "nix"
+      "nu"
       "nvim-nightfox"
+      "rust-snippets"
+      "svelte"
+      "svelte-snippets"
+      "toml"
+      "html"
     ];
 
     userKeymaps = [
@@ -37,14 +41,14 @@
 
     userSettings = {
       theme = "Carbonfox - blurred";
-      
+
       # AI
       agent = {
         default_model = {
           provider = "openrouter";
           model = "qwen/qwen3-coder:free";
         };
-        
+
         profiles = {
           write = {
             name = "Write";
@@ -57,7 +61,7 @@
           };
         };
       };
-      
+
       # UI
       toolbar = {
         breadcrumbs = false;
@@ -74,7 +78,7 @@
         display_in = "all_editors";
         thumb_border = "none";
         current_line_highlight = "line";
-      };      
+      };
 
       project_panel = {
         dock = "right";
@@ -123,10 +127,10 @@
       buffer_font_family = "FiraCode Nerd Font Mono";
       buffer_font_fallbacks = [ ".ZedMono" ];
       # buffer_font_size = 16;
-      
+
       # Misc
       autosave.after_delay.milliseconds = 1500;
-      
+
       icon_theme = "Bearded Icon Theme";
 
       features = {
@@ -145,15 +149,21 @@
       terminal = {
         blinking = "on";
         scrollbar.show = "never";
-        
+
         keep_selection_on_copy = false;
-        
+
         detect_venv.on = {
-          directories = [ ".env" "env" ".venv" "venv" ".direnv" ];
+          directories = [
+            ".env"
+            "env"
+            ".venv"
+            "venv"
+            ".direnv"
+          ];
           activate_script = "nushell";
         };
       };
-      
+
       pane_split_direction_horizontal = "up";
       pane_split_direction_vertical = "left";
 
@@ -173,7 +183,7 @@
 
       soft_wrap = "editor_width";
 
-      profiles = {};
+      profiles = { };
     };
   };
 
