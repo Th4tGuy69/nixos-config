@@ -8,7 +8,6 @@
     # https://github.com/zed-industries/extensions/tree/main/extensions
     extensions = [
       "bearded-icon-theme"
-      "biome"
       "codebook"
       "git-firefly"
       "log"
