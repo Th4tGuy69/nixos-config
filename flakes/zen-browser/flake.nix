@@ -14,11 +14,11 @@
       ];
       forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems f;
 
-      version = "1.17.13b";
+      version = "1.17.14b";
       downloadUrl = {
         "x86_64-linux" = {
           url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
-          sha256 = "sha256:1asfh4crjpnmz3g2kaiipb7hzlpdmk8af9srn8ragv2q12f4qqkg";
+          sha256 = "sha256:1xzra71c1r32ggfj9xav9svvxxag0idq81gjx7q2xi08wi57qsp5";
         };
         "aarch64-linux" = {
           url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-aarch64.tar.xz";
