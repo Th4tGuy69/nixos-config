@@ -201,7 +201,7 @@ in
   services.greetd = {
     enable = true;
     settings = {
-      default_session.command = "${inputs.hyprland}/bin/start-hyprland -- --config /etc/greetd/hyprland.conf";
+      default_session.command = "${pkgs.hyprland}/bin/Hyprland --config /etc/greetd/hyprland.conf";
     };
   };
 
