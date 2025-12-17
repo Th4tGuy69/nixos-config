@@ -192,7 +192,6 @@ in
     misc {
         disable_hyprland_logo = true
         disable_splash_rendering = true
-        disable_hyprland_qtutils_check = true
     }
   '';
 
@@ -202,7 +201,7 @@ in
   services.greetd = {
     enable = true;
     settings = {
-      default_session.command = "Hyprland --config /etc/greetd/hyprland.conf";
+      default_session.command = "start-hyprland -- --config /etc/greetd/hyprland.conf";
     };
   };
 
