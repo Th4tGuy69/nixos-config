@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  home.packages = [ pkgs.microfetch ];
+
   programs.ghostty = {
     enable = true;
 

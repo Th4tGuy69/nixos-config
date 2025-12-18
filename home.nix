@@ -33,7 +33,6 @@ in
     ./hm-modules/starship.nix
     ./hm-modules/vscode.nix
     ./hm-modules/celluloid.nix
-    ./hm-modules/bevy.nix
     ./hm-modules/qemu.nix
     ./hm-modules/env.nix
     ./hm-modules/aliases.nix
@@ -51,6 +50,7 @@ in
     ./hm-modules/mpv.nix
     ./hm-modules/zen-browser.nix
     ./hm-modules/seanime.nix
+    ./hm-modules/pay-respects.nix
     # ./hm-modules/niri.nix
     # ./hm-modules/linux-wallpaperengine.nix
     ./hm-modules/scroll.nix
