@@ -6,6 +6,11 @@
 }:
 
 {
+  environment.systemPackages = with pkgs; [
+    kitty
+    wmenu
+  ];
+
   programs.scroll = {
     enable = true;
     package = inputs.scroll.packages.${system}.scroll-stable;

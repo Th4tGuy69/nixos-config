@@ -40,7 +40,7 @@ in
     ./anyrun.nix
     # ./walker.nix
     # ./sherlock.nix
-    ./hyprwinwrap.nix
+    # ./hyprwinwrap.nix
     ./hyprsunset.nix
     ./hyprfocus.nix
     # ./hyprdarkwindow.nix
