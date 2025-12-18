@@ -7,6 +7,7 @@
 let
   term = "ghostty";
   menu = "anyrun";
+  filemanager = "nautilus";
 in
 
 {
@@ -33,6 +34,8 @@ in
       set $term ${term}
       # Your preferred application launcher
       set $menu ${menu}
+      # Your preferred file manager
+      set $filemanager ${filemanager}
 
       ### Output configuration
       #
@@ -44,7 +47,8 @@ in
       # output HDMI-A-1 resolution 1920x1080 position 1920,0
       #
       # You can get the names of your outputs by running: scrollmsg -t get_outputs
-      output DP-3 resolution 2560x1080 position 0,0
+      output DP-1     resolution 2560x1080@144Hz allow_tearing yes position     0,0 transform   0 layout_type horizontal layout_default_width 0.5 layout_default_height 1   
+      output HDMI-A-1 resolution 1920x1080@144Hz allow_tearing yes position -1080,0 transform 270 layout_type   vertical layout_default_width 1   layout_default_height 0.5 
         
       ### Idle configuration
       #
@@ -76,11 +80,20 @@ in
       #
       # You can also configure each device individually.
       # Read `man 5 scroll-input` for more information about this section.
+      input type:keyboard {
+          repeat_delay 200
+          repeat_rate 35
+      }
+
+      input type:pointer {
+          accel_profile flat
+          pointer_accel -0.5
+      }
 
       ### Windows defaults
-      default_border pixel 2
-      gaps inner 4
-      gaps outer 20
+      default_border pixel 0
+      gaps inner 0
+      gaps outer 0
       client.focused #15439e #4b4b4b #e0e0e0 #2e9ef4 #15439e
       client.focused_inactive #595959 #3b3b3b #e0e0e0 #2e9ef4 #595959
       client.unfocused #595959 #1b1b1b #e0e0e0 #2e9ef4 #595959
@@ -116,10 +129,10 @@ in
       # Animations
       animations {
           enabled yes
-          default yes 300 var 3 [ 0.215 0.61 0.355 1 ]
-          window_open yes 300 var 3 [ 0 0 1 1 ]
-          window_move yes 300 var 3 [ 0.215 0.61 0.355 1 ] off 0.05 6 [0 0.6 0.4 0 1 0 0.4 -0.6 1 -0.6]
-          window_size yes 300 var 3 [ -0.35 0 0 0.5 ]
+          default yes 150 var 3 [ 0.215 0.61 0.355 1 ]
+          window_open yes 150 var 3 [ 0 0 1 1 ]
+          window_move yes 150 var 3 [ 0.215 0.61 0.355 1 ] off 0.05 6 [0 0.6 0.4 0 1 0 0.4 -0.6 1 -0.6]
+          window_size yes 150 var 3 [ -0.35 0 0 0.5 ]
           # You can also define curves for the following events
           # window_move_float
           # workspace_switch
@@ -133,15 +146,15 @@ in
       # Basics:
       #
           # Start a terminal
-          bindsym $mod+Return exec $term
+          bindsym $mod+q exec $term
 
           # Kill focused window
-          bindsym $mod+Backspace kill
-          bindsym $mod+Shift+Backspace kill unfocused
-          bindsym $mod+Ctrl+Backspace kill all
+          bindsym $mod+w kill
+          # bindsym $mod+Shift+Backspace kill unfocused
+          # bindsym $mod+Ctrl+Backspace kill all
 
           # Start your launcher
-          bindsym $mod+r exec $menu
+          bindsym $mod+space exec $menu
           
           bindsym $mod+e exec $filemanager
 
@@ -543,7 +556,7 @@ in
           bindsym Ctrl+Shift+$down fit_size v all equal; mode default
           bindsym Escape mode "default"
       }
-      bindsym $mod+w mode "fit_size"
+      #bindsym $mod+w mode "fit_size"
 
       mode "trailmark" {
           bindsym bracketright trailmark next
