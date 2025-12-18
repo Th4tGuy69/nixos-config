@@ -24,7 +24,9 @@ in
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./secrets/sops.nix
+
     ./modules/newt.nix
+    ./modules/scroll.nix
   ];
 
   _module.args.system = pkgs.stdenv.hostPlatform.system;

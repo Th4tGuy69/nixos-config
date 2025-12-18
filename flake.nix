@@ -60,6 +60,11 @@
     musnix.url = "github:musnix/musnix";
 
     # niri.url = "github:sodiboo/niri-flake";
+
+    scroll = {
+      url = "github:AsahiRocks/scroll-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -74,6 +79,7 @@
           sops-nix.nixosModules.sops
           lanzaboote.nixosModules.lanzaboote
           musnix.nixosModules.musnix
+          scroll.nixosModules.default
         ];
       };
     };
