@@ -47,8 +47,8 @@ in
       # output HDMI-A-1 resolution 1920x1080 position 1920,0
       #
       # You can get the names of your outputs by running: scrollmsg -t get_outputs
-      output DP-1     resolution 2560x1080@144Hz allow_tearing yes position     0,0 transform   0 layout_type horizontal layout_default_width 0.5 layout_default_height 1   
-      output HDMI-A-1 resolution 1920x1080@144Hz allow_tearing yes position -1080,0 transform 270 layout_type   vertical layout_default_width 1   layout_default_height 0.5 
+      output DP-1     resolution 2560x1080@144Hz allow_tearing yes position     0,0 transform   0 layout_type horizontal layout_default_width 0.67 layout_default_height 1   
+      output HDMI-A-1 resolution 1920x1080@144Hz allow_tearing yes position -1080,0 transform 270 layout_type   vertical layout_default_width 1    layout_default_height 0.5 
         
       ### Idle configuration
       #
