@@ -123,7 +123,7 @@ in
     turtle
     sushi
     kdePackages.filelight
-    #gitbutler
+    gitbutler
     #github-desktop
     #jetbrains.rider
     #jetbrains.clion
