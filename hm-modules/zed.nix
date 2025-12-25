@@ -43,6 +43,8 @@
 
       # AI
       agent = {
+        dock = "left";
+
         default_model = {
           provider = "openrouter";
           model = "qwen/qwen3-coder:free";
