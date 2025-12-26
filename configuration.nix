@@ -253,6 +253,7 @@ in
       };
     };
     adb.enable = true;
+    nix-ld.enable = true;
   };
 
   # GPU Driver
