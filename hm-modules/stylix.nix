@@ -9,6 +9,8 @@
       zed.enable = false;
       starship.enable = false;
       helix.enable = false;
+
+      zen-browser.profileNames = [ "That Guy" ];
     };
 
     # base16Scheme = { # Poimandres original

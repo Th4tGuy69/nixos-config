@@ -81,13 +81,7 @@
               definedAliases = [ "@searxng" ];
               urls = [
                 {
-                  template = "https://search.that-guy.dev/search?q={searchQuery}&language=en&time_range=&safesearch=0&categories=general";
-                  params = [
-                    {
-                      name = "query";
-                      value = "searchQuery";
-                    }
-                  ];
+                  template = "https://search.that-guy.dev/search?q={searchTerms}&language=en&safesearch=0&categories=general";
                 }
               ];
               iconMapObj."20" = "https://docs.searxng.org/_static/searxng-wordmark.svg";
@@ -97,13 +91,7 @@
               definedAliases = [ "@nixpkgs" ];
               urls = [
                 {
-                  template = "https://search.nixos.org/packages?channel=unstable&query={searchQuery}";
-                  params = [
-                    {
-                      name = "query";
-                      value = "searchQuery";
-                    }
-                  ];
+                  template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
                 }
               ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
@@ -113,13 +101,7 @@
               definedAliases = [ "@nixoptions" ];
               urls = [
                 {
-                  template = "https://search.nixos.org/options?channel=unstable&query={searchQuery}";
-                  params = [
-                    {
-                      name = "query";
-                      value = "searchQuery";
-                    }
-                  ];
+                  template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
                 }
               ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
@@ -129,13 +111,7 @@
               definedAliases = [ "@homeoptions" ];
               urls = [
                 {
-                  template = "https://home-manager-options.extranix.com/?query={searchQuery}&release=master";
-                  params = [
-                    {
-                      name = "query";
-                      value = "searchQuery";
-                    }
-                  ];
+                  template = "https://home-manager-options.extranix.com/?query={searchTerms}&release=master";
                 }
               ];
               iconMapObj."20" = "https://nix-community.org/nix-community-logo.svg";
