@@ -29,7 +29,6 @@ let
   blurPasses = 2;
   vibrancy = 0.1696;
 
-  hyprwatch = import ../packages/hyprwatch.nix { pkgs = pkgs; };
   nerdshade = import ../packages/nerdshade.nix { pkgs = pkgs; };
 in
 

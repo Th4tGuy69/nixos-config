@@ -115,7 +115,10 @@
 
       preview_tabs = {
         enable_preview_from_file_finder = true;
-        enable_preview_from_code_navigation = true;
+        enable_preview_from_multibuffer = true;
+        enable_preview_from_project_panel = true;
+        enable_preview_file_from_code_navigation = true;
+        enable_keep_preview_on_code_navigation = true;
       };
 
       # UI Font
@@ -129,6 +132,14 @@
       buffer_font_fallbacks = [ ".ZedMono" ];
       # buffer_font_size = 16;
 
+      # LSP
+      lsp = {
+        nil.settings.nix.flake = {
+          autoArchive = true;
+          autoEvalInputs = true;
+        };
+      };
+      
       # Misc
       autosave.after_delay.milliseconds = 1500;
 

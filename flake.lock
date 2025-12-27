@@ -166,6 +166,28 @@
         "type": "github"
       }
     },
+    "firefox-addons": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkgs/firefox-addons",
+        "lastModified": 1766846533,
+        "narHash": "sha256-D7XoHk5/daZt3E0K6uCueVxpDYp+cIoCctoTsz5mjfk=",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "rev": "e55ad9427895bc94e55b2cb6474ca46773816885",
+        "type": "gitlab"
+      },
+      "original": {
+        "dir": "pkgs/firefox-addons",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "type": "gitlab"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -381,11 +403,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766553851,
-        "narHash": "sha256-hHKQhHkXxuPJwLkI8wdu826GLV5AcuW9/HVdc9eBnTU=",
+        "lastModified": 1766861762,
+        "narHash": "sha256-Ok0jocJ82JriaMDtYEytR8oWcxADlX5WcWXULrN4czA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7eca7f7081036a7b740090994c9ec543927f89a7",
+        "rev": "4067ca1ffb6425b8597eafb63a84b171e0192d2b",
         "type": "github"
       },
       "original": {
@@ -512,11 +534,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1766604420,
-        "narHash": "sha256-2Kqg1YNtjPGXc1DIzBeESL8hiuUNUn3c3Oimab19Zn8=",
+        "lastModified": 1766863557,
+        "narHash": "sha256-UOiLXV8URnB1Gv1aaD+P8YerN0u4FI71dfZzVV44itI=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "25250527793eb04bb60f103abe7f06370b9f6e1c",
+        "rev": "5faa66d297752ab0d919bb5719fa0949292fe720",
         "type": "github"
       },
       "original": {
@@ -911,27 +933,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1766309749,
-        "narHash": "sha256-3xY8CZ4rSnQ0NqGhMKAy5vgC+2IVK0NoVEzDoOh4DA4=",
+        "lastModified": 1766651565,
+        "narHash": "sha256-QEhk0eXgyIqTpJ/ehZKg9IKS7EtlWxF3N7DXy42zPfU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a6531044f6d0bef691ea18d4d4ce44d0daa6e816",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1766309749,
-        "narHash": "sha256-3xY8CZ4rSnQ0NqGhMKAy5vgC+2IVK0NoVEzDoOh4DA4=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "a6531044f6d0bef691ea18d4d4ce44d0daa6e816",
+        "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
         "type": "github"
       },
       "original": {
@@ -1019,6 +1025,7 @@
     "root": {
       "inputs": {
         "anyrun": "anyrun",
+        "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "hypr-darkwindow": "hypr-darkwindow",
         "hyprchroma": "hyprchroma",
@@ -1067,11 +1074,11 @@
         "scroll-stable": "scroll-stable"
       },
       "locked": {
-        "lastModified": 1766454036,
-        "narHash": "sha256-n1lQNITz6USSmF7eW5tvJ0IBBH2J87+mzWhtY8E3fIg=",
+        "lastModified": 1766798971,
+        "narHash": "sha256-8Q8XSEr0NTFa9sCqijLzWqXQ0K/jXrZc+ogSXZ5TySE=",
         "owner": "AsahiRocks",
         "repo": "scroll-flake",
-        "rev": "3423144d4a54b3a15ae4ec730b73c7fec95ebe64",
+        "rev": "af32778734ab29c99086de05d65478af7767c766",
         "type": "github"
       },
       "original": {
@@ -1083,11 +1090,11 @@
     "scroll-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1766400091,
-        "narHash": "sha256-cpj8SbCnmC2pnApt3MK0DztTPBOR6F3C/EFS4zph6FA=",
+        "lastModified": 1766789650,
+        "narHash": "sha256-84m/vMYyV3E29fHCUDXB7IUNuBjZusM9gak8A1ckgAU=",
         "ref": "master",
-        "rev": "59a71a41288700084f12be6c7d8d102eb632f045",
-        "revCount": 8054,
+        "rev": "5d40eef0dc146f852fb85c199ac525c146f48426",
+        "revCount": 8055,
         "type": "git",
         "url": "https://github.com/dawsers/scroll"
       },
@@ -1352,17 +1359,25 @@
     },
     "zen-browser": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4"
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1766637628,
-        "narHash": "sha256-vA6yYS+Y6oQmEfhzn2lGnjzX0DYN24Cy5m5+e+ngdEs=",
-        "path": "/etc/nixos/flakes/zen-browser",
-        "type": "path"
+        "lastModified": 1766697593,
+        "narHash": "sha256-mGZBEN67mxeOsBhplBRLm6L+y++8jU46EEUYgemG1aQ=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "98d8f48ba80a4b6e3b56addad850d57132301075",
+        "type": "github"
       },
       "original": {
-        "path": "/etc/nixos/flakes/zen-browser",
-        "type": "path"
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "type": "github"
       }
     }
   },
