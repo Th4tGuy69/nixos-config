@@ -30,30 +30,36 @@
         };
 
         spaces = {
-          "Home" = {
+          Personal = {
             id = "f87a6e79-da7d-4474-9d6e-161ef88e2563";
             position = 1000;
-            container = containers."Personal".id;
+            container = containers.Personal.id;
+          };
+          Work = {
+            id = "035e231b-8e62-417d-88a1-527c2604c1c6";
+            position = 2000;
+            container = containers.Work.id;
           };
         };
 
         pins = {
-          # Home
-          "Youtube Home" = {
+          # Personal
+          Youtube = {
             id = "e0fea1a2-7a1d-4bed-a9da-3716a532e229";
             container = containers.Personal.id;
             url = "https://www.youtube.com/";
             position = 200;
           };
-          "Youtube Subscriptions" = {
+          Subscriptions = {
             id = "04deb0d4-3fe4-4288-89e5-d84608fcd0e8";
             container = containers.Personal.id;
             url = "https://www.youtube.com/feed/subscriptions";
+            editedTitle = true;
             position = 201;
           };
+          # Work
         };
 
-        # extensions.packages = with inputs.firefox-addons.packages.${system}; [
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           adnauseam
           bitwarden
@@ -118,7 +124,7 @@
               ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             };
-            homeManagerOptins = {
+            homeManagerOptions = {
               name = "Home Manager Options";
               definedAliases = [ "@homeoptions" ];
               urls = [
@@ -132,7 +138,7 @@
                   ];
                 }
               ];
-              iconObjMap."20" = "https://nix-community.org/nix-community-logo.svg";
+              iconMapObj."20" = "https://nix-community.org/nix-community-logo.svg";
             };
           };
         };
