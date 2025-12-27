@@ -53,6 +53,7 @@ in
     # ./hm-modules/niri.nix
     # ./hm-modules/linux-wallpaperengine.nix
     ./hm-modules/scroll.nix
+    ./hm-modules/rbw.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
