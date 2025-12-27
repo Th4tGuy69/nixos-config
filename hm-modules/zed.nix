@@ -134,12 +134,15 @@
 
       # LSP
       lsp = {
-        nil.settings.nix.flake = {
-          autoArchive = true;
-          autoEvalInputs = true;
+        nil.settings = {
+          maxMemoryMB = 2048;
+          nix.flake = {
+            autoArchive = true;
+            autoEvalInputs = true;
+          };
         };
       };
-      
+
       # Misc
       autosave.after_delay.milliseconds = 1500;
 

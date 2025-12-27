@@ -32,10 +32,15 @@
       };
     };
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    nur = {
+      url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # firefox-addons = {
+    #   url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     stylix = {
       url = "github:danth/stylix";
@@ -88,6 +93,7 @@
           lanzaboote.nixosModules.lanzaboote
           musnix.nixosModules.musnix
           scroll.nixosModules.default
+          nur.modules.nixos.default
         ];
       };
     };

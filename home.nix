@@ -61,14 +61,6 @@ in
   home.username = "thatguy";
   home.homeDirectory = "/home/thatguy";
 
-  # Enable unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  nixpkgs.config.permittedInsecurePackages = [
-    # "libsoup-2.74.3"
-    # "qtwebengine-5.15.19" # For Stremio
-  ];
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -151,24 +143,28 @@ in
     helium
   ];
 
-  nixpkgs.overlays = [
-    # inputs.niri.overlays.niri
-    # Add support for nautilus trash and networking
-    (self: super: {
-      gnome = super.gnome.overrideScope (
-        gself: gsuper: {
-          nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
-            buildInputs =
-              nsuper.buildInputs
-              ++ (with pkgs.gst_all_1; [
-                gst-plugins-good
-                gst-plugins-bad
-              ]);
-          });
-        }
-      );
-    })
-  ];
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [
+      inputs.nur.overlays.default
+      # inputs.niri.overlays.niri
+      # Add support for nautilus trash and networking
+      (self: super: {
+        gnome = super.gnome.overrideScope (
+          gself: gsuper: {
+            nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
+              buildInputs =
+                nsuper.buildInputs
+                ++ (with pkgs.gst_all_1; [
+                  gst-plugins-good
+                  gst-plugins-bad
+                ]);
+            });
+          }
+        );
+      })
+    ];
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
