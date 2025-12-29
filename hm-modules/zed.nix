@@ -9,6 +9,7 @@
     extensions = [
       "bearded-icon-theme"
       "codebook"
+      "discord-presence"
       "git-firefly"
       "log"
       "nix"
@@ -205,5 +206,6 @@
   home.packages = with pkgs; [
     nil
     nixd
+    zlib # For LSPs
   ];
 }
