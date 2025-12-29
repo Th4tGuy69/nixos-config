@@ -178,7 +178,7 @@ in
         # Fix some dragging issues with XWayland
         "match:class ^$; title:^$; xwayland:1; floating:1; fullscreen:0; pinned:0, no_focus true"
         # Start apps on primary monitor
-        "match:class zen, monitor DP-3"
+        "match:class zen-beta, monitor DP-1"
         # Start apps on second monitor
         "match:class goofcord, monitor HDMI-A-1"
         "match:class discord, monitor HDMI-A-1"
@@ -285,7 +285,7 @@ in
       ];
 
       monitor = [
-        "DP-3, preferred, 0x0, 1"
+        "DP-1, preferred, 0x0, 1"
         "desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-56, 1, transform, 1"
         "desc:Hisense Electric Co. Ltd. HISENSE 0x00000001, 3840x2160@60, 0x0, 2"
         ", preferred, auto, 1"
