@@ -206,6 +206,5 @@
   home.packages = with pkgs; [
     nil
     nixd
-    zlib # For LSPs
   ];
 }
