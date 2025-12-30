@@ -147,8 +147,15 @@ in
 
       # LSP
       lsp = {
+        discord_presence.initialization_options = {
+          large_image = "{base_icons_url}/zed.png";
+          large_text = "Zed";
+          small_image = "{base_icons_url}/{language:lo}.png";
+          small_text = "{language:u}";
+        };
+
         nil.settings = {
-          maxMemoryMB = 2048;
+          maxMemoryMB = 4096;
           nix.flake = {
             autoArchive = true;
             autoEvalInputs = true;
