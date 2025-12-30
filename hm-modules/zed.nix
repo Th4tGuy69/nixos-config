@@ -1,5 +1,17 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
+let
+  zedDiscordPresenceLsp =
+    "${config.home.homeDirectory}/.local/share/zed/extensions/work/discord-presence"
+    + "/discord-presence-lsp-v0.9.2"
+    + "/discord-presence-lsp-x86_64-unknown-linux-gnu"
+    + "/discord-presence-lsp";
+in
 {
   programs.zed-editor = {
     enable = true;
@@ -207,4 +219,17 @@
     nil
     nixd
   ];
+
+  home.activation.patchZedDiscordPresence =
+    with pkgs;
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      if [ -x "${zedDiscordPresenceLsp}" ]; then
+        echo "Patching discord-presence for NixOS…"
+
+        ${patchelf}/bin/patchelf \
+          --set-interpreter "$(${stdenv.cc.bintools.dynamicLinker})" \
+          --set-rpath "${zlib}/lib" \
+          "${zedDiscordPresenceLsp}"
+      fi
+    '';
 }
