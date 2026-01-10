@@ -35,10 +35,10 @@ in
     loader = {
       systemd-boot.enable = pkgs.lib.mkForce false; # Set to false when using lanzaboote
       efi.canTouchEfiVariables = true;
-      grub = {
-        theme = "${(pkgs.sleek-grub-theme.override { withStyle = "dark"; })}/theme.txt";
-        useOSProber = true;
-      };
+      # grub = {
+      #   theme = "${(pkgs.sleek-grub-theme.override { withStyle = "dark"; })}/theme.txt";
+      #   useOSProber = true;
+      # };
     };
 
     lanzaboote = {
