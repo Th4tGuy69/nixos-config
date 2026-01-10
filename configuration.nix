@@ -44,6 +44,8 @@ in
     lanzaboote = {
       enable = true; # Not working "failed to install generation (os error 2)"
       pkiBundle = "/var/lib/sbctl";
+      autoGenerateKeys.enable = true;
+      autoEnrollKeys.enable = true;
     };
 
     kernelModules = [ "nct6775" ];
