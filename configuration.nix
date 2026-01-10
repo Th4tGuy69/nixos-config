@@ -33,7 +33,7 @@ in
   # Bootloader.
   boot = {
     loader = {
-      systemd-boot.enable = true; # Set to false when using lanzaboote
+      systemd-boot.enable = pkgs.lib.mkForce false; # Set to false when using lanzaboote
       efi.canTouchEfiVariables = true;
       grub = {
         theme = "${(pkgs.sleek-grub-theme.override { withStyle = "dark"; })}/theme.txt";
@@ -42,7 +42,7 @@ in
     };
 
     lanzaboote = {
-      enable = false; # Not working "failed to install generation (os error 2)"
+      enable = true; # Not working "failed to install generation (os error 2)"
       pkiBundle = "/var/lib/sbctl";
     };
 
