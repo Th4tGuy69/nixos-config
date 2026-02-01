@@ -12,10 +12,6 @@
     ];
 
     settings = {
-      animations.animation = [
-        "hyprfocusIn, 1, 1.7, easeOutQuint"
-      ];
-
       plugin.hyprfocus = {
         enabled = "yes";
 
