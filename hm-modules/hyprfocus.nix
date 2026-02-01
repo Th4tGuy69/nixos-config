@@ -17,10 +17,20 @@
       ];
 
       plugin.hyprfocus = {
-        mode = "flash";
-        fade_opacity = 0.85;
-        bounce_strength = 0.95;
-        slide_height = 20;
+        enabled = "yes";
+
+        keyboard_focus_animation = "flash";
+        mouse_focus_animation = "flash";
+
+        flash = {
+          flash_opacity = 0.85;
+
+          in_bezier = "easeInQuint";
+          # in_speed = ;
+
+          out_bezier = "easeOutQuint";
+          # out_speed = ;
+        };
       };
     };
   };

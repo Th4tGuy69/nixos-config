@@ -204,7 +204,7 @@ in
   services.greetd = {
     enable = true;
     settings = {
-      default_session.command = "${pkgs.hyprland}/bin/Hyprland --config /etc/greetd/hyprland.conf";
+      default_session.command = "${pkgs.hyprland}/bin/start-hyprland -- --config /etc/greetd/hyprland.conf";
     };
   };
 
@@ -421,7 +421,7 @@ in
     curlFull
   ];
 
-  nix.extraOptions = ''download-buffer-size = 1073741824'';
+  nix.extraOptions = "download-buffer-size = 1073741824";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
