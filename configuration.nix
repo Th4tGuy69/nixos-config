@@ -223,7 +223,7 @@ in
 
   # Musnix
   musnix = {
-    enable = true;
+    enable = false;
 
     alsaSeq.enable = true;
     ffado.enable = false;
@@ -231,7 +231,21 @@ in
 
     kernel = {
       realtime = true;
-      packages = pkgs.linuxPackages_latest_rt;
+      # packages = pkgs.linuxPackages_latest_rt;
+      # https://github.com/musnix/musnix/issues/206#issuecomment-3632117934
+      packages =
+        with pkgs;
+        linuxPackagesFor (
+          linux_6_12.override {
+            structuredExtraConfig = with lib.kernel; {
+              EXPERT = yes;
+              PREEMPT_RT = yes;
+              RT_GROUP_SCHED = no;
+              PREEMPT_VOLUNTARY = lib.mkForce no;
+            };
+            ignoreConfigErrors = true;
+          }
+        );
     };
   };
 
@@ -253,7 +267,6 @@ in
         ];
       };
     };
-    adb.enable = true;
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
@@ -428,6 +441,7 @@ in
     ];
     gnome.gnome-keyring.enable = true;
     envfs.enable = true;
+    flatpak.enable = true;
   };
 
   # Enable the OpenSSH daemon.

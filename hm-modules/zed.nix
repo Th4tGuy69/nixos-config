@@ -155,7 +155,7 @@ in
         };
 
         nil.settings = {
-          maxMemoryMB = 4096;
+          maxMemoryMB = 8192;
           nix.flake = {
             autoArchive = true;
             autoEvalInputs = true;

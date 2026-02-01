@@ -43,7 +43,7 @@ in
     # ./hm-modules/cursor.nix
     ./hm-modules/stylix.nix
     # ./hm-modules/quickshell.nix
-    ./hm-modules/music.nix
+    # ./hm-modules/music.nix
     ./hm-modules/zed.nix
     ./hm-modules/btop.nix
     ./hm-modules/mpv.nix
@@ -131,7 +131,7 @@ in
     obs-studio
     blender
     #gcc
-    wlx-overlay-s
+    wayvr
     bottles
     # networkmanagerapplet
     helvum
