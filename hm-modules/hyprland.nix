@@ -223,6 +223,8 @@ in
         "match:class cs2, immediate true"
         # TF2
         "match:class tf_linux64, immediate true"
+        # Minecraft
+        "match:class Minecraft, immediate true"
       ];
 
       # Keybindings

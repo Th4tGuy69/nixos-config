@@ -2,11 +2,11 @@
 
 let
   pname = "seanime-denshi";
-  version = "3.3.0";
+  version = "3.4.3";
 
   src = pkgs.fetchurl {
     url = "https://github.com/5rahim/seanime/releases/download/v${version}/seanime-denshi-${version}_Linux_x86_64.AppImage";
-    hash = "sha256-5ulO1Q1p72OJfOP/s0T5agCpmZx7R+nS9VFXYXR3B6Q=";
+    hash = "sha256-smcWbzbs/ebT3x/TnWYgnuSblqxh6ooHra8OlOaf+Tc=";
   };
 
   appimageContents = pkgs.appimageTools.extractType2 {
