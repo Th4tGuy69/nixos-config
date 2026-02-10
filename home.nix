@@ -141,6 +141,7 @@ in
     # bottom
     lumafly
     helium
+    element-desktop
   ];
 
   nixpkgs = {
