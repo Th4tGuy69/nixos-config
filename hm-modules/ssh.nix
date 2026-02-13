@@ -18,6 +18,11 @@
         hostname = "10.0.0.154";
         user = "root";
       };
+
+      "nixos-25.11" = {
+        hostname = "10.0.0.197";
+        user = "root";
+      };
     };
 
     enableDefaultConfig = false;
