@@ -1,0 +1,10 @@
+{
+    "cSpell.words": [
+        "Quickshell"
+    ],
+    "editor.defaultFormatter": "Delgan.qml-format",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "nixEnvSelector.nixFile": "${workspaceFolder}/shell.nix",
+    "editor.detectIndentation": false
+}
