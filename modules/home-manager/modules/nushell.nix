@@ -111,19 +111,7 @@
 
         extraConfig = ''
           def rebuild [] {
-            cd /home/thatguy/nixos-config/
-
-            ls | get name | each { | i | 
-              if ($i | path type) == "symlink" {
-                rm $i
-              } else {
-                rm -r $i
-              }
-            }
-
-            sudo cp -rp /etc/nixos/* ./
-
-            sudo chown -R thatguy:users /home/thatguy/nixos-config/
+            cd /etc/nixos
 
             git -c include.path=/home/thatguy/.gitconfig add .
 
