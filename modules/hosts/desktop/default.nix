@@ -2,10 +2,14 @@
 
 {
   flake.nixosModules.desktopModule = {
-    imports = [
-      self.nixosModules.desktopConfiguration
-      self.nixosModules.desktopHardwareConfiguration
-      self.nixosModules.homeManager
+    imports = with self.nixosModules; [
+      desktopConfiguration
+      desktopHardwareConfiguration
+      desktopServices
+      desktopPrograms
+      desktopFlakes
+      homeManager
+      sops
     ];
   };
 }
