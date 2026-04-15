@@ -169,7 +169,7 @@
               prompt_format = "qwen";
             };
 
-            mode = "subtle";
+            mode = "eager";
             enabled_in_text_threads = true;
           };
 
@@ -200,11 +200,11 @@
 
           helix_mode = true;
 
-          restore_on_startup = "none";
+          restore_on_startup = "empty_tab";
 
           use_system_path_prompts = false;
 
-          show_edit_predictions = false;
+          show_edit_predictions = true;
 
           middle_click_paste = false;
 
