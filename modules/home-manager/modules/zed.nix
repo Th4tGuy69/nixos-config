@@ -46,9 +46,30 @@
           }
           {
             context = "Workspace";
+            unbind = {
+              "ctrl-tab" = "tab_switcher::Toggle";
+              "ctrl-shift-tab" = "tab_switcher::Toggle";
+            };
+          }
+          {
+            context = "Editor && edit_prediction";
+            unbind = {
+              "alt-l" = "editor::AcceptEditPrediction";
+            };
+          }
+          {
+            context = "vim_mode == insert";
+            unbind = {
+              "ctrl-x ctrl-c" = "editor::ShowEditPrediction";
+            };
+          }
+          {
+            context = "Editor && !edit_prediction";
+            unbind = {
+              "alt-\\" = "editor::ShowEditPrediction";
+            };
             bindings = {
-              "ctrl-tab" = null;
-              "ctrl-shift-tab" = null;
+              "alt-e" = "editor::ShowEditPrediction";
             };
           }
         ];
@@ -200,7 +221,7 @@
 
           helix_mode = true;
 
-          restore_on_startup = "empty_tab";
+          restore_on_startup = "launchpad";
 
           use_system_path_prompts = false;
 

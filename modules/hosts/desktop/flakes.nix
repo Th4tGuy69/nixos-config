@@ -6,7 +6,7 @@
     {
       imports = with self.nixosModules; [
         stylix
-        # musnix
+        musnix
       ];
     };
 }

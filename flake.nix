@@ -14,7 +14,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # musnix.url = "github:musnix/musnix";
+    musnix.url = "github:musnix/musnix";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
