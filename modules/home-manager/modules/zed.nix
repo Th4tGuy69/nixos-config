@@ -169,7 +169,7 @@
               prompt_format = "qwen";
             };
 
-            mode = "eager";
+            mode = "subtle";
             enabled_in_text_threads = true;
           };
 
