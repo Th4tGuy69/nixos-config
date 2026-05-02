@@ -2,19 +2,14 @@
 
 {
   flake.homeModules.anyrun =
-    { inputs, pkgs, ... }:
-    let
-      shutdown-script = pkgs.writeShellScriptBin "shutdown" ''
-        #!/bin/bash
-        shutdown now
-      '';
-
-      reboot-script = pkgs.writeShellScriptBin "reboot" ''
-        #!/bin/bash
-        reboot
-      '';
-    in
     {
+      pkgs,
+      lib,
+      inputs,
+      ...
+    }:
+    {
+      # Only configure if user imported this module
       programs.anyrun = {
         enable = true;
         config = {
@@ -145,20 +140,34 @@
         '';
       };
 
-      xdg.desktopEntries.shutdown = {
-        name = "Shutdown";
-        exec = "${shutdown-script}/bin/shutdown";
-        type = "Application";
-        terminal = true;
-        icon = "utilities-terminal";
-      };
+      xdg.desktopEntries =
+        let
+          shutdown-script = pkgs.writeShellScriptBin "shutdown" ''
+            #!${lib.getExe pkgs.bash}
+            shutdown now
+          '';
 
-      xdg.desktopEntries.reboot = {
-        name = "Reboot";
-        exec = "${reboot-script}/bin/reboot";
-        type = "Application";
-        terminal = true;
-        icon = "utilities-terminal";
-      };
+          reboot-script = pkgs.writeShellScriptBin "reboot" ''
+            #!${lib.getExe pkgs.bash}
+            reboot
+          '';
+        in
+        {
+          shutdown = {
+            name = "Shutdown";
+            exec = lib.getExe shutdown-script;
+            type = "Application";
+            terminal = true;
+            icon = "utilities-terminal";
+          };
+
+          reboot = {
+            name = "Reboot";
+            exec = lib.getExe reboot-script;
+            type = "Application";
+            terminal = true;
+            icon = "utilities-terminal";
+          };
+        };
     };
 }

@@ -1,12 +1,14 @@
-{ self, ... }:
+{ self, lib, ... }:
 
 {
   flake.homeModules.hyprland =
-    { pkgs, inputs, ... }:
+    {
+      pkgs,
+      config,
+      inputs,
+      ...
+    }:
     let
-      terminal = "ghostty";
-      fileManager = "nautilus";
-      launcher = "anyrun";
       screenshot = "grimblast copy area";
 
       gapsIn = 1;
@@ -20,15 +22,47 @@
       blurSize = 2;
       blurPasses = 2;
       vibrancy = 0.1696;
+
+      terminal = config.gui.terminal;
+      fileManager = config.gui.fileManager;
+      launcher = config.gui.runner;
+
+      monitorConfig =
+        m:
+        let
+          # Determine monitor identifier
+          identifier =
+            if m.wildcard or false then
+              ", preferred, auto, 1"
+            else if m ? description && m.description != null then
+              "desc:${m.description}"
+            else
+              m.name;
+
+          # Determine resolution/refresh rate
+          resolution =
+            if m.preferred or false then
+              "preferred"
+            else if m ? width && m ? height then
+              "${toString m.width}x${toString m.height}"
+              + (if m ? refreshRate then "@${toString m.refreshRate}" else "")
+            else
+              "auto";
+
+          # Position
+          position = "${toString (m.x or 0)}x${toString (m.y or 0)}";
+
+          # Scale
+          scale = toString (m.scale or 1);
+
+          # Transform
+          transform =
+            if m ? transform && m.transform != null then ", transform, ${toString (m.transform / 90)}" else "";
+        in
+        "${identifier}, ${resolution}, ${position}, ${scale}${transform}";
     in
     {
-      imports = [
-        self.homeModules.anyrun
-        self.homeModules.hyprsunset
-
-        # ./anyrun.nix
-        # ./hyprsunset.nix
-      ];
+      imports = [ self.homeModules.hyprsunset ];
 
       home.packages = with pkgs; [
         hyprnotify
@@ -36,15 +70,14 @@
         hyprpicker
         wl-clipboard
         grimblast
-
         kitty
         clock-rs
       ];
 
-      services.hypridle.enable = true;
-      programs.hyprlock.enable = true;
+      services.hypridle.enable = config.gui.windowManager == "hyprland";
+      programs.hyprlock.enable = config.gui.windowManager == "hyprland";
 
-      wayland.windowManager.hyprland = {
+      wayland.windowManager.hyprland = lib.mkIf (config.gui.windowManager == "hyprland") {
         enable = true;
         package = inputs.hyprland.packages.x86_64-linux.hyprland;
         portalPackage = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;
@@ -131,14 +164,10 @@
             smart_split = true;
           };
 
-          exec-once = [
+          exec-once = config.gui.startupApps ++ [
             "systemctl --user start hyprpolkitagent"
             "systemctl --user enable --now hyprsunset.service"
-            "zen"
-            "discord"
-            "spotify"
-            "steam -silent"
-            "nerdshade -loop -gammaNight 75 -latitude 44.564568 -longitude -123.262047 -tempNight 1600"
+            "nerdshade -loop -gammaNight 75 -latitude $(cat /run/secrets/latitude) -longitude $(cat /run/secrets/longitude) -tempNight 1600"
           ];
 
           windowrule = [
@@ -165,10 +194,10 @@
             "match:title Steam Big Picture Mode, max_size 1920 1080"
             "match:title Steam Big Picture Mode, min_size 1920 1080"
             "match:title Steam Big Picture Mode, float true"
-            "match:title Steam Big Picture Mode, fullscreen_state 3 *"
+            "match:title Steam Big Picture Mode, fullscreen_state 3 -1"
             "match:class (steam_app).*, immediate true"
             "match:class steam_app_2622380, render_unfocused true"
-            "match:class steam_app_2622380, fullscreen_state * 3"
+            "match:class steam_app_2622380, fullscreen_state -1 3"
             "match:class cs2, immediate true"
             "match:class tf_linux64, immediate true"
             "match:class Minecraft, immediate true"
@@ -231,12 +260,7 @@
             ", XF86AudioNext, exec, playerctl next"
           ];
 
-          monitor = [
-            "DP-1, preferred, 0x0, 1"
-            "desc:LG Electronics 27GL650F 008NTHM5V961, preferred, -1080x-56, 1, transform, 1"
-            "desc:Hisense Electric Co. Ltd. HISENSE 0x00000001, 3840x2160@60, 0x0, 2"
-            ", preferred, auto, 1"
-          ];
+          monitor = map monitorConfig config.gui.monitors;
         };
       };
     };

@@ -2,11 +2,12 @@
 
 {
   flake.homeModules.direnv =
-    { ... }:
+    { config, ... }:
     {
       programs.direnv = {
         enable = true;
-        enableNushellIntegration = true;
+        enableBashIntegration = true;
+        enableNushellIntegration = config.programs.nushell.enable;
         nix-direnv.enable = true;
       };
     };

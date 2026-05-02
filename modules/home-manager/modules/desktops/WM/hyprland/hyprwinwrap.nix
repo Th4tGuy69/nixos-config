@@ -1,8 +1,8 @@
-{ ... }:
+{ config, lib, inputs, ... }:
 
 {
   flake.homeModules.hyprwinwrap =
-    { pkgs, inputs, system, ... }:
+    { pkgs, config, inputs, system, ... }:
     let
       clock-bg = pkgs.writeShellScriptBin "clock-bg" ''
         #!${pkgs.bash}/bin/bash
@@ -10,13 +10,14 @@
       '';
     in
     {
-      home.packages = [
+      # Only enable if hyprland is enabled
+      home.packages = lib.optional (config.gui.windowManager == "hyprland") [
         pkgs.clock-rs
         pkgs.bash
         pkgs.kitty
       ];
 
-      wayland.windowManager.hyprland = {
+      wayland.windowManager.hyprland = lib.optionalAttrs (config.gui.windowManager == "hyprland") {
         plugins = with inputs.hyprland-plugins.packages.${system}; [
           hyprwinwrap
         ];

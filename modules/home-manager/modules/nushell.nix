@@ -2,7 +2,7 @@
 
 {
   flake.homeModules.nushell =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     let
       theme = "custom_theme";
       custom_theme = ''
@@ -113,13 +113,13 @@
           def rebuild [] {
             cd /etc/nixos
 
-            git -c include.path=/home/thatguy/.gitconfig add .
+            git -c include.path=${config.home.homeDirectory}/.gitconfig add .
 
             sudo nixos-rebuild switch --flake
 
-            git -c include.path=/home/thatguy/.gitconfig commit -m (date now | format date '%D %r')
-            git -c include.path=/home/thatguy/.gitconfig push
-          }     
+            git -c include.path=${config.home.homeDirectory}/.gitconfig commit -m (date now | format date '%D %r')
+            git -c include.path=${config.home.homeDirectory}/.gitconfig push
+          }
         '';
 
         configFile.text = ''

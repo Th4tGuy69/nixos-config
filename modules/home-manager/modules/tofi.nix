@@ -2,12 +2,12 @@
 
 {
   flake.homeModules.tofi =
-    { ... }:
+    { config, ... }:
     {
       programs.tofi = {
         enable = true;
         settings = {
-          font = "/home/thatguy/.nix-profile/share/fonts/truetype/NerdFonts/FiraCode/FiraCodeNerdFontMono-Regular.ttf";
+          font = "${config.home.homeDirectory}/.nix-profile/share/fonts/truetype/NerdFonts/FiraCode/FiraCodeNerdFontMono-Regular.ttf";
           hint-font = false;
           ascii-input = true;
 

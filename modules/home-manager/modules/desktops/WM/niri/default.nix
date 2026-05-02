@@ -1,23 +1,51 @@
-{ ... }:
+{ config, lib, pkgs, ... }:
 
 {
   flake.homeModules.niri =
     { pkgs, config, inputs, ... }:
     let
-      terminal = "ghostty";
-      launcher = "anyrun";
+      terminal = config.gui.terminal or "ghostty";
+      launcher = config.gui.runner or "anyrun";
+      
+      monitorConfig = m:
+        let
+          name = if m.name != null then m.name else m.description;
+        in
+        {
+          name = name;
+          value = {
+            enable = true;
+            mode = {
+              width = m.width;
+              height = m.height;
+              refresh = m.refreshRate;
+            };
+            scale = m.scale or 1.0;
+            transform = {
+              flipped = false;
+              rotation = m.transform or 0;
+            };
+            position = {
+              x = m.x or 0;
+              y = m.y or 0;
+            };
+          };
+        };
     in
     {
-      imports = [ inputs.niri.homeModules.niri ];
+      # Only enable if user imported this module
+      imports = lib.mkIf (config.gui.windowManager == "niri") [
+        inputs.niri.homeModules.niri
+      ];
 
-      home.packages = with pkgs; [
+      home.packages = lib.mkIf (config.gui.windowManager == "niri") (with pkgs; [
         xwayland-satellite-unstable
         swaylock
         playerctl
         brightnessctl
-      ];
+      ]);
 
-      programs.niri = {
+      programs.niri = lib.mkIf (config.gui.windowManager == "niri") {
         enable = true;
         package = pkgs.niri-unstable;
 
@@ -43,43 +71,7 @@
             };
           };
 
-          outputs = {
-            "DP-3" = {
-              enable = true;
-              mode = {
-                width = 1920;
-                height = 1080;
-                refresh = 144.0;
-              };
-              scale = 1.0;
-              transform = {
-                flipped = false;
-                rotation = 0;
-              };
-              position = {
-                x = 0;
-                y = 0;
-              };
-            };
-
-            "HDMI-A-1" = {
-              enable = true;
-              mode = {
-                width = 1920;
-                height = 1080;
-                refresh = 144.0;
-              };
-              scale = 1.0;
-              transform = {
-                flipped = false;
-                rotation = 90;
-              };
-              position = {
-                x = -1080;
-                y = -56;
-              };
-            };
-          };
+          outputs = lib.mkIf (config.gui.windowManager == "niri") (builtins.listToAttrs (map monitorConfig config.gui.monitors));
 
           layout = {
             gaps = 16;

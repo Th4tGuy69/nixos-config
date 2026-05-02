@@ -2,11 +2,11 @@
 
 {
   flake.homeModules.yazi =
-    { ... }:
+    { config, ... }:
     {
       programs.yazi = {
         enable = true;
-        enableNushellIntegration = true;
+        enableNushellIntegration = config.programs.nushell.enable;
       };
     };
 }

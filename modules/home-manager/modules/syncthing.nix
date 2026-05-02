@@ -2,7 +2,7 @@
 
 {
   flake.homeModules.syncthing =
-    { ... }:
+    { config, ... }:
     {
       services.syncthing = {
         enable = true;
@@ -14,7 +14,7 @@
           folders = {
             "Obsidian" = {
               label = "Vault";
-              path = "/home/thatguy/Documents/GitHub/Obsidian";
+              path = "${config.home.homeDirectory}/Documents/GitHub/Obsidian";
               type = "sendreceive";
               devices = [ "Server" "1+8 Pro" ];
             };

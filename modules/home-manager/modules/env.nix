@@ -6,7 +6,7 @@
     let
       vars = {
         NIXOS_OZONE_WL = "1";
-        SSH_AUTH_SOCK = "/home/thatguy/.bitwarden-ssh-agent.sock";
+        SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
         SDL_VIDEO_DRIVER = "wayland";
         EDITOR = "hx";
       } // config.custom.externalVars;

@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   flake.homeModules.sherlock =
     { ... }:

@@ -2,11 +2,11 @@
 
 {
   flake.homeModules.linux-wallpaperengine =
-    { ... }:
+    { config, ... }:
     {
       services.linux-wallpaperengine = {
         enable = false;
-        assetsPath = "/home/thatguy/.steam";
+        assetsPath = "${config.home.homeDirectory}/.steam";
 
         wallpapers = [
           {

@@ -35,7 +35,7 @@
       config = {
         services.fluidsynth = {
           enable = true;
-          soundFont = "/home/thatguy/.local/share/soundfonts/FluidR3_GM2-2.sf2";
+          soundFont = "${config.home.homeDirectory}/.local/share/soundfonts/FluidR3_GM2-2.sf2";
           soundService = "pipewire-pulse";
 
           extraOptions = [
@@ -89,7 +89,7 @@
         home.file.".local/share/soundfonts".source = sfs;
 
         custom.externalVars = {
-          SOUNDFONT_PATH = "/home/thatguy/.local/share/soundfonts";
+          SOUNDFONT_PATH = "${config.home.homeDirectory}/.local/share/soundfonts";
         };
       };
     };

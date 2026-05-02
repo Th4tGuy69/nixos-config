@@ -2,19 +2,24 @@
 
 {
   flake.homeModules.sops =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
       home.packages = with pkgs; [ sops ];
 
       sops = {
-        age.keyFile = "/home/thatguy/.config/sops/age/keys.txt";
+        age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
         defaultSopsFile = ../../secrets/secrets.yaml;
+
+        secrets = {
+          latitude = { };
+          longitude = { };
+        };
       };
 
       custom.externalVars = {
-        SOPS_AGE_KEY_FILE = "/home/thatguy/.config/sops/age/keys.txt";
+        SOPS_AGE_KEY_FILE = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
       };
     };
 }

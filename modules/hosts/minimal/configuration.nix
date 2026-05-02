@@ -1,24 +1,6 @@
-{ inputs, self, ... }:
+{ self, ... }:
 
 {
-  flake.nixosConfigurations = with inputs.nixpkgs.lib; {
-    nixos = nixosSystem {
-      modules = [ self.nixosModules.desktopModule ];
-    };
-
-    minimal = nixosSystem {
-      modules = [ self.nixosModules.minimalModule ];
-    };
-  };
-
-  flake.nixosModules.minimalModule = {
-    imports = with self.nixosModules; [
-      hostsCommon
-      minimalConfiguration
-      desktopHardwareConfiguration
-    ];
-  };
-
   flake.nixosModules.minimalConfiguration =
     { pkgs, ... }:
     {
