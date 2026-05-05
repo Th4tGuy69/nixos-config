@@ -112,14 +112,24 @@
 
             search = {
               force = true;
-              default = "searxng";
+              default = "omnisearch";
               engines = {
+                omnisearch = {
+                  name = "OmniSearch";
+                  definedAliases = [ "@omnisearch" ];
+                  urls = [
+                    {
+                      template = "https://search.that-guy.dev/search?q={searchTerms}";
+                    }
+                  ];
+                  iconMapObj."20" = "https://git.bwaaa.monster/omnisearch/plain/static/favicon.ico";
+                };
                 searxng = {
                   name = "SearXNG";
                   definedAliases = [ "@searxng" ];
                   urls = [
                     {
-                      template = "https://search.that-guy.dev/search?q={searchTerms}&language=en&safesearch=0&categories=general";
+                      template = "https://searxng.that-guy.dev/search?q={searchTerms}&language=en&safesearch=0&categories=general";
                     }
                   ];
                   iconMapObj."20" = "https://docs.searxng.org/_static/searxng-wordmark.svg";

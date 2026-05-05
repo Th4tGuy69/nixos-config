@@ -104,7 +104,7 @@
             code_actions = false;
           };
 
-          title_bar.show_branch_icon = true;
+          title_bar.show_branch_status_icon = true;
 
           scrollbar.show = "never";
 
@@ -191,7 +191,6 @@
             };
 
             mode = "subtle";
-            enabled_in_text_threads = true;
           };
 
           diagnostics.inline.enabled = true;
