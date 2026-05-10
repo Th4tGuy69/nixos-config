@@ -4,6 +4,10 @@
   flake.homeModules.prismlauncher =
     { pkgs, ... }:
     {
+      home.packages = with pkgs; [
+        wayland # libwayland-client error fix
+      ];
+
       programs.prismlauncher = {
         enable = true;
         extraPackages = [ ];
