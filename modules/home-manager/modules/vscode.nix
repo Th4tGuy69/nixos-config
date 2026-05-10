@@ -4,30 +4,33 @@
   flake.homeModules.vscode =
     { pkgs, ... }:
     let
-      defaultExtensions = with pkgs.vscode-extensions; [
-        usernamehw.errorlens
-        thenuprojectcontributors.vscode-nushell-lang
-        jnoortheen.nix-ide
-        arrterian.nix-env-selector
-        mkhl.direnv
-        streetsidesoftware.code-spell-checker
-        formulahendry.code-runner
-        file-icons.file-icons
-        supermaven.supermaven
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "noir-theme-bundle";
-          publisher = "andrewberty";
-          version = "1.6.0";
-          sha256 = "sha256-vKQhUEvapX6gJ9sFJzOTyPG4iUEBgVUhM4z2FgUt/Q4=";
-        }
-        {
-          name = "vscode-text-tools";
-          publisher = "biati";
-          version = "1.2.2";
-          sha256 = "sha256-HNvRYOJlNZaFfNU0ubmnxLMdgYH/ATyGh6PxD3+EKuI=";
-        }
-      ];
+      defaultExtensions =
+        with pkgs.vscode-extensions;
+        [
+          usernamehw.errorlens
+          thenuprojectcontributors.vscode-nushell-lang
+          jnoortheen.nix-ide
+          arrterian.nix-env-selector
+          mkhl.direnv
+          streetsidesoftware.code-spell-checker
+          formulahendry.code-runner
+          file-icons.file-icons
+          supermaven.supermaven
+        ]
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "noir-theme-bundle";
+            publisher = "andrewberty";
+            version = "1.6.0";
+            sha256 = "sha256-vKQhUEvapX6gJ9sFJzOTyPG4iUEBgVUhM4z2FgUt/Q4=";
+          }
+          {
+            name = "vscode-text-tools";
+            publisher = "biati";
+            version = "1.2.2";
+            sha256 = "sha256-HNvRYOJlNZaFfNU0ubmnxLMdgYH/ATyGh6PxD3+EKuI=";
+          }
+        ];
 
       defaultUserSettings = {
         "debug.onTaskErrors" = "abort";
@@ -48,7 +51,10 @@
         "git.openRepositoryInParentFolders" = "never";
         "errorLens.excludeBySource" = [ "cSpell" ];
         "cSpell.diagnosticLevel" = "Hint";
-        "cSpell.userWords" = [ "nixpkgs" "pkgs" ];
+        "cSpell.userWords" = [
+          "nixpkgs"
+          "pkgs"
+        ];
         "window.newWindowProfile" = "Default";
       };
 
@@ -62,7 +68,7 @@
           key = "ctrl+tab";
           command = "-workbench.action.quickOpenPreviousRecentlyUsededitorInGroup";
           when = "!activeEditorGroupEmpty";
-        }   
+        }
         {
           key = "ctrl+shift+tab";
           command = "workbench.action.previousEditor";
@@ -78,11 +84,11 @@
     {
       home.packages = [ pkgs.dotnet-sdk ];
 
-      programs.vscode = {
+      programs.vscodium = {
         enable = true;
-        package = pkgs.vscodium.fhs;
+        # package = pkgs.vscodium.fhs;
         mutableExtensionsDir = false;
-        
+
         profiles = {
           default = {
             extensions = defaultExtensions;
@@ -91,27 +97,29 @@
           };
 
           Quickshell = {
-            extensions = defaultExtensions ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [        
-              {
-                name = "qt-core";
-                publisher = "theqtcompany";
-                version = "1.4.0";
-                sha256 = "sha256-QiZc6WNh4Q67beyFuiSqkG5G4zRMNmyjuZhWW7ZATO0=";
-              }
-              {
-                name = "qt-qml";
-                publisher = "theqtcompany";
-                version = "1.4.0";
-                sha256 = "sha256-9C0EC4vnulg0OjGNU0SfMA2R6+OaHVCqDsipY2TAqxo=";
-              }
-              {
-                name = "qml-format";
-                publisher = "delgan";
-                version = "1.1.0";
-                sha256 = "sha256-QOovj9loSWAgaBCwW3HBPD/Wr7GwVppSRcCJ4R5X/as=";
-              }
-            ];
-            
+            extensions =
+              defaultExtensions
+              ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+                {
+                  name = "qt-core";
+                  publisher = "theqtcompany";
+                  version = "1.4.0";
+                  sha256 = "sha256-QiZc6WNh4Q67beyFuiSqkG5G4zRMNmyjuZhWW7ZATO0=";
+                }
+                {
+                  name = "qt-qml";
+                  publisher = "theqtcompany";
+                  version = "1.4.0";
+                  sha256 = "sha256-9C0EC4vnulg0OjGNU0SfMA2R6+OaHVCqDsipY2TAqxo=";
+                }
+                {
+                  name = "qml-format";
+                  publisher = "delgan";
+                  version = "1.1.0";
+                  sha256 = "sha256-QOovj9loSWAgaBCwW3HBPD/Wr7GwVppSRcCJ4R5X/as=";
+                }
+              ];
+
             userSettings = defaultUserSettings // {
               "qmlFormat.extraArguments" = [ "-w 2" ];
               "qt-qml.doNotAskForQmllsDownload" = true;
@@ -120,40 +128,40 @@
             keybindings = defaultKeybindings;
           };
 
-          Unity = {};
+          Unity = { };
 
-          C = {};
+          C = { };
 
-          Python = {};
+          Python = { };
         };
       };
 
       home.file.".vscode-oss/argv.json".text = ''
-// Generated by Home Manager.
+        // Generated by Home Manager.
 
-// This configuration file allows you to pass permanent command line arguments to VS Code.
-// Only a subset of arguments is currently supported to reduce the likelihood of breaking
-// the installation.
-//
-// PLEASE DO NOT CHANGE WITHOUT UNDERSTANDING THE IMPACT
-//
-// NOTE: Changing this file requires a restart of VS Code.
-{
-	// Use software rendering instead of hardware accelerated rendering.
-	// This can help in cases where you see rendering issues in VS Code.
-	// "disable-hardware-acceleration": true,
+        // This configuration file allows you to pass permanent command line arguments to VS Code.
+        // Only a subset of arguments is currently supported to reduce the likelihood of breaking
+        // the installation.
+        //
+        // PLEASE DO NOT CHANGE WITHOUT UNDERSTANDING THE IMPACT
+        //
+        // NOTE: Changing this file requires a restart of VS Code.
+        {
+        	// Use software rendering instead of hardware accelerated rendering.
+        	// This can help in cases where you see rendering issues in VS Code.
+        	// "disable-hardware-acceleration": true,
 
-	// Allows to disable crash reporting.
-	// Should restart the app if the value is changed.
-	"enable-crash-reporter": false,
+        	// Allows to disable crash reporting.
+        	// Should restart the app if the value is changed.
+        	"enable-crash-reporter": false,
 
-	// Unique id used for correlating crash reports sent from this instance.
-	// Do not edit this value.
-	"crash-reporter-id": "333f7930-7b01-445d-aaab-09302f68c149",
+        	// Unique id used for correlating crash reports sent from this instance.
+        	// Do not edit this value.
+        	"crash-reporter-id": "333f7930-7b01-445d-aaab-09302f68c149",
 
-  // Set password store as GNOME Keyring
-	"password-store": "gnome-libsecret" 
-}
+          // Set password store as GNOME Keyring
+        	"password-store": "gnome-libsecret" 
+        }
       '';
     };
 }

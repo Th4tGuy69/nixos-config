@@ -29,6 +29,7 @@
         nushell
         pay-respects
         pipewire
+        prismlauncher
         qemu
         rbw
         sops
@@ -125,14 +126,6 @@
             gh
             fd
             kitty
-            (prismlauncher.override {
-              jdks = [
-                graalvmPackages.graalvm-ce
-                zulu8
-                zulu17
-                zulu
-              ];
-            })
             #steam
             goverlay
             #kodi-wayland

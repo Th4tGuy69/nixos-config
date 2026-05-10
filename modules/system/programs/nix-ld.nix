@@ -8,6 +8,7 @@
         enable = true;
         libraries = with pkgs; [
           zlib
+          wayland
         ];
       };
     };
