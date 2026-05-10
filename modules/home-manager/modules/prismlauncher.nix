@@ -4,7 +4,7 @@
   flake.homeModules.prismlauncher =
     { pkgs, ... }:
     {
-      home.file.".local/share/PrismLauncher/themes/Amoled" = {
+      home.file.".local/share/PrismLauncher/themes" = {
         source = pkgs.fetchzip {
           url = "https://github.com/PrismLauncher/Themes/releases/latest/download/Amoled-theme.zip";
           sha256 = "sha256-rjGTYC7nq9fTT1yVQPaD+aRBCHXnhjfG260PNNpeTrU=";
