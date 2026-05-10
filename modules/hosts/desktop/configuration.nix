@@ -20,6 +20,7 @@
           "audio"
           "kvm"
           "adbusers"
+          "keys"
         ];
         shell = pkgs.nushell;
       };

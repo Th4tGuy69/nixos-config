@@ -9,7 +9,7 @@
         libraries = with pkgs; [
           zlib
           wayland
-          libxkbcommon
+          # libxkbcommon
         ];
       };
     };
