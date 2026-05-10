@@ -164,11 +164,24 @@
             smart_split = true;
           };
 
-          exec-once = config.gui.startupApps ++ [
-            "systemctl --user start hyprpolkitagent"
-            "systemctl --user enable --now hyprsunset.service"
-            "nerdshade -loop -gammaNight 75 -latitude $(cat /run/secrets/latitude) -longitude $(cat /run/secrets/longitude) -tempNight 1600"
-          ];
+          exec-once =
+            let
+              lat = config.sops.secrets.latitude.path;
+              lon = config.sops.secrets.longitude.path;
+            in
+            config.gui.startupApps
+            ++ [
+              "systemctl --user start hyprpolkitagent"
+              "systemctl --user enable --now hyprsunset.service"
+              ''
+                nerdshade \
+                -loop \
+                -gammaNight 75 \
+                -latitude $(cat ${lat}) \
+                -longitude $(cat ${lon}) \
+                -tempNight 1600
+              ''
+            ];
 
           windowrule = [
             "match:class .*, suppress_event maximize"
