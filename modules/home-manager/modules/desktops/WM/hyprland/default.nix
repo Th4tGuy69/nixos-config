@@ -83,111 +83,412 @@
         portalPackage = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;
 
         settings = {
-          ecosystem.no_update_news = true;
-
-          general = {
-            "gaps_in" = gapsIn;
-            "gaps_out" = gapsOut;
-            "border_size" = borderSize;
-            "resize_on_border" = false;
-            "allow_tearing" = true;
-            "layout" = "dwindle";
-          };
-
-          decoration = {
-            rounding = rounding;
-            active_opacity = activeOpacity;
-            inactive_opacity = inactiveOpacity;
-            shadow = {
-              enabled = shadowEnabled;
-              range = 4;
-              render_power = 3;
+          config = {
+            ecosystem = {
+              no_update_news = true;
+              no_donation_nag = true;
             };
-            blur = {
-              enabled = blurEnabled;
-              size = blurSize;
-              passes = blurPasses;
-              vibrancy = vibrancy;
+
+            general = {
+              "gaps_in" = gapsIn;
+              "gaps_out" = gapsOut;
+              "border_size" = borderSize;
+              "resize_on_border" = false;
+              "allow_tearing" = true;
+              "layout" = "dwindle";
             };
+
+            decoration = {
+              rounding = rounding;
+              active_opacity = activeOpacity;
+              inactive_opacity = inactiveOpacity;
+              shadow = {
+                enabled = shadowEnabled;
+                range = 4;
+                render_power = 3;
+              };
+              blur = {
+                enabled = blurEnabled;
+                size = blurSize;
+                passes = blurPasses;
+                vibrancy = vibrancy;
+              };
+            };
+
+            misc = {
+              disable_hyprland_logo = true;
+              middle_click_paste = false;
+              vrr = 3;
+              mouse_move_enables_dpms = true;
+              key_press_enables_dpms = true;
+            };
+
+            cursor = {
+              hide_on_key_press = true;
+              no_hardware_cursors = 1;
+            };
+
+            input = {
+              kb_layout = "us";
+              repeat_rate = 35;
+              repeat_delay = 200;
+
+              sensitivity = -0.5;
+              accel_profile = "flat";
+            };
+
+            dwindle = {
+              smart_split = true;
+            };
+
+            monitor = map monitorConfig config.gui.monitors;
           };
 
-          misc = {
-            disable_hyprland_logo = true;
-            middle_click_paste = false;
-            vrr = 3;
-            mouse_move_enables_dpms = true;
-            key_press_enables_dpms = true;
-          };
-
-          cursor = {
-            hide_on_key_press = true;
-            no_hardware_cursors = 1;
-          };
-
-          input = {
-            kb_layout = "us";
-            repeat_rate = 35;
-            repeat_delay = 200;
-
-            sensitivity = -0.5;
-            accel_profile = "flat";
-          };
-
-          dwindle = {
-            smart_split = true;
-          };
-
-          exec_cmd =
-            let
-              lat = config.sops.secrets.latitude.path;
-              lon = config.sops.secrets.longitude.path;
-            in
-            config.gui.startupApps
-            ++ [
-              "systemctl --user start hyprpolkitagent"
-              "systemctl --user enable --now hyprsunset.service"
-              ''
-                sleep 5s;
-                nerdshade \
-                -loop \
-                -gammaNight 75 \
-                -latitude $(cat ${lat}) \
-                -longitude $(cat ${lon}) \
-                -tempNight 1600
-              ''
+          on = [
+            {
+              _args = [
+                "hyprland.start"
+                (lib.generators.mkLuaInline "function()\n  hl.exec_cmd(\"systemctl --user start hyprpolkitagent\")\nend")
+              ];
+            }
+            {
+              _args = [
+                "hyprland.start"
+                (lib.generators.mkLuaInline "function()\n  hl.exec_cmd(\"systemctl --user enable --now hyprsunset.service\")\nend")
+              ];
+            }
+            {
+              _args =
+                let
+                  lat = config.sops.secrets.latitude.path;
+                  lon = config.sops.secrets.longitude.path;
+                in
+                [
+                  "hyprland.start"
+                  (lib.generators.mkLuaInline ''
+                    function()
+                      hl.exec_cmd("sleep 5s; nerdshade -loop -gammaNight 75 -latitude $(cat ${lat}) -longitude $(cat ${lon}) -tempNight 1600")
+                    end
+                  '')
+                ];
+            }
+          ]
+          ++ map (app: {
+            _args = [
+              "hyprland.start"
+              (lib.generators.mkLuaInline "function()\n  hl.exec_cmd(\"${app}\")\nend")
             ];
+          }) config.gui.startupApps;
 
           windowrule = [
-            "match:class .*, suppress_event maximize"
-            "match:class ^$; title:^$; xwayland:1; floating:1; fullscreen:0; pinned:0, no_focus true"
-            "match:class zen-beta, monitor DP-1"
-            "match:class goofcord, monitor HDMI-A-1"
-            "match:class discord, monitor HDMI-A-1"
-            "match:class Spotify, monitor HDMI-A-1"
-            "match:float true, border_color rgba(FFFFFF99) rgba(FFFFFF33)"
-            "match:float true, border_size 2"
-            "match:class xdg-desktop-portal-gtk, float true"
-            "match:class org.prismlauncher.PrismLauncher, float true"
-            "match:class tofi-drun, no_anim true"
-            "match:class qalculate-gtk, float true"
-            "match:title QEMU, fullscreen true"
-            "match:title UnityEditor.Searcher.SearcherWindow, allows_input true"
-            "match:title Color, move cursor -50% -5%"
-            "match:title Project Settings, center true"
-            "match:title Android Emulator, size 479 1038"
-            "match:title Android Emulator, max_size 472 1038"
-            "match:title Android Emulator, min_size 472 1038"
-            "match:class dev.zed.Zed, render_unfocused true"
-            "match:title Steam Big Picture Mode, max_size 1920 1080"
-            "match:title Steam Big Picture Mode, min_size 1920 1080"
-            "match:title Steam Big Picture Mode, float true"
-            "match:title Steam Big Picture Mode, fullscreen_state 3 -1"
-            "match:class (steam_app).*, immediate true"
-            "match:class steam_app_2622380, render_unfocused true"
-            "match:class steam_app_2622380, fullscreen_state -1 3"
-            "match:class cs2, immediate true"
-            "match:class tf_linux64, immediate true"
-            "match:class Minecraft, immediate true"
+            {
+              _args = [
+                {
+                  name = "suppress-maximize-events";
+                  match = {
+                    class = ".*";
+                  };
+                  suppress_event = "maximize";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  name = "fix-xwayland-drags";
+                  match = {
+                    class = "^$";
+                    title = "^$";
+                    xwayland = true;
+                    float = true;
+                    fullscreen = false;
+                    pin = false;
+                  };
+
+                  no_focus = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "zen-beta";
+                  };
+                  monitor = "DP-1";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "goofcord";
+                  };
+                  monitor = "HDMI-A-1";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "discord";
+                  };
+                  monitor = "HDMI-A-1";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "Spotify";
+                  };
+                  monitor = "HDMI-A-1";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    floating = true;
+                  };
+                  border_color = "rgba(FFFFFF99) rgba(FFFFFF33)";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    floating = true;
+                  };
+                  border_size = 2;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "xdg-desktop-portal-gtk";
+                  };
+                  float = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "org.prismlauncher.PrismLauncher";
+                  };
+                  float = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "tofi-drun";
+                  };
+                  no_anim = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "qalculate-gtk";
+                  };
+                  float = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "QEMU";
+                  };
+                  fullscreen = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "UnityEditor.Searcher.SearcherWindow";
+                  };
+                  allows_input = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "Color";
+                  };
+                  move = "cursor -50% -5%";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "Project Settings";
+                  };
+                  center = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "Android Emulator";
+                  };
+                  size = "479 1038";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "Android Emulator";
+                  };
+                  max_size = "472 1038";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "Android Emulator";
+                  };
+                  min_size = "472 1038";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "dev.zed.Zed";
+                  };
+                  render_unfocused = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "Steam Big Picture Mode";
+                  };
+                  max_size = "1920 1080";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "Steam Big Picture Mode";
+                  };
+                  min_size = "1920 1080";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "Steam Big Picture Mode";
+                  };
+                  float = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    title = "Steam Big Picture Mode";
+                  };
+                  fullscreen_state = "3 -1";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "(steam_app).*";
+                  };
+                  immediate = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "steam_app_2622380";
+                  };
+                  render_unfocused = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "steam_app_2622380";
+                  };
+                  fullscreen_state = "-1 3";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "cs2";
+                  };
+                  immediate = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "tf_linux64";
+                  };
+                  immediate = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  match = {
+                    class = "Minecraft";
+                  };
+                  immediate = true;
+                }
+              ];
+            }
           ];
 
           bind =
@@ -449,8 +750,6 @@
                 ];
               }
             ];
-
-          monitor = map monitorConfig config.gui.monitors;
         };
       };
     };
