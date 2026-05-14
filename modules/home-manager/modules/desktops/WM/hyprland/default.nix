@@ -194,93 +194,266 @@
             let
               mod = "SUPER";
             in
+            with lib.generators;
             [
-              "${mod} + Q"
-              "hl.dsp.exec_cmd(\"${terminal}\")"
-              "${mod} + SHIFT + Q"
-              "hl.dsp.exec_cmd(\"kitty\")"
-              "${mod} + E"
-              "hl.dsp.exec_cmd(\"${fileManager}\")"
-              "${mod} + SPACE"
-              "hl.dsp.exec_cmd(\"${launcher}\")"
-              "${mod} + SHIFT + S"
-              "hl.dsp.exec_cmd(\"${screenshot}\")"
-              "${mod} + C"
-              "hl.dsp.exec_cmd(\"hyprpicker -a\")"
-              "${mod} + W"
-              "hl.dsp.window.close()"
-              "${mod} + F"
-              "hl.dsp.window.fullscreen()"
-              "${mod} + SHIFT + F"
-              "hl.dsp.window.float({ action = \"toggle\" })"
-              "${mod} + M"
-              "hl.dsp.exit()"
-              "${mod} + P"
-              "hl.dsp.window.pseudo()"
-              "${mod} + S"
-              "hl.dsp.layout(\"togglesplit\")"
-              "${mod} + left"
-              "hl.dsp.focus({ direction = \"left\" })"
-              "${mod} + right"
-              "hl.dsp.focus({ direction = \"right\" })"
-              "${mod} + up"
-              "hl.dsp.focus({ direction = \"up\" })"
-              "${mod} + down"
-              "hl.dsp.focus({ direction = \"down\" })"
-              "${mod} + SHIFT + left"
-              "hl.dsp.window.move({ direction = \"left\" })"
-              "${mod} + SHIFT + right"
-              "hl.dsp.window.move({ direction = \"right\" })"
-              "${mod} + SHIFT + up"
-              "hl.dsp.window.move({ direction = \"up\" })"
-              "${mod} + SHIFT + down"
-              "hl.dsp.window.move({ direction = \"down\" })"
-              "${mod} + 1"
-              "hl.dsp.focus({ workspace = 1 })"
-              "${mod} + 2"
-              "hl.dsp.focus({ workspace = 2 })"
-              "${mod} + 3"
-              "hl.dsp.focus({ workspace = 3 })"
-              "${mod} + 4"
-              "hl.dsp.focus({ workspace = 4 })"
-              "${mod} + 5"
-              "hl.dsp.focus({ workspace = 5 })"
-              "${mod} + 6"
-              "hl.dsp.focus({ workspace = 6 })"
-              "${mod} + 7"
-              "hl.dsp.focus({ workspace = 7 })"
-              "${mod} + 8"
-              "hl.dsp.focus({ workspace = 8 })"
-              "${mod} + 9"
-              "hl.dsp.focus({ workspace = 9 })"
-              "${mod} + 0"
-              "hl.dsp.focus({ workspace = 10 })"
-              "${mod} + escape"
-              "hl.dsp.workspace.toggle_special(\"magic\")"
-              "${mod} + SHIFT + 1"
-              "hl.dsp.window.move({ workspace = 1 })"
-              "${mod} + SHIFT + 2"
-              "hl.dsp.window.move({ workspace = 2 })"
-              "${mod} + SHIFT + 3"
-              "hl.dsp.window.move({ workspace = 3 })"
-              "${mod} + SHIFT + 4"
-              "hl.dsp.window.move({ workspace = 4 })"
-              "${mod} + SHIFT + 5"
-              "hl.dsp.window.move({ workspace = 5 })"
-              "${mod} + SHIFT + 6"
-              "hl.dsp.window.move({ workspace = 6 })"
-              "${mod} + SHIFT + 7"
-              "hl.dsp.window.move({ workspace = 7 })"
-              "${mod} + SHIFT + 8"
-              "hl.dsp.window.move({ workspace = 8 })"
-              "${mod} + SHIFT + 9"
-              "hl.dsp.window.move({ workspace = 9 })"
-              "${mod} + SHIFT + 0"
-              "hl.dsp.window.move({ workspace = 10 })"
-              "${mod} + SHIFT + escape"
-              "hl.dsp.window.move({ workspace = \"special:magic\" })"
-              ", insert"
-              "hl.dsp.sendshortcut(\"CTRL SHIFT\", \"d\", { class = \"discord\" })"
+              {
+                _args = [
+                  "${mod} + Q"
+                  (mkLuaInline "hl.dsp.exec_cmd(${terminal})")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + Q"
+                  (mkLuaInline "hl.dsp.exec_cmd(kitty)")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + E"
+                  (mkLuaInline "hl.dsp.exec_cmd(${fileManager})")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SPACE"
+                  (mkLuaInline "hl.dsp.exec_cmd(${launcher})")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + S"
+                  (mkLuaInline "hl.dsp.exec_cmd(${screenshot})")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + C"
+                  (mkLuaInline "hl.dsp.exec_cmd(\"hyprpicker -a\")")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + W"
+                  (mkLuaInline "hl.dsp.window.close()")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + F"
+                  (mkLuaInline "hl.dsp.window.fullscreen()")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + F"
+                  (mkLuaInline "hl.dsp.window.float({ action = \"toggle\" })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + M"
+                  (mkLuaInline "hl.dsp.exit()")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + P"
+                  (mkLuaInline "hl.dsp.window.pseudo()")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + S"
+                  (mkLuaInline "hl.dsp.layout(\"togglesplit\")")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + left"
+                  (mkLuaInline "hl.dsp.focus({ direction = \"left\" })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + right"
+                  (mkLuaInline "hl.dsp.focus({ direction = \"right\" })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + up"
+                  (mkLuaInline "hl.dsp.focus({ direction = \"up\" })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + down"
+                  (mkLuaInline "hl.dsp.focus({ direction = \"down\" })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + left"
+                  (mkLuaInline "hl.dsp.window.move({ direction = \"left\" })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + right"
+                  (mkLuaInline "hl.dsp.window.move({ direction = \"right\" })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + up"
+                  (mkLuaInline "hl.dsp.window.move({ direction = \"up\" })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + down"
+                  (mkLuaInline "hl.dsp.window.move({ direction = \"down\" })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 1"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 1 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 2"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 2 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 3"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 3 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 4"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 4 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 5"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 5 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 6"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 6 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 7"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 7 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 8"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 8 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 9"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 9 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + 0"
+                  (mkLuaInline "hl.dsp.focus({ workspace = 10 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + escape"
+                  (mkLuaInline "hl.dsp.workspace.toggle_special(\"magic\")")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 1"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 1 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 2"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 2 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 3"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 3 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 4"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 4 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 5"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 5 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 6"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 6 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 7"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 7 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 8"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 8 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 9"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 9 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + 0"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = 10 })")
+                ];
+              }
+              {
+                _args = [
+                  "${mod} + SHIFT + escape"
+                  (mkLuaInline "hl.dsp.window.move({ workspace = \"special:magic\" })")
+                ];
+              }
+              {
+                _args = [
+                  "insert"
+                  (mkLuaInline "hl.dsp.sendshortcut(\"CTRL SHIFT\", \"d\", { class = \"discord\" })")
+                ];
+              }
             ];
 
           monitor = map monitorConfig config.gui.monitors;
