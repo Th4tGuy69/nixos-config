@@ -205,7 +205,7 @@
               {
                 _args = [
                   "${mod} + SHIFT + Q"
-                  (mkLuaInline "hl.dsp.exec_cmd(kitty)")
+                  (mkLuaInline "hl.dsp.exec_cmd(\"kitty\")")
                 ];
               }
               {
