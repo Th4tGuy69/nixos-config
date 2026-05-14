@@ -83,66 +83,64 @@
         portalPackage = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;
 
         settings = {
-          config = {
-            ecosystem = {
-              no_update_news = true;
-              no_donation_nag = true;
-            };
-
-            general = {
-              "gaps_in" = gapsIn;
-              "gaps_out" = gapsOut;
-              "border_size" = borderSize;
-              "resize_on_border" = false;
-              "allow_tearing" = true;
-              "layout" = "dwindle";
-            };
-
-            decoration = {
-              rounding = rounding;
-              active_opacity = activeOpacity;
-              inactive_opacity = inactiveOpacity;
-              shadow = {
-                enabled = shadowEnabled;
-                range = 4;
-                render_power = 3;
-              };
-              blur = {
-                enabled = blurEnabled;
-                size = blurSize;
-                passes = blurPasses;
-                vibrancy = vibrancy;
-              };
-            };
-
-            misc = {
-              disable_hyprland_logo = true;
-              middle_click_paste = false;
-              vrr = 3;
-              mouse_move_enables_dpms = true;
-              key_press_enables_dpms = true;
-            };
-
-            cursor = {
-              hide_on_key_press = true;
-              no_hardware_cursors = 1;
-            };
-
-            input = {
-              kb_layout = "us";
-              repeat_rate = 35;
-              repeat_delay = 200;
-
-              sensitivity = -0.5;
-              accel_profile = "flat";
-            };
-
-            dwindle = {
-              smart_split = true;
-            };
-
-            monitor = map monitorConfig config.gui.monitors;
-          };
+          config = [
+            {
+              _args = [
+                {
+                  ecosystem = {
+                    no_update_news = true;
+                    no_donation_nag = true;
+                  };
+                  general = {
+                    gaps_in = gapsIn;
+                    gaps_out = gapsOut;
+                    border_size = borderSize;
+                    resize_on_border = false;
+                    allow_tearing = true;
+                    layout = "dwindle";
+                  };
+                  decoration = {
+                    rounding = rounding;
+                    active_opacity = activeOpacity;
+                    inactive_opacity = inactiveOpacity;
+                    shadow = {
+                      enabled = shadowEnabled;
+                      range = 4;
+                      render_power = 3;
+                    };
+                    blur = {
+                      enabled = blurEnabled;
+                      size = blurSize;
+                      passes = blurPasses;
+                      vibrancy = vibrancy;
+                    };
+                  };
+                  misc = {
+                    disable_hyprland_logo = true;
+                    middle_click_paste = false;
+                    vrr = 3;
+                    mouse_move_enables_dpms = true;
+                    key_press_enables_dpms = true;
+                  };
+                  cursor = {
+                    hide_on_key_press = true;
+                    no_hardware_cursors = 1;
+                  };
+                  input = {
+                    kb_layout = "us";
+                    repeat_rate = 35;
+                    repeat_delay = 200;
+                    sensitivity = -0.5;
+                    accel_profile = "flat";
+                  };
+                  dwindle = {
+                    smart_split = true;
+                  };
+                  monitor = map monitorConfig config.gui.monitors;
+                }
+              ];
+            }
+          ];
 
           on = [
             {
