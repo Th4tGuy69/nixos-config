@@ -174,6 +174,7 @@
               "systemctl --user start hyprpolkitagent"
               "systemctl --user enable --now hyprsunset.service"
               ''
+                sleep 5s;
                 nerdshade \
                 -loop \
                 -gammaNight 75 \

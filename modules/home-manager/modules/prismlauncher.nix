@@ -91,7 +91,7 @@
           SkipModpackUpdatePrompt = false;
           StatusBarVisible = true;
           TheCat = false;
-          ToolbarsLocked = false;
+          ToolbarsLocked = true;
           UseDiscreteGpu = false;
           UseNativeGLFW = true;
           UseNativeOpenAL = false;
