@@ -14,19 +14,6 @@
       menu = config.gui.runner;
       filemanager = config.gui.fileManager;
 
-      monitorConfig =
-        m:
-        let
-          name = if m.name != null then m.name else m.description;
-          res =
-            if m.preferred then
-              "preferred"
-            else
-              "${toString m.width}x${toString m.height}"
-              + lib.optionalString (m.refreshRate != null) "@${toString m.refreshRate}Hz";
-        in
-        "output ${name} resolution ${res} position ${toString (m.x or 0)},${toString (m.y or 0)} transform ${toString (m.transform or 0)}";
-
       scrollConfig = ''
         # vim: ft=swayconfig
         #
@@ -48,10 +35,6 @@
         set $menu ${menu}
         # Your preferred file manager
         set $filemanager ${filemanager}
-
-        ### Output configuration
-        #
-        ${lib.concatMapStringsSep "\n" monitorConfig config.gui.monitors}
 
         ### Input configuration
         #
@@ -79,44 +62,33 @@
       '';
     in
     {
-      home.file.".config/scroll/config".text = lib.mkIf (
-        config.gui.windowManager == "scroll"
-      ) scrollConfig;
+      home.file.".config/scroll/config".text = scrollConfig;
 
-      programs.scroll = {
-        enable = true;
-        package = inputs.scroll-flake.packages.${pkgs.stdenv.hostPlatform.system}.scroll-git;
+      # programs.scroll = {
+      #   enable = true;
+      #   package = inputs.scroll-flake.packages.${pkgs.stdenv.hostPlatform.system}.scroll-git;
 
-        extraSessionCommands = ''
-          # Tell QT, GDK and others to use the Wayland backend by default, X11 if not available
-          export QT_QPA_PLATFORM="wayland;xcb"
-          export GDK_BACKEND="wayland,x11"
-          export SDL_VIDEODRIVER=wayland
-          export CLUTTER_BACKEND=wayland
+      #   extraSessionCommands = ''
+      #     # Tell QT, GDK and others to use the Wayland backend by default, X11 if not available
+      #     export QT_QPA_PLATFORM="wayland;xcb"
+      #     export GDK_BACKEND="wayland,x11"
+      #     export SDL_VIDEODRIVER=wayland
+      #     export CLUTTER_BACKEND=wayland
 
-          # XDG desktop variables to set scroll as the desktop
-          export XDG_CURRENT_DESKTOP=scroll
-          export XDG_SESSION_TYPE=wayland
-          export XDG_SESSION_DESKTOP=scroll
+      #     # XDG desktop variables to set scroll as the desktop
+      #     export XDG_CURRENT_DESKTOP=scroll
+      #     export XDG_SESSION_TYPE=wayland
+      #     export XDG_SESSION_DESKTOP=scroll
 
-          # Configure Electron to use Wayland instead of X11
-          export ELECTRON_OZONE_PLATFORM_HINT=wayland
-        '';
-      };
+      #     # Configure Electron to use Wayland instead of X11
+      #     export ELECTRON_OZONE_PLATFORM_HINT=wayland
+      #   '';
+      # };
 
       xdg.portal.extraPortals = with pkgs; [
         xdg-desktop-portal
         xdg-desktop-portal-gtk
         xdg-desktop-portal-wlr
       ];
-
-      # Enable Pipewire for screencasting and audio server
-      security.rtkit.enable = true;
-      services.pipewire = {
-        enable = true;
-        pulse.enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-      };
     };
 }
