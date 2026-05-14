@@ -448,12 +448,6 @@
                   (mkLuaInline "hl.dsp.window.move({ workspace = \"special:magic\" })")
                 ];
               }
-              {
-                _args = [
-                  "insert"
-                  (mkLuaInline "hl.dsp.sendshortcut(\"CTRL SHIFT\", \"d\", { class = \"discord\" })")
-                ];
-              }
             ];
 
           monitor = map monitorConfig config.gui.monitors;
