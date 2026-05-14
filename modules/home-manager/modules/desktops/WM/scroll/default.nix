@@ -62,7 +62,7 @@
       '';
     in
     {
-      home.file.".config/scroll/config".text = scrollConfig;
+      # home.file.".config/scroll/config".text = scrollConfig;
 
       # programs.scroll = {
       #   enable = true;
