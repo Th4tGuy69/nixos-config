@@ -162,7 +162,7 @@
             smart_split = true;
           };
 
-          exec-once =
+          exec-cmd =
             let
               lat = config.sops.secrets.latitude.path;
               lon = config.sops.secrets.longitude.path;
@@ -216,12 +216,12 @@
           ];
 
           bind = [
-            "SUPER, q, exec, ${terminal}"
-            "SUPER SHIFT, q, exec, kitty"
-            "SUPER, e, exec, ${fileManager}"
-            "SUPER, space, exec, ${launcher}"
-            "SUPER SHIFT, s, exec, ${screenshot}"
-            "SUPER, c, exec, hyprpicker -a"
+            "SUPER, q, exec_cmd, ${terminal}"
+            "SUPER SHIFT, q, exec_cmd, kitty"
+            "SUPER, e, exec_cmd, ${fileManager}"
+            "SUPER, space, exec_cmd, ${launcher}"
+            "SUPER SHIFT, s, exec_cmd, ${screenshot}"
+            "SUPER, c, exec_cmd, hyprpicker -a"
             "SUPER, w, killactive,"
             "SUPER, f, fullscreen,"
             "SUPER SHIFT, f, togglefloating,"
@@ -267,9 +267,9 @@
           ];
 
           bindl = [
-            ", XF86AudioPlay, exec, playerctl play-pause"
-            ", XF86AudioPrev, exec, playerctl previous"
-            ", XF86AudioNext, exec, playerctl next"
+            ", XF86AudioPlay, exec_cmd, playerctl play-pause"
+            ", XF86AudioPrev, exec_cmd, playerctl previous"
+            ", XF86AudioNext, exec_cmd, playerctl next"
           ];
 
           monitor = map monitorConfig config.gui.monitors;
