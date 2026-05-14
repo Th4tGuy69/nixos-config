@@ -199,7 +199,7 @@
               {
                 _args = [
                   "${mod} + Q"
-                  (mkLuaInline "hl.dsp.exec_cmd(${terminal})")
+                  (mkLuaInline "hl.dsp.exec_cmd(\"${terminal}\")")
                 ];
               }
               {
@@ -211,19 +211,19 @@
               {
                 _args = [
                   "${mod} + E"
-                  (mkLuaInline "hl.dsp.exec_cmd(${fileManager})")
+                  (mkLuaInline "hl.dsp.exec_cmd(\"${fileManager}\")")
                 ];
               }
               {
                 _args = [
                   "${mod} + SPACE"
-                  (mkLuaInline "hl.dsp.exec_cmd(${launcher})")
+                  (mkLuaInline "hl.dsp.exec_cmd(\"${launcher}\")")
                 ];
               }
               {
                 _args = [
                   "${mod} + SHIFT + S"
-                  (mkLuaInline "hl.dsp.exec_cmd(${screenshot})")
+                  (mkLuaInline "hl.dsp.exec_cmd(\"${screenshot}\")")
                 ];
               }
               {
