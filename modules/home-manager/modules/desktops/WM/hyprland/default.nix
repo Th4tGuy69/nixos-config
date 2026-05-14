@@ -162,7 +162,7 @@
             smart_split = true;
           };
 
-          exec-cmd =
+          exec_cmd =
             let
               lat = config.sops.secrets.latitude.path;
               lon = config.sops.secrets.longitude.path;
