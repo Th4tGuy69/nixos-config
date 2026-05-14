@@ -1,22 +1,32 @@
-{ config, lib, pkgs, inputs, ... }:
+{ ... }:
 
 {
   flake.homeModules.scroll =
-    { pkgs, config, inputs, ... }:
+    {
+      inputs,
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
-      term = config.gui.terminal or "ghostty";
-      menu = config.gui.runner or "anyrun";
-      filemanager = config.gui.fileManager or "nautilus";
-      
-      monitorConfig = m:
+      term = config.gui.terminal;
+      menu = config.gui.runner;
+      filemanager = config.gui.fileManager;
+
+      monitorConfig =
+        m:
         let
           name = if m.name != null then m.name else m.description;
-          res = if m.preferred then "preferred" 
-                else "${toString m.width}x${toString m.height}" + 
-                     lib.optionalString (m.refreshRate != null) "@${toString m.refreshRate}Hz";
+          res =
+            if m.preferred then
+              "preferred"
+            else
+              "${toString m.width}x${toString m.height}"
+              + lib.optionalString (m.refreshRate != null) "@${toString m.refreshRate}Hz";
         in
-        ''output ${name} resolution ${res} position ${toString (m.x or 0)},${toString (m.y or 0)} transform ${toString (m.transform or 0)}'';
-      
+        "output ${name} resolution ${res} position ${toString (m.x or 0)},${toString (m.y or 0)} transform ${toString (m.transform or 0)}";
+
       scrollConfig = ''
         # vim: ft=swayconfig
         #
@@ -69,20 +79,44 @@
       '';
     in
     {
-      # Only enable if user imported this module
-      home.sessionVariables = lib.mkIf (config.gui.windowManager == "scroll") {
-        QT_QPA_PLATFORM = "wayland;xcb";
-        GDK_BACKEND = "wayland,x11";
-        SDL_VIDEODRIVER = "wayland";
-        CLUTTER_BACKEND = "wayland";
+      home.file.".config/scroll/config".text = lib.mkIf (
+        config.gui.windowManager == "scroll"
+      ) scrollConfig;
 
-        XDG_CURRENT_DESKTOP = "scroll";
-        XDG_SESSION_TYPE = "wayland";
-        XDG_SESSION_DESKTOP = "scroll";
+      programs.scroll = {
+        enable = true;
+        package = inputs.scroll-flake.packages.${pkgs.stdenv.hostPlatform.system}.scroll-git;
 
-        ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+        extraSessionCommands = ''
+          # Tell QT, GDK and others to use the Wayland backend by default, X11 if not available
+          export QT_QPA_PLATFORM="wayland;xcb"
+          export GDK_BACKEND="wayland,x11"
+          export SDL_VIDEODRIVER=wayland
+          export CLUTTER_BACKEND=wayland
+
+          # XDG desktop variables to set scroll as the desktop
+          export XDG_CURRENT_DESKTOP=scroll
+          export XDG_SESSION_TYPE=wayland
+          export XDG_SESSION_DESKTOP=scroll
+
+          # Configure Electron to use Wayland instead of X11
+          export ELECTRON_OZONE_PLATFORM_HINT=wayland
+        '';
       };
 
-      home.file.".config/scroll/config".text = lib.mkIf (config.gui.windowManager == "scroll") scrollConfig;
+      xdg.portal.extraPortals = with pkgs; [
+        xdg-desktop-portal
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-wlr
+      ];
+
+      # Enable Pipewire for screencasting and audio server
+      security.rtkit.enable = true;
+      services.pipewire = {
+        enable = true;
+        pulse.enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+      };
     };
 }

@@ -78,7 +78,7 @@
       programs.hyprlock.enable = config.gui.windowManager == "hyprland";
 
       wayland.windowManager.hyprland = lib.mkIf (config.gui.windowManager == "hyprland") {
-        enable = true;
+        enable = false;
         package = inputs.hyprland.packages.x86_64-linux.hyprland;
         portalPackage = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;
 

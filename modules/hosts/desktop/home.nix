@@ -16,9 +16,9 @@
         git
         gpg
         helix
-        hyprland
-        # niri       # Uncomment to use niri
-        # scroll     # Uncomment to use scroll
+        # hyprland
+        # niri # Uncomment to use niri
+        # scroll # Uncomment to use scroll
         # hyprpanel  # Uncomment if gui.bar = "hyprpanel"
         # eww        # Uncomment if gui.bar = "eww"
         # quickshell # Uncomment if gui.bar = "quickshell"

@@ -7,6 +7,7 @@
       imports = with self.nixosModules; [
         stylix
         musnix
+        scroll
       ];
     };
 }

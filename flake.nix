@@ -54,9 +54,9 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    scroll = {
-      url = "github:AsahiRocks/scroll-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+    scroll-flake = {
+      url = "github:Diax170/scroll-flake";
+      inputs.nixpkgs.follows = "nixpkgs"; # this assumes nixos unstable
     };
 
     anyrun = {
