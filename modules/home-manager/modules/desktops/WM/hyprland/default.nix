@@ -83,8 +83,6 @@
         portalPackage = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;
 
         settings = {
-          "$mod" = "SUPER";
-
           ecosystem.no_update_news = true;
 
           general = {
