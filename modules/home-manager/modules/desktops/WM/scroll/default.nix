@@ -19,13 +19,13 @@
       monitorConfig =
         m:
         let
-          identifier = if m ? name then m.name else "desc:${m.description}";
+          identifier = if m ? name then m.name else "\"desc:${m.description}\"";
 
           resolution =
             if m.preferred or false then
-              "preferred"
+              ""
             else
-              "${toString m.width}x${toString m.height}@${toString m.refreshRate}Hz";
+              "resolution ${toString m.width}x${toString m.height}@${toString m.refreshRate}Hz";
 
           position = "${toString m.x}x${toString m.y}";
 
@@ -33,7 +33,7 @@
 
           transform = if m ? transform then " transform ${toString (scrollTransform m.transform)}" else "";
         in
-        "output ${identifier} resolution ${resolution} position ${position} scale ${scale}${transform}";
+        "output ${identifier} ${resolution} position ${position} scale ${scale}${transform}";
 
       startupApp = app: "exec ${app}";
 
