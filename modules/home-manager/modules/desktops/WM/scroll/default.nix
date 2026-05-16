@@ -27,7 +27,7 @@
             else
               "resolution ${toString m.width}x${toString m.height}@${toString m.refreshRate}Hz";
 
-          position = "${toString m.x}x${toString m.y}";
+          position = "${toString m.x} ${toString m.y}";
 
           scale = toString (m.scale or 1);
 
