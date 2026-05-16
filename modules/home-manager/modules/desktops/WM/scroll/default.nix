@@ -31,7 +31,17 @@
 
           scale = toString (m.scale or 1);
 
-          transform = if m ? transform then " transform ${toString (scrollTransform m.transform)}" else "";
+          scrollTransform =
+            deg:
+            {
+              "0" = "normal";
+              "90" = "90";
+              "180" = "180";
+              "270" = "270";
+            }
+            .${toString deg};
+
+          transform = if m ? transform then " transform ${scrollTransform m.transform}" else "";
         in
         "output ${identifier} ${resolution} position ${position} scale ${scale}${transform}";
 
