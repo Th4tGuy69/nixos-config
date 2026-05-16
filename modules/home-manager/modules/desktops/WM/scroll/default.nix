@@ -19,7 +19,7 @@
       monitorConfig =
         m:
         let
-          identifier = if m ? name then m.name else "\"desc:${m.description}\"";
+          identifier = if m ? name then m.name else "\"${m.description}\"";
 
           resolution =
             if m.preferred or false then
