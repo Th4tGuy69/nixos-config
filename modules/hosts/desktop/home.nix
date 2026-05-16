@@ -74,7 +74,7 @@
             x = -1080;
             y = -56;
             scale = 1;
-            transform = 90;
+            transform = 270;
           }
           {
             description = "Hisense Electric Co. Ltd. HISENSE 0x00000001";
