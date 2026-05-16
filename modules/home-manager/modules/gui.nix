@@ -2,7 +2,7 @@
 
 {
   flake.homeModules.gui =
-    { config, ... }:
+    { ... }:
     {
       options.gui = {
         windowManager = lib.mkOption {
