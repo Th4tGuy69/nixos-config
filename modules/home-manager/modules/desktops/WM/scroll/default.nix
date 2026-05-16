@@ -155,7 +155,6 @@
 
             # Kill focused window
             bindsym $mod+w kill
-            bindsym $mod+Shift+w kill unfocused
 
             # Start your launcher
             bindsym $mod+space exec $menu
