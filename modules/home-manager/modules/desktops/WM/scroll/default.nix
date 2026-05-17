@@ -156,6 +156,9 @@
         workspace 1 output DP-1
         workspace 2 output "LG Electronics 27GL650F 008NTHM5V961"
 
+        workspace 2 layout_default_width 1.0
+        workspace 2 layout_default_height 0.5
+
         ### Idle configuration
         #
         # Example configuration:
