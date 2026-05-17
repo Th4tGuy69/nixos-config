@@ -51,11 +51,6 @@
         local configured = {}
 
         local function on_focus_ws(workspace, _)
-          local results = scroll.command(workspace, "layout_default_width 1.0")
-          for _, v in ipairs(results) do
-            scroll.log("command result: " .. tostring(v))
-          end
-
           local output = scroll.workspace_get_output(workspace)
           if not output then return end
 
