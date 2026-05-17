@@ -72,9 +72,13 @@
             if height > width then
               scroll.log("Setting vertical for output " .. output_name)
               scroll.workspace_set_layout_type(workspace, "vertical")
+              scroll.command(workspace, "layout_default_width 1.0")
+              scroll.command(workspace, "layout_default_height 0.5")
             else
               scroll.log("Setting horizontal for output " .. output_name)
               scroll.workspace_set_layout_type(workspace, "horizontal")
+              scroll.command(workspace, "layout_default_width 0.5")
+              scroll.command(workspace, "layout_default_height 1.0")
             end
             configured[output_name] = true
           end
