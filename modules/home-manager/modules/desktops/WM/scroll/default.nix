@@ -53,28 +53,30 @@
         local configured = {}
 
         local function on_focus_ws(workspace, _)
-          local name = scroll.workspace_get_name(workspace)
+          local output = scroll.workspace_get_output(workspace)
+          if not output then return end
 
-          if configured[name] then
-            return
-          end
+          local output_name = scroll.output_get_name(output)
+          if not output_name then return end
+
+          if configured[output_name] then return end
 
           local width = scroll.workspace_get_width(workspace)
           local height = scroll.workspace_get_height(workspace)
 
-          scroll.log("workspace_focus: name=" .. tostring(name) ..
+          scroll.log("workspace_focus: output=" .. output_name ..
             " width=" .. tostring(width) ..
             " height=" .. tostring(height))
 
           if width and height and (width > 0 or height > 0) then
             if height > width then
-              scroll.log("Setting vertical for workspace " .. tostring(name))
+              scroll.log("Setting vertical for output " .. output_name)
               scroll.workspace_set_layout_type(workspace, "vertical")
             else
-              scroll.log("Setting horizontal for workspace " .. tostring(name))
+              scroll.log("Setting horizontal for output " .. output_name)
               scroll.workspace_set_layout_type(workspace, "horizontal")
             end
-            configured[name] = true
+            configured[output_name] = true
           end
         end
 
