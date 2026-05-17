@@ -51,6 +51,11 @@
         local configured = {}
 
         local function on_focus_ws(workspace, _)
+          local results = scroll.command(workspace, "layout_default_width 1.0")
+          for _, v in ipairs(results) do
+            scroll.log("command result: " .. tostring(v))
+          end
+
           local output = scroll.workspace_get_output(workspace)
           if not output then return end
 
@@ -209,8 +214,6 @@
         for_window [all] inhibit_idle fullscreen
 
         # Layout settings
-        layout_default_width 0.5
-        layout_default_height 1.0
         layout_widths [0.33333333 0.5 0.666666667 1.0]
         layout_heights [0.33333333 0.5 0.666666667 1.0]
 
