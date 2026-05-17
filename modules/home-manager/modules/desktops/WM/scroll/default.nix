@@ -83,6 +83,12 @@
         # You can get the names of your outputs by running: scrollmsg -t get_outputs
         ${lib.concatMapStringsSep "\n" monitorConfig monitors}
 
+        workspace 1 output DP-1
+        workspace 2 output "LG Electronics 27GL650F 008NTHM5V961"
+
+        workspace_layout horizontal
+        workspace 2 exec scrollmsg set_mode v
+
         ### Idle configuration
         #
         # Example configuration:
