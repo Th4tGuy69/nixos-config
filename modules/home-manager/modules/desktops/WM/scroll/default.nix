@@ -48,31 +48,39 @@
       startupApp = app: "exec ${app}";
 
       workspaceModeScript = pkgs.writers.writeLua "scroll_auto_workspace_mode.lua" { } ''
+        local state = ...
+
         local scroll = require("scroll")
 
-        local function on_create_ws(workspace, _)
+        local function on_focus_ws(workspace, _)
           local name = scroll.workspace_get_name(workspace)
+
+          -- Only run once per workspace
+          if scroll.state_get_value(state, name) then
+            return
+          end
+
           local width = scroll.workspace_get_width(workspace)
           local height = scroll.workspace_get_height(workspace)
 
-          scroll.log("workspace_create: name=" .. tostring(name) ..
+          scroll.log("workspace_focus: name=" .. tostring(name) ..
             " width=" .. tostring(width) ..
             " height=" .. tostring(height))
 
-          if width and height then
+          if width and height and (width > 0 or height > 0) then
             if height > width then
-              scroll.log("Setting vertical layout for workspace " .. tostring(name))
+              scroll.log("Setting vertical for workspace " .. tostring(name))
               scroll.workspace_set_layout_type(workspace, "vertical")
             else
-              scroll.log("Setting horizontal layout for workspace " .. tostring(name))
+              scroll.log("Setting horizontal for workspace " .. tostring(name))
               scroll.workspace_set_layout_type(workspace, "horizontal")
             end
-          else
-            scroll.log("WARNING: width or height is nil for workspace " .. tostring(name))
+            -- Mark this workspace as done so we don't override manual changes later
+            scroll.state_set_value(state, name, true)
           end
         end
 
-        scroll.add_callback("workspace_create", on_create_ws, nil)
+        scroll.add_callback("workspace_focus", on_focus_ws, nil)
       '';
 
       scrollConfig = with config.gui; ''
