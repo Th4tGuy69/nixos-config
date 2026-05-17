@@ -48,15 +48,14 @@
       startupApp = app: "exec ${app}";
 
       workspaceModeScript = pkgs.writers.writeLua "scroll_auto_workspace_mode.lua" { } ''
-        local state = ...
-
         local scroll = require("scroll")
+
+        local configured = {}
 
         local function on_focus_ws(workspace, _)
           local name = scroll.workspace_get_name(workspace)
 
-          -- Only run once per workspace
-          if scroll.state_get_value(state, name) then
+          if configured[name] then
             return
           end
 
@@ -75,8 +74,7 @@
               scroll.log("Setting horizontal for workspace " .. tostring(name))
               scroll.workspace_set_layout_type(workspace, "horizontal")
             end
-            -- Mark this workspace as done so we don't override manual changes later
-            scroll.state_set_value(state, name, true)
+            configured[name] = true
           end
         end
 
