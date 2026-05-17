@@ -51,15 +51,24 @@
         local scroll = require("scroll")
 
         local function on_create_ws(workspace, _)
+          local name = scroll.workspace_get_name(workspace)
           local width = scroll.workspace_get_width(workspace)
           local height = scroll.workspace_get_height(workspace)
 
+          scroll.log("workspace_create: name=" .. tostring(name) ..
+            " width=" .. tostring(width) ..
+            " height=" .. tostring(height))
+
           if width and height then
             if height > width then
+              scroll.log("Setting vertical layout for workspace " .. tostring(name))
               scroll.workspace_set_layout_type(workspace, "vertical")
             else
+              scroll.log("Setting horizontal layout for workspace " .. tostring(name))
               scroll.workspace_set_layout_type(workspace, "horizontal")
             end
+          else
+            scroll.log("WARNING: width or height is nil for workspace " .. tostring(name))
           end
         end
 
