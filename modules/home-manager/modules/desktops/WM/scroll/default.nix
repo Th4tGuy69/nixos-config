@@ -47,9 +47,7 @@
 
       startupApp = app: "exec ${app}";
 
-      workspaceModeScript = ''
-        local args, state = ...
-
+      workspaceModeScript = pkgs.writers.writeLua "scroll_auto_workspace_mode.lua" { } ''
         local scroll = require("scroll")
 
         local function on_create_ws(workspace, _)
@@ -105,7 +103,7 @@
         ${lib.concatMapStringsSep "\n" monitorConfig monitors}
 
         # Set scrolling mode per output
-        lua $lua_scripts/workspace_auto_layout.lua
+        lua ${workspaceModeScript}
 
         workspace 1 output DP-1
         workspace 2 output "LG Electronics 27GL650F 008NTHM5V961"
@@ -745,8 +743,6 @@
     in
     {
       home.file.".config/scroll/config".text = scrollConfig;
-
-      home.file.".config/scroll/scripts/workspace_auto_mode.lua".text = workspaceModeScript;
 
       xdg.portal.extraPortals = with pkgs; [
         xdg-desktop-portal
