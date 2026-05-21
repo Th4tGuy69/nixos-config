@@ -729,18 +729,8 @@
             scroller_indicator no
             trails_indicator no
             tray_output none
-            gaps 0 1256 0 0
-
-            # When the status_command prints a new line to stdout, scrollbar updates.
-            # The default just shows the current date and time.
-            status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
-            colors {
-                statusline #ffffff
-                background #000000
-                inactive_workspace #32323200 #32323200 #5c5c5c
-                scroller #2F343AFF #055E20FF #FFFFFFFF
-            }
+            gaps 0 1256 0 1256
+            status_command while date +'%l:%M'; do sleep 1; done
         }
         #
         # include @sysconfdir@/scroll/config.d/*
