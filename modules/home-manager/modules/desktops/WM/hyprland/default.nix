@@ -1,10 +1,11 @@
-{ self, lib, ... }:
+{ self, ... }:
 
 {
   flake.homeModules.hyprland =
     {
       pkgs,
       config,
+      lib,
       inputs,
       ...
     }:
