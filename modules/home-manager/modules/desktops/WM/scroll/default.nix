@@ -723,6 +723,13 @@
         # Read `man 5 scroll-bar` for more information about this section.
         bar {
             position top
+            output DP-1
+            workspace_buttons no
+            mode hide
+            scroller_indicator no
+            trails_indicator no
+            tray_output none
+            gaps 0 1256 0 0
 
             # When the status_command prints a new line to stdout, scrollbar updates.
             # The default just shows the current date and time.
