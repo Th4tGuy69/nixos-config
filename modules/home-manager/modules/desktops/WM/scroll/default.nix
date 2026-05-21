@@ -737,7 +737,7 @@
 
             colors {
                 statusline #ffffff
-                background #323232
+                background #000000
                 inactive_workspace #32323200 #32323200 #5c5c5c
                 scroller #2F343AFF #055E20FF #FFFFFFFF
             }

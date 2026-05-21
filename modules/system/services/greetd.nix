@@ -12,7 +12,7 @@
       };
 
       environment.etc."greetd/scroll.conf".text = ''
-        exec ${pkgs.regreet}/bin/regreet; scrollmsg exit
+        exec "${pkgs.regreet}/bin/regreet; scrollmsg exit"
       '';
 
       environment.etc."greetd/hyprland.lua".text = ''
