@@ -2,8 +2,13 @@
 
 {
   flake.nixosModules.greetd =
-    { pkgs, ... }:
     {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
+    lib.mkIf config.greeter.greetd.enable {
       services.greetd = {
         enable = true;
         settings.default_session.command = "${

@@ -59,6 +59,11 @@
       inputs.nixpkgs.follows = "nixpkgs"; # this assumes nixos unstable
     };
 
+    sysc-greet = {
+      url = "github:Nomadcxx/sysc-greet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     anyrun = {
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";

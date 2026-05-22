@@ -5,7 +5,7 @@
     { ... }:
     {
       imports = with self.nixosModules; [
-        greetd
+        greeter
         audio
         udev
         ollama
