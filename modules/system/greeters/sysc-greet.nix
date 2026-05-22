@@ -3,27 +3,17 @@
 {
   flake.nixosModules.sysc-greet =
     {
+      pkgs,
       lib,
       config,
       ...
     }:
-    {
+    let
+      scrollConf = pkgs.writeText "scroll.conf" ''
+        ###########################
+        # Managed by Home Manager #
+        ###########################
 
-      imports = [ inputs.sysc-greet.nixosModules.default ];
-    }
-    // lib.mkIf config.greeter.sysc-greet.enable {
-
-      services.sysc-greet = {
-        enable = true;
-        # settings.initial_session = {
-        #   command = "${
-        #     inputs.scroll-flake.packages.${pkgs.system}.scroll-stable
-        #   }/bin/scroll --config /etc/greetd/scroll.conf";
-        #   user = "thatguy";
-        # };
-      };
-
-      environment.etc."usr/share/sysc-greet/ascii_configs/scroll.conf".text = ''
         # Scroll - Scrolling Wayland compositor
 
         # ASCII Art
@@ -174,5 +164,28 @@
           ▀▀▀▀▀▀     ▀▀▀▀▀    ▀▀         ▀▀▀▀       ▀▀▀▀      ▀▀▀▀  
         """
       '';
+
+      sysc-greet-override = inputs.sysc-greet.packages.${pkgs.system}.default.overrideAttrs (old: {
+        postInstall = old.postInstall + ''
+          cp ${scrollConf} $out/share/sysc-greet/ascii_configs/scroll.conf
+        '';
+      });
+    in
+    {
+      imports = [ inputs.sysc-greet.nixosModules.default ];
+    }
+    // lib.mkIf config.greeter.sysc-greet.enable {
+
+      services.sysc-greet = {
+        enable = true;
+        # settings.initial_session = {
+        #   command = "${
+        #     inputs.scroll-flake.packages.${pkgs.system}.scroll-stable
+        #   }/bin/scroll --config /etc/greetd/scroll.conf";
+        #   user = "thatguy";
+        # };
+      };
+
+      environment.systemPackages = [ sysc-greet-override ];
     };
 }
