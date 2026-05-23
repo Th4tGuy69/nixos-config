@@ -165,14 +165,8 @@
         """
       '';
 
-      sysc-greet-override = inputs.sysc-greet.packages.${pkgs.system}.default.overrideAttrs (old: {
-        postInstall = old.postInstall + ''
-          cp ${scrollConf} $out/share/sysc-greet/ascii_configs/scroll.conf
-        '';
-      });
-
       scrollConfig = pkgs.runCommand "scroll-greeter-config" { } ''
-        cp ${sysc-greet-override}/etc/greetd/sway-greeter-config $out
+        cp ${inputs.sysc-greet.packages.${pkgs.system}.default}/etc/greetd/sway-greeter-config $out
         substituteInPlace $out \
           --replace 'swaymsg ' "${
             inputs.scroll-flake.packages.${pkgs.system}.scroll-stable
@@ -180,8 +174,9 @@
           --replace 'swww-daemon' "${pkgs.swww}/bin/swww-daemon" \
           --replace 'kitty ' "${pkgs.kitty}/bin/kitty "
         echo '# monitor config' >> $out
-        echo 'output "DP-1" position 0 0' >> $out
-        echo 'focus output "DP-1"' >> $out
+        echo 'output * disable' >> $out
+        echo 'output DP-1 enable' >> $out
+        echo 'focus output DP-1' >> $out
       '';
     in
     {
@@ -199,7 +194,5 @@
       };
 
       environment.etc."greetd/scroll-greeter-config".source = scrollConfig;
-
-      environment.systemPackages = [ sysc-greet-override ];
     };
 }
