@@ -9,6 +9,7 @@
       desktopServices
       desktopPrograms
       desktopFlakes
+      desktopVars
     ];
   };
 }

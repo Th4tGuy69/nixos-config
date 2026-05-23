@@ -196,12 +196,6 @@
             inputs.scroll-flake.packages.${pkgs.system}.scroll-stable
           }/bin/scroll --config /etc/greetd/scroll-greeter-config";
         };
-        # settings.initial_session = {
-        #   command = "${
-        #     inputs.scroll-flake.packages.${pkgs.system}.scroll-stable
-        #   }/bin/scroll --config /etc/greetd/scroll-greeter-config";
-        #   user = "thatguy";
-        # };
       };
 
       environment.etc."greetd/scroll-greeter-config".source = scrollConfig;
