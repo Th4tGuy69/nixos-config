@@ -154,31 +154,34 @@ in
           default = { };
           description = "Additional ASCII art configs";
           type = types.attrsOf (
-            types.submodule {
-              options = {
-                name = mkOption {
-                  type = types.str;
-                  default = _module.args.name;
-                  description = "Compositor name for plain text rendering";
+            types.submodule (
+              { config, ... }:
+              {
+                options = {
+                  name = mkOption {
+                    type = types.str;
+                    default = config._module.args.name;
+                    description = "Compositor name for plain text rendering";
+                  };
+                  color = mkOption {
+                    type = types.nullOr types.str;
+                    default = null;
+                    example = "#123abc";
+                    description = "Optional per-session ASCII color override";
+                  };
+                  ascii = mkOption {
+                    type = types.listOf types.lines;
+                    default = [ ];
+                    description = "Optional ASCII art entries";
+                  };
+                  roasts = mkOption {
+                    type = types.listOf types.str;
+                    default = [ ];
+                    description = "Optional list of roast strings";
+                  };
                 };
-                color = mkOption {
-                  type = types.nullOr types.str;
-                  default = null;
-                  example = "#123abc";
-                  description = "Optional per-session ASCII color override";
-                };
-                ascii = mkOption {
-                  type = types.listOf types.lines;
-                  default = [ ];
-                  description = "Optional ASCII art entries";
-                };
-                roasts = mkOption {
-                  type = types.listOf types.str;
-                  default = [ ];
-                  description = "Optional list of roast strings";
-                };
-              };
-            }
+              }
+            )
           );
         };
       };
