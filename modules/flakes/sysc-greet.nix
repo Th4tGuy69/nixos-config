@@ -1,7 +1,20 @@
 { inputs, ... }:
 let
   mkSyscGreet =
-    pkgs:
+    pkgs: extraAsciiConfigs:
+    let
+      generatedAsciiConfigs = pkgs.lib.mapAttrs (
+        name: entry:
+        pkgs.writeText "${name}.cfg" (
+          pkgs.lib.concatStringsSep "\n" (
+            [ "name=${entry.name}" ]
+            ++ pkgs.lib.optional (entry.color != null) "color=${entry.color}"
+            ++ pkgs.lib.imap1 (i: art: "ascii_${toString i}=\n${art}") entry.ascii
+            ++ pkgs.lib.optional (entry.roasts != [ ]) "roasts=${pkgs.lib.concatStringsSep " | " entry.roasts}"
+          )
+        )
+      ) extraAsciiConfigs;
+    in
     pkgs.buildGoModule rec {
       pname = "sysc-greet";
       version = "1.1.6";
@@ -37,6 +50,13 @@ let
       postInstall = ''
               mkdir -p $out/share/sysc-greet/ascii_configs
               cp -r ascii_configs/* $out/share/sysc-greet/ascii_configs/
+
+              # Install extra ASCII configs from NixOS module (override bundled on collision)
+              ${pkgs.lib.concatStrings (
+                pkgs.lib.mapAttrsToList (name: src: ''
+                  cp ${src} $out/share/sysc-greet/ascii_configs/${name}.conf
+                '') generatedAsciiConfigs
+              )}
 
               mkdir -p $out/share/sysc-greet/fonts
               cp -r fonts/* $out/share/sysc-greet/fonts/
@@ -109,7 +129,7 @@ in
   perSystem =
     { pkgs, ... }:
     {
-      packages.sysc-greet = mkSyscGreet pkgs;
+      packages.sysc-greet = mkSyscGreet pkgs { };
     };
 
   flake.nixosModules.sysc-greet =
@@ -122,7 +142,7 @@ in
     with lib;
     let
       cfg = config.services.sysc-greet;
-      package = cfg.package;
+      package = mkSyscGreet pkgs cfg.extraAsciiConfigs;
     in
     {
       options.services.sysc-greet = {
@@ -247,47 +267,13 @@ in
           "polkit-1/rules.d/85-greeter.rules".source = "${package}/etc/polkit-1/rules.d/85-greeter.rules";
         };
 
-        systemd.tmpfiles.rules =
-          let
-            # Bundled configs are symlinked first; extraAsciiConfigs entries
-            # use `ln -sf` so they silently win on any filename collision.
-            generatedAsciiConfigs = lib.mapAttrs (
-              name: entry:
-              pkgs.writeText "${name}.conf" (
-                lib.concatStringsSep "\n" (
-                  [ "name=${entry.name}" ]
-                  ++ lib.optional (entry.color != null) "color=${entry.color}"
-                  ++ lib.imap1 (i: art: "ascii_${toString i}=\n${art}") entry.ascii
-                  ++ lib.optional (entry.roasts != [ ]) "roasts=${lib.concatStringsSep " | " entry.roasts}"
-                )
-              )
-            ) cfg.extraAsciiConfigs;
-
-            mergedAsciiConfigs = pkgs.runCommand "sysc-greet-merged-ascii-configs" { } ''
-              mkdir -p $out
-              for f in ${package}/share/sysc-greet/ascii_configs/*; do
-                ln -s "$f" "$out/$(basename "$f")"
-              done
-              ${lib.concatStrings (
-                lib.mapAttrsToList (name: src: ''
-                  ln -sf ${src} "$out/${name}.conf"
-                '') generatedAsciiConfigs
-              )}
-            '';
-          in
-          [
-            # Create cache directory
-            "d /var/cache/sysc-greet 0755 greeter greeter -"
-
-            # Symlink every share subdirectory individually so we can override ascii_configs
-            "L+ /usr/share/sysc-greet/fonts       - - - - ${package}/share/sysc-greet/fonts"
-            # Symlink for wallpaper paths (compositor configs use gslapper with these paths)
-            "L+ /usr/share/sysc-greet/wallpapers  - - - - ${package}/share/sysc-greet/wallpapers"
-            "L+ /usr/share/sysc-greet/Assets      - - - - ${package}/share/sysc-greet/Assets"
-
-            # ASCII configs use dataDir ldflags injection instead, but wallpapers keep symlink
-            "L+ /usr/share/sysc-greet/ascii_configs - - - - ${mergedAsciiConfigs}"
-          ];
+        # Create cache directory
+        systemd.tmpfiles.rules = [
+          "d /var/cache/sysc-greet 0755 greeter greeter -"
+          # Symlink for wallpaper paths (compositor configs use gslapper with these paths)
+          # ASCII configs use dataDir ldflags injection instead, but wallpapers keep symlink
+          "L+ /usr/share/sysc-greet - - - - ${package}/share/sysc-greet"
+        ];
 
         # Enable polkit (required for shutdown/reboot)
         security.polkit.enable = true;
