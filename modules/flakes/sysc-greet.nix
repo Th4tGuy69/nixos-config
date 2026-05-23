@@ -129,7 +129,7 @@ in
   perSystem =
     { pkgs, ... }:
     {
-      packages.sysc-greet = mkSyscGreet pkgs { };
+      packages.sysc-greet = mkSyscGreet pkgs;
     };
 
   flake.nixosModules.sysc-greet =
