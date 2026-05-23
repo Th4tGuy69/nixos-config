@@ -8,23 +8,6 @@
       config,
       ...
     }:
-    let
-      # scrollConfig = pkgs.runCommand "scroll-greeter-config" { } ''
-      #   cp ${inputs.sysc-greet.packages.${pkgs.system}.default}/etc/greetd/sway-greeter-config $out
-      #   substituteInPlace $out \
-      #     --replace 'swaymsg ' "${
-      #       inputs.scroll-flake.packages.${pkgs.system}.scroll-stable
-      #     }/bin/scrollmsg " \
-      #     --replace 'awww-daemon' "${pkgs.awww}/bin/awww-daemon" \
-      #     --replace 'kitty ' "${pkgs.kitty}/bin/kitty " \
-      #     --replace '# seat * hide_cursor 1000' "seat * hide_cursor 100"
-      #   echo '# monitor config' >> $out
-      #   echo 'output * disable' >> $out
-      #   echo 'output DP-1 enable' >> $out
-      #   echo 'focus output DP-1' >> $out
-      #   echo 'exec ghostty' >> $out
-      # '';
-    in
     {
       # imports = [ inputs.sysc-greet.nixosModules.default ];
     }
@@ -32,12 +15,7 @@
 
       services.sysc-greet = {
         enable = true;
-        compositor = "sway";
-        # settings.default_session = {
-        #   command = "${
-        #     inputs.scroll-flake.packages.${pkgs.system}.scroll-stable
-        #   }/bin/scroll --config /etc/greetd/scroll-greeter-config";
-        # };
+        compositor = "hyprland";
         extraAsciiConfigs.scroll = {
           ascii = [
             ''
@@ -158,7 +136,5 @@
           ];
         };
       };
-
-      # environment.etc."greetd/scroll-greeter-config".source = scrollConfig;
     };
 }
