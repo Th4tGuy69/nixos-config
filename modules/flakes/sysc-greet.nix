@@ -82,19 +82,19 @@ let
               # Substitute all hardcoded paths with Nix store paths
               substituteInPlace $out/etc/greetd/niri-greeter-config.kdl \
                 --replace '/usr/local/bin/sysc-greet' "$out/bin/sysc-greet" \
-                --replace 'swww-daemon' "${pkgs.swww}/bin/swww-daemon" \
+                --replace 'awww-daemon' "${pkgs.awww}/bin/awww-daemon" \
                 --replace 'kitty ' "${pkgs.kitty}/bin/kitty " \
                 --replace 'niri msg' "${pkgs.niri}/bin/niri msg"
 
               substituteInPlace $out/etc/greetd/hyprland-greeter-config.conf \
                 --replace '/usr/local/bin/sysc-greet' "$out/bin/sysc-greet" \
-                --replace 'swww-daemon' "${pkgs.swww}/bin/swww-daemon" \
+                --replace 'awww-daemon' "${pkgs.awww}/bin/awww-daemon" \
                 --replace 'kitty ' "${pkgs.kitty}/bin/kitty " \
                 --replace 'hyprctl ' "${pkgs.hyprland}/bin/hyprctl "
 
               substituteInPlace $out/etc/greetd/sway-greeter-config \
                 --replace '/usr/local/bin/sysc-greet' "$out/bin/sysc-greet" \
-                --replace 'swww-daemon' "${pkgs.swww}/bin/swww-daemon" \
+                --replace 'awww-daemon' "${pkgs.awww}/bin/awww-daemon" \
                 --replace 'kitty ' "${pkgs.kitty}/bin/kitty " \
                 --replace 'swaymsg ' "${pkgs.sway}/bin/swaymsg "
 
@@ -247,7 +247,7 @@ in
           [
             package
             kitty
-            swww
+            awww
           ]
           ++ (
             if cfg.compositor == "niri" then

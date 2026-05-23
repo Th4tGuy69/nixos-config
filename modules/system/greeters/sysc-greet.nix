@@ -15,7 +15,7 @@
       #     --replace 'swaymsg ' "${
       #       inputs.scroll-flake.packages.${pkgs.system}.scroll-stable
       #     }/bin/scrollmsg " \
-      #     --replace 'swww-daemon' "${pkgs.swww}/bin/swww-daemon" \
+      #     --replace 'awww-daemon' "${pkgs.awww}/bin/awww-daemon" \
       #     --replace 'kitty ' "${pkgs.kitty}/bin/kitty " \
       #     --replace '# seat * hide_cursor 1000' "seat * hide_cursor 100"
       #   echo '# monitor config' >> $out
