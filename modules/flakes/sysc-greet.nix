@@ -253,15 +253,13 @@ in
             # use `ln -sf` so they silently win on any filename collision.
             generatedAsciiConfigs = lib.mapAttrs (
               name: entry:
-              pkgs.writeText "${name}.json" (
-                builtins.toJSON {
-                  inherit (entry)
-                    name
-                    color
-                    ascii
-                    roasts
-                    ;
-                }
+              pkgs.writeText "${name}.conf" (
+                lib.concatStringsSep "\n" (
+                  [ "name=${entry.name}" ]
+                  ++ lib.optional (entry.color != null) "color=${entry.color}"
+                  ++ lib.imap1 (i: art: "ascii_${toString i}=\n${art}") entry.ascii
+                  ++ lib.optional (entry.roasts != [ ]) "roasts=${lib.concatStringsSep " | " entry.roasts}"
+                )
               )
             ) cfg.extraAsciiConfigs;
 
@@ -272,7 +270,7 @@ in
               done
               ${lib.concatStrings (
                 lib.mapAttrsToList (name: src: ''
-                  ln -sf ${src} "$out/${name}.json"
+                  ln -sf ${src} "$out/${name}.conf"
                 '') generatedAsciiConfigs
               )}
             '';
