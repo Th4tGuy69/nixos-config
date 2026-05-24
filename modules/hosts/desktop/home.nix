@@ -38,6 +38,7 @@
         stylix
         syncthing
         vscode
+        wlsunset
         wine
         xdg
         yazi
