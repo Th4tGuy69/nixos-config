@@ -126,9 +126,9 @@
         # your displays after another 300 seconds, and turn your screens back on when
         # resumed. It will also lock your screen before your computer goes to sleep.
         exec swayidle -w \
-            timeout 300 'swaylock -f -c 000000' \
+            timeout 300 '${lib.getExe pkgs.swaylock-effects} -f -C ${swaylock-effects-config}' \
             timeout 600 'scrollmsg "output * power off"' resume 'scrollmsg "output * power on"' \
-            before-sleep 'swaylock -f -c 000000'
+            before-sleep '${lib.getExe pkgs.swaylock-effects} -f -C ${swaylock-effects-config}'
 
         ### Input configuration
         #
@@ -735,9 +735,50 @@
         #
         # include @sysconfdir@/scroll/config.d/*
       '';
+
+      swaylock-effects-config = pkgs.writeText "swaylock-effects-config" ''
+        screenshots
+        indicator-idle-visible
+        clock
+        timestr %I:%M
+        datestr ""
+        grace 3
+        fade-in 2
+        text-clear ""
+        text-caps-lock ⇪
+        text-ver ...
+        text-wrong X
+        effect-greyscale
+        effect-vignette 0.5:0
+        effect-blur 7x5
+        color 000000
+        inside-color 00000000
+        inside-clear-color 00000000
+        inside-ver-color 00000000
+        inside-wrong-color 00000000
+        ring-color b3b3b300
+        ring-clear-color b3b3b3
+        ring-ver-color b3b3b300
+        ring-wrong-color b3b3b300
+        ring-caps-lock-color b3b3b300
+        line-color b3b3b3
+        separator-color 00000000
+        text-color b3b3b3
+        text-clear-color b3b3b3
+        text-ver-color b3b3b3
+        text-wrong-color b3b3b3
+        layout-text-color b3b3b3
+        key-hl-color b3b3b3
+        bs-hl-color b3b3b3
+        indicator-radius 65
+        indicator-thickness 3
+        line-uses-ring
+      '';
     in
     {
       home.file.".config/scroll/config".text = scrollConfig;
+
+      home.packages = with pkgs; [ swaylock-effects ];
 
       xdg.portal.extraPortals = with pkgs; [
         xdg-desktop-portal
