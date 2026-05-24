@@ -740,7 +740,7 @@
         screenshots
         indicator-idle-visible
         clock
-        timestr %I:%M
+        timestr "%I:%M"
         datestr ""
         grace 3
         fade-in 2
