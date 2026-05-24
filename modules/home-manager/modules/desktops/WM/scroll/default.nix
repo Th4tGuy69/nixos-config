@@ -740,38 +740,38 @@
         screenshots
         indicator-idle-visible
         clock
-        timestr '%I:%M'
-        datestr ""
-        grace 3
-        fade-in 2
-        text-clear ""
-        text-caps-lock ⇪
-        text-ver ...
-        text-wrong X
+        timestr=%I:%M
+        datestr=
+        grace=3
+        fade-in=2
+        text-clear=
+        text-caps-lock=⇪
+        text-ver=...
+        text-wrong=X
         effect-greyscale
-        effect-vignette 0.5:0
-        effect-blur 7x5
-        color 000000
-        inside-color 00000000
-        inside-clear-color 00000000
-        inside-ver-color 00000000
-        inside-wrong-color 00000000
-        ring-color b3b3b300
-        ring-clear-color b3b3b3
-        ring-ver-color b3b3b300
-        ring-wrong-color b3b3b300
-        ring-caps-lock-color b3b3b300
-        line-color b3b3b3
-        separator-color 00000000
-        text-color b3b3b3
-        text-clear-color b3b3b3
-        text-ver-color b3b3b3
-        text-wrong-color b3b3b3
-        layout-text-color b3b3b3
-        key-hl-color b3b3b3
-        bs-hl-color b3b3b3
-        indicator-radius 65
-        indicator-thickness 3
+        effect-vignette=0.5:0
+        effect-blur=7x5
+        color=000000
+        inside-color=00000000
+        inside-clear-color=00000000
+        inside-ver-color=00000000
+        inside-wrong-color=00000000
+        ring-color=b3b3b300
+        ring-clear-color=b3b3b3
+        ring-ver-color=b3b3b300
+        ring-wrong-color=b3b3b300
+        ring-caps-lock-color=b3b3b300
+        line-color=b3b3b3
+        separator-color=00000000
+        text-color=b3b3b3
+        text-clear-color=b3b3b3
+        text-ver-color=b3b3b3
+        text-wrong-color=b3b3b3
+        layout-text-color=b3b3b3
+        key-hl-color=b3b3b3
+        bs-hl-color=b3b3b3
+        indicator-radius=65
+        indicator-thickness=3
         line-uses-ring
       '';
     in
