@@ -3,22 +3,28 @@
 {
   perSystem =
     { pkgs, ... }:
-
     let
       pname = "seanime-denshi";
-      version = "3.7.1";
+
+      manifest = builtins.readFile (
+        builtins.fetchurl {
+          url = "https://github.com/5rahim/seanime/releases/latest/download/latest-linux.yml";
+          sha256 = "sha256:18k2ax2f2z1h1v3prrfxqflncj0b7isxzaf2d4i9jbqfs9w38vwf";
+        }
+      );
+
+      version = builtins.head (builtins.match ".*version: ([0-9.]+).*" manifest);
+      sha512 = builtins.head (builtins.match ".*\nsha512: ([A-Za-z0-9+/=]+)\n.*" manifest);
 
       src = pkgs.fetchurl {
-        url = "https://github.com/5rahim/seanime/releases/download/v${version}/seanime-denshi-${version}_Linux_x86_64.AppImage";
-        hash = "sha256-TWENSkQWIE9WsXS3D3rfjBP5CsvXik3ED2CrCymMW2E=";
+        url = "https://github.com/5rahim/seanime/releases/latest/download/seanime-denshi-${version}_Linux_x86_64.AppImage";
+        inherit sha512;
       };
 
       appimageContents = pkgs.appimageTools.extractType2 {
         inherit pname version src;
       };
-
     in
-
     {
       packages.seanime-denshi = pkgs.appimageTools.wrapType2 rec {
         inherit pname version src;
