@@ -53,6 +53,7 @@
         lua ${windowResizerScript}
 
         ### Startup apps
+        exec ${lib.getExe pkgs.wlsunset} -l 44.56 -L -123.27 -t 1600 -T 4000
         ${lib.concatMapStringsSep "\n" startupApp config.gui.startupApps}
 
         ### Variables
