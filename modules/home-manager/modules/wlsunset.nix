@@ -2,7 +2,7 @@
 
 {
   flake.homeModules.wlsunset =
-    { ... }:
+    { lib, ... }:
     {
       services.wlsunset = {
         enable = true;
@@ -16,8 +16,10 @@
 
       systemd.user.services.wlsunset = {
         Unit = {
-          After = [ "graphical-session.target" ];
-          PartOf = [ "graphical-session.target" ];
+          After = [ "scroll-session.target" ];
+          BindsTo = [ "scroll-session.target" ];
+
+          ConditionEnvironment = lib.mkForce "";
         };
       };
     };
