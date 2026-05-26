@@ -13,5 +13,12 @@
           night = 1600;
         };
       };
+
+      systemd.user.services.wlsunset = {
+        Unit = {
+          After = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
+        };
+      };
     };
 }
