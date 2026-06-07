@@ -37,7 +37,7 @@
         starship
         stylix
         syncthing
-        vscode
+        # vscode
         wlsunset
         wine
         xdg
@@ -147,7 +147,7 @@
             p7zip
             # thunderbird-latest
             obsidian
-            bitwarden-desktop
+            # bitwarden-desktop
             #keyguard
             libnotify
             #unityhub
