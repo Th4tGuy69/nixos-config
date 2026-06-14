@@ -83,7 +83,7 @@
         #
         # You can get the names of your outputs by running: scrollmsg -t get_outputs
         output DP-1 {
-            position 1080 56
+            position 1080 28
             scale 1
 
             layout_type horizontal
