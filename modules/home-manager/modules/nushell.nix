@@ -119,29 +119,12 @@
 
             git -c include.path=${config.home.homeDirectory}/.gitconfig commit -m (date now | format date '%D %r')
 
-            let tmp = (mktemp)
+            print -n "Push to github? [y/N] (5s) "
+            let key = (input listen --types [key] --timeout 5sec)
+            let answer = if $key == null { "n" } else { $key.code | into string | str downcase }
+            print $answer
 
-            start (nu -c $"
-                input 'Push to GitHub? [y/N] '
-                | str trim
-                | str downcase
-                | default 'n'
-                | save -f '($tmp)'
-            ")
-
-            sleep 5sec
-
-            let push = (
-                if ($tmp | path exists) {
-                    open $tmp | str trim | default "n"
-                } else {
-                    "n"
-                }
-            )
-
-            rm -f $tmp
-
-            if $push == "y" {
+            if $answer == "y" {
                 git -c include.path=${config.home.homeDirectory}/.gitconfig push
             }
           }
