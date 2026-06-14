@@ -118,7 +118,32 @@
             sudo nixos-rebuild switch --flake
 
             git -c include.path=${config.home.homeDirectory}/.gitconfig commit -m (date now | format date '%D %r')
-            git -c include.path=${config.home.homeDirectory}/.gitconfig push
+
+            let tmp = (mktemp)
+
+            start (nu -c $"
+                input 'Push to GitHub? [y/N] '
+                | str trim
+                | str downcase
+                | default 'n'
+                | save -f '($tmp)'
+            ")
+
+            sleep 5sec
+
+            let push = (
+                if ($tmp | path exists) {
+                    open $tmp | str trim | default "n"
+                } else {
+                    "n"
+                }
+            )
+
+            rm -f $tmp
+
+            if $push == "y" {
+                git -c include.path=${config.home.homeDirectory}/.gitconfig push
+            }
           }
         '';
 
