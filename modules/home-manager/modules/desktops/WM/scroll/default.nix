@@ -83,7 +83,7 @@
         #
         # You can get the names of your outputs by running: scrollmsg -t get_outputs
         output DP-1 {
-            position 1080 0
+            position 1080 -56
             scale 1
 
             layout_type horizontal
@@ -92,7 +92,7 @@
         }
 
         output "LG Electronics 27GL650F 008NTHM5V961" {
-            position 0 56
+            position 0 0
             scale 1
             transform 270
 
