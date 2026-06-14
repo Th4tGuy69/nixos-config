@@ -148,7 +148,7 @@
             # thunderbird-latest
             obsidian
             # bitwarden-desktop
-            #keyguard
+            keyguard
             libnotify
             #unityhub
             turtle
