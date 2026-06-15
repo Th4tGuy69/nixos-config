@@ -53,6 +53,8 @@
         lua ${windowResizerScript}
 
         ### Startup apps
+        exec ${pkgs.systemd}/bin/systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+        exec ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
         exec ${lib.getExe pkgs.wlsunset} -l 44.56 -L -123.27 -t 1600 -T 4000
         ${lib.concatMapStringsSep "\n" startupApp config.gui.startupApps}
 
