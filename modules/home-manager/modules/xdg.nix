@@ -8,7 +8,7 @@
         enable = true;
 
         portal.enable = true;
-        portal.config.common.default = "*";
+        portal.config.common.default = "gtk";
 
         mime.enable = true;
         mimeApps.enable = true;
