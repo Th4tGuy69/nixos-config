@@ -2,17 +2,13 @@
 
 {
   flake.homeModules.xdg =
-    { pkgs, ... }:
+    { ... }:
     {
       xdg = {
         enable = true;
 
         portal.enable = true;
-        portal.extraPortals = with pkgs; [
-          xdg-desktop-portal
-          xdg-desktop-portal-gtk
-          xdg-desktop-portal-wlr
-        ];
+        portal.config.common.default = "*";
 
         mime.enable = true;
         mimeApps.enable = true;
