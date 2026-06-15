@@ -775,9 +775,18 @@
         indicator-thickness=3
         line-uses-ring
       '';
+
+      scrollXDGConfig = ''
+        [preferred]
+        default=gtk
+        org.freedesktop.impl.portal.ScreenCast=wlr
+        org.freedesktop.impl.portal.Screenshot=wlr
+        org.freedesktop.impl.portal.Inhibit=none
+      '';
     in
     {
       home.file.".config/scroll/config".text = scrollConfig;
+      home.file.".config/xdg-desktop-portal/scroll-portals.conf".text = scrollXDGConfig;
 
       home.packages = with pkgs; [ swaylock-effects ];
 
