@@ -72,6 +72,14 @@
           makeWrapper $BIN $out/bin/keyguard \
             --set LD_LIBRARY_PATH "${pkgs.lib.makeLibraryPath buildInputs}"
 
+          mkdir -p $out/share/applications
+          cp $out/lib/keyguard/Keyguard/share/applications/*.desktop \
+             $out/share/applications/
+
+          mkdir -p $out/share/icons
+          cp -r $out/lib/keyguard/Keyguard/share/icons/* \
+             $out/share/icons/
+
           runHook postInstall
         '';
       };
