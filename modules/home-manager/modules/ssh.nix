@@ -25,7 +25,7 @@
 
         enableDefaultConfig = false;
         matchBlocks."*" = {
-          identityAgent = "~/.bitwarden-ssh-agent.sock";
+          identityAgent = "\${XDG_RUNTIME_DIR}/keyguard-ssh-agent.sock";
 
           forwardAgent = false;
           addKeysToAgent = "no";
