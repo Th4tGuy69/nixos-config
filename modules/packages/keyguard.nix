@@ -76,6 +76,9 @@
           cp $out/lib/keyguard/Keyguard/share/applications/*.desktop \
              $out/share/applications/
 
+          substituteInPlace $out/share/applications/com.artemchep.keyguard.desktop \
+            --replace "Exec=Keyguard" "Exec=keyguard %U"
+            
           mkdir -p $out/share/icons
           cp -r $out/lib/keyguard/Keyguard/share/icons/* \
              $out/share/icons/
