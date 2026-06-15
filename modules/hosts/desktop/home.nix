@@ -107,6 +107,7 @@
             # my packages
             seanime-denshi
             nerdshade
+            keyguard
           ])
           ++ (with pkgs; [
             # nixpkgs
@@ -148,7 +149,7 @@
             # thunderbird-latest
             obsidian
             # bitwarden-desktop
-            keyguard
+            # keyguard # is the mobile version for some reason
             libnotify
             #unityhub
             turtle
