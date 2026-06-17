@@ -9,7 +9,7 @@
       manifest = builtins.readFile (
         builtins.fetchurl {
           url = "https://github.com/5rahim/seanime/releases/latest/download/latest-linux.yml";
-          sha256 = "sha256:0j128nklkdhhlxh59svpc5zyx25414yprhr1ja41pxrxv41hkwn6";
+          sha256 = "sha256:0j30zr1slljfar1phcykfbpmi7h5rac3vgc5in97jfwfrshv351l";
         }
       );
 
