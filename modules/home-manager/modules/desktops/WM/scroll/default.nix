@@ -710,8 +710,7 @@
             bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
             # Special key to take a screenshot with grimblast
-            bindsym $mod+Shift+s exec grimblast copy area
-
+            bindsym $mod+Shift+s exec ${lib.getExe pkgs.sway-contrib.grimshot} copy area
 
         focus_wrapping no
 
