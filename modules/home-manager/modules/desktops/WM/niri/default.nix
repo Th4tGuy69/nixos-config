@@ -2,9 +2,6 @@
 
 {
   flake.homeModules.niri = { ... }: {
-
-    niri-flake.cache.enable = true;
-
     programs.niri.settings = {
       screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 

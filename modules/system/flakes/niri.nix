@@ -5,6 +5,5 @@
     { ... }:
     {
       imports = [ inputs.niri.nixosModules.niri ];
-
     };
 }
