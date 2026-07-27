@@ -1,9 +1,9 @@
 { ... }:
 
 {
-  flake.homeModules.niri = { ... }: {
+  flake.homeModules.niri = { config, ... }: {
     programs.niri.settings = {
-      screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
+      screenshot-path = "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S.png";
 
       hotkey-overlay = {
         hide-not-bound = false;
@@ -14,15 +14,188 @@
       clipboard.disable-primary = false;
       prefer-no-csd = false;
 
-      spawn-at-startup = [ ];
+      spawn-at-startup = map (app: { command = [ app ]; }) config.gui.startupApps;
 
-      # Binds (per bind defaults)
-      # binds.<name>.action = null; # required, niri action
-      # binds.<name>.allow-inhibiting = true;
-      # binds.<name>.allow-when-locked = false;
-      # binds.<name>.cooldown-ms = null;
-      # binds.<name>.hotkey-overlay = { hidden = false; };
-      # binds.<name>.repeat = true;
+      binds = {
+        "Mod+Shift+Slash".action = {
+          show-hotkey-overlay = { };
+        };
+
+        "Mod+T".action.spawn = [ config.gui.terminal ];
+        "Mod+D".action.spawn = [ config.gui.runner ];
+        "Super+Alt+L".action.spawn = [ "swaylock" ];
+
+        "Mod+Q".action = {
+          close-window = { };
+        };
+
+        "Mod+Left".action = {
+          focus-column-left = { };
+        };
+        "Mod+Down".action = {
+          focus-window-down = { };
+        };
+        "Mod+Up".action = {
+          focus-window-up = { };
+        };
+        "Mod+Right".action = {
+          focus-column-right = { };
+        };
+
+        "Mod+Ctrl+Left".action = {
+          move-column-left = { };
+        };
+        "Mod+Ctrl+Down".action = {
+          move-window-down = { };
+        };
+        "Mod+Ctrl+Up".action = {
+          move-window-up = { };
+        };
+        "Mod+Ctrl+Right".action = {
+          move-column-right = { };
+        };
+
+        "Mod+Home".action = {
+          focus-column-first = { };
+        };
+        "Mod+End".action = {
+          focus-column-last = { };
+        };
+        "Mod+Ctrl+Home".action = {
+          move-column-to-first = { };
+        };
+        "Mod+Ctrl+End".action = {
+          move-column-to-last = { };
+        };
+
+        "Mod+Shift+Left".action = {
+          focus-monitor-left = { };
+        };
+        "Mod+Shift+Down".action = {
+          focus-monitor-down = { };
+        };
+        "Mod+Shift+Up".action = {
+          focus-monitor-up = { };
+        };
+        "Mod+Shift+Right".action = {
+          focus-monitor-right = { };
+        };
+
+        "Mod+Shift+Ctrl+Left".action = {
+          move-column-to-monitor-left = { };
+        };
+        "Mod+Shift+Ctrl+Down".action = {
+          move-column-to-monitor-down = { };
+        };
+        "Mod+Shift+Ctrl+Up".action = {
+          move-column-to-monitor-up = { };
+        };
+        "Mod+Shift+Ctrl+Right".action = {
+          move-column-to-monitor-right = { };
+        };
+
+        "Mod+Page_Down".action = {
+          focus-workspace-down = { };
+        };
+        "Mod+Page_Up".action = {
+          focus-workspace-up = { };
+        };
+        "Mod+U".action = {
+          focus-workspace-down = { };
+        };
+        "Mod+I".action = {
+          focus-workspace-up = { };
+        };
+
+        "Mod+Ctrl+Page_Down".action = {
+          move-column-to-workspace-down = { };
+        };
+        "Mod+Ctrl+Page_Up".action = {
+          move-column-to-workspace-up = { };
+        };
+        "Mod+Ctrl+U".action = {
+          move-column-to-workspace-down = { };
+        };
+        "Mod+Ctrl+I".action = {
+          move-column-to-workspace-up = { };
+        };
+
+        "Mod+Shift+Page_Down".action = {
+          move-workspace-down = { };
+        };
+        "Mod+Shift+Page_Up".action = {
+          move-workspace-up = { };
+        };
+        "Mod+Shift+U".action = {
+          move-workspace-down = { };
+        };
+        "Mod+Shift+I".action = {
+          move-workspace-up = { };
+        };
+
+        "Mod+1".action.focus-workspace = 1;
+        "Mod+2".action.focus-workspace = 2;
+        "Mod+3".action.focus-workspace = 3;
+        "Mod+4".action.focus-workspace = 4;
+        "Mod+5".action.focus-workspace = 5;
+        "Mod+6".action.focus-workspace = 6;
+        "Mod+7".action.focus-workspace = 7;
+        "Mod+8".action.focus-workspace = 8;
+        "Mod+9".action.focus-workspace = 9;
+
+        "Mod+Ctrl+1".action.move-column-to-workspace = 1;
+        "Mod+Ctrl+2".action.move-column-to-workspace = 2;
+        "Mod+Ctrl+3".action.move-column-to-workspace = 3;
+        "Mod+Ctrl+4".action.move-column-to-workspace = 4;
+        "Mod+Ctrl+5".action.move-column-to-workspace = 5;
+        "Mod+Ctrl+6".action.move-column-to-workspace = 6;
+        "Mod+Ctrl+7".action.move-column-to-workspace = 7;
+        "Mod+Ctrl+8".action.move-column-to-workspace = 8;
+        "Mod+Ctrl+9".action.move-column-to-workspace = 9;
+
+        "Mod+Comma".action = {
+          consume-window-into-column = { };
+        };
+        "Mod+Period".action = {
+          expel-window-from-column = { };
+        };
+
+        "Mod+R".action = {
+          switch-preset-column-width = { };
+        };
+        "Mod+F".action = {
+          maximize-column = { };
+        };
+        "Mod+Shift+F".action = {
+          fullscreen-window = { };
+        };
+        "Mod+C".action = {
+          center-column = { };
+        };
+
+        "Mod+Minus".action.set-column-width = "-10%";
+        "Mod+Equal".action.set-column-width = "+10%";
+
+        "Mod+Shift+Minus".action.set-window-height = "-10%";
+        "Mod+Shift+Equal".action.set-window-height = "+10%";
+
+        "Print".action = {
+          screenshot = { };
+        };
+        "Ctrl+Print".action = {
+          screenshot-screen = { };
+        };
+        "Alt+Print".action = {
+          screenshot-window = { };
+        };
+
+        "Mod+Shift+E".action = {
+          quit = { };
+        };
+        "Mod+Shift+P".action = {
+          power-off-monitors = { };
+        };
+      };
 
       switch-events = {
         lid-close = null;
@@ -30,10 +203,6 @@
         tablet-mode-off = null;
         tablet-mode-on = null;
       };
-
-      # Workspaces (named workspaces)
-      # workspaces.<name>.name = <key>; # defaults to the attribute key
-      # workspaces.<name>.open-on-output = null;
 
       overview = {
         backdrop-color = null;
@@ -57,12 +226,12 @@
 
         keyboard = {
           numlock = false;
-          repeat-delay = 600;
-          repeat-rate = 25;
+          repeat-delay = 200;
+          repeat-rate = 35;
           track-layout = "global";
           xkb = {
             file = null;
-            layout = "";
+            layout = "us";
             model = "";
             options = null;
             rules = "";
@@ -153,19 +322,45 @@
         workspace-auto-back-and-forth = false;
       };
 
-      # Outputs (per output defaults)
-      # outputs.<name>.backdrop-color = null;
-      # outputs.<name>.background-color = null;
-      # outputs.<name>.enable = true;
-      # outputs.<name>.focus-at-startup = false;
-      # outputs.<name>.mode = null;
-      # outputs.<name>.mode.refresh = null;
-      # outputs.<name>.name = <key>; # defaults to the attribute key
-      # outputs.<name>.position = null;
-      # outputs.<name>.scale = null;
-      # outputs.<name>.transform.flipped = false;
-      # outputs.<name>.transform.rotation = 0;
-      # outputs.<name>.variable-refresh-rate = false;
+      outputs = {
+        "DP-1" = {
+          enable = true;
+          focus-at-startup = true;
+          mode = null; # preferred
+          position = {
+            x = 0;
+            y = 0;
+          };
+          scale = 1;
+          transform.rotation = 0;
+        };
+
+        "LG Electronics 27GL650F 008NTHM5V961" = {
+          enable = true;
+          mode = null; # preferred
+          position = {
+            x = -1080;
+            y = -56;
+          };
+          scale = 1;
+          transform.rotation = 270;
+        };
+
+        "Hisense Electric Co. Ltd. HISENSE 0x00000001" = {
+          enable = true;
+          mode = {
+            width = 3840;
+            height = 2160;
+            refresh = 60.0;
+          };
+          position = {
+            x = 0;
+            y = 0;
+          };
+          scale = 2;
+          transform.rotation = 0;
+        };
+      };
 
       cursor = {
         hide-after-inactive-ms = null;
@@ -317,18 +512,14 @@
 
       environment = { };
 
-      # Window rules (list of rules)
-      # window-rules = [];
+      window-rules = [ ];
 
-      # Layer rules (list of rules)
-      # layer-rules = [];
+      layer-rules = [ ];
 
       xwayland-satellite = {
         enable = true;
         path = null;
       };
-
-      # debug = {}; # Debug options for niri
     };
   };
 }
