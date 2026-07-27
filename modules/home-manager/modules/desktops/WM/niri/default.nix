@@ -21,11 +21,11 @@
           show-hotkey-overlay = { };
         };
 
-        "Mod+T".action.spawn = [ config.gui.terminal ];
-        "Mod+D".action.spawn = [ config.gui.runner ];
+        "Mod+Q".action.spawn = [ config.gui.terminal ];
+        "Mod+Space".action.spawn = [ config.gui.runner ];
         "Super+Alt+L".action.spawn = [ "swaylock" ];
 
-        "Mod+Q".action = {
+        "Mod+W".action = {
           close-window = { };
         };
 
