@@ -17,7 +17,7 @@
     musnix.url = "github:musnix/musnix";
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
+      url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -57,6 +57,11 @@
     scroll-flake = {
       url = "github:Diax170/scroll-flake";
       inputs.nixpkgs.follows = "nixpkgs"; # this assumes nixos unstable
+    };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # sysc-greet = {
