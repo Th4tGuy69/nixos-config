@@ -343,7 +343,7 @@
             y = -56;
           };
           scale = 1;
-          transform.rotation = 270;
+          transform.rotation = 90;
         };
 
         "Hisense Electric Co. Ltd. HISENSE 0x00000001" = {
