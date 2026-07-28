@@ -7,12 +7,12 @@
 
       hotkey-overlay = {
         hide-not-bound = false;
-        skip-at-startup = false;
+        skip-at-startup = true;
       };
 
       config-notification.disable-failed = false;
       clipboard.disable-primary = false;
-      prefer-no-csd = false;
+      prefer-no-csd = true;
 
       spawn-at-startup = map (app: { command = [ app ]; }) config.gui.startupApps;
 
@@ -164,13 +164,16 @@
           switch-preset-column-width = { };
         };
         "Mod+F".action = {
-          maximize-column = { };
+          fullscreen-window = { };
         };
         "Mod+Shift+F".action = {
-          fullscreen-window = { };
+          toggle-window-floating = { };
         };
         "Mod+C".action = {
           center-column = { };
+        };
+        "Mod+Ctrl+C".action = {
+          center-visible-columns = { };
         };
 
         "Mod+Minus".action.set-column-width = "-10%";
@@ -243,8 +246,8 @@
         mod-key-nested = null;
 
         mouse = {
-          accel-profile = null;
-          accel-speed = null;
+          accel-profile = "flat";
+          accel-speed = -0.5;
           enable = true;
           left-handed = false;
           middle-emulation = false;
@@ -370,46 +373,31 @@
       };
 
       layout = {
-        background-color = null;
-        always-center-single-column = false;
+        background-color = "black";
+        always-center-single-column = true;
         center-focused-column = "never";
         default-column-display = "normal";
-        default-column-width = { };
+        default-column-width = {
+          proportion = 0.5;
+        };
         empty-workspace-above-first = false;
         gaps = 16;
 
-        border = {
-          enable = false;
-          width = 4;
-          active = null;
-          inactive = null;
-          urgent = null;
-        };
+        border.enable = false;
 
         focus-ring = {
           enable = true;
-          width = 4;
-          active = null;
-          inactive = null;
-          urgent = null;
-        };
-
-        shadow = {
-          color = "#00000070";
-          draw-behind-window = false;
-          enable = false;
-          inactive-color = null;
-          offset = {
-            x = 0;
-            y = 5;
+          width = 1;
+          active = {
+            color = "#ffffff";
           };
-          softness = 30;
-          spread = 5;
         };
 
         insert-hint = {
           enable = true;
-          display = null;
+          display = {
+            color = "#ffffff80";
+          };
         };
 
         struts = {
@@ -466,9 +454,29 @@
         };
 
         window-close = {
-          custom-shader = null;
+          custom-shader = ''
+            r"
+            vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+                float p = niri_clamped_progress;
+                vec2 uv = coords_geo.xy;
+
+                vec2 center = vec2(0.5, 0.5);
+                float scale = mix(1.0, 0.95, p);
+                vec2 scaled_uv = (uv - center) / scale + center;
+
+                vec3 tex_coords = niri_geo_to_tex * vec3(scaled_uv, 1.0);
+                vec4 color = texture2D(niri_tex, tex_coords.st);
+
+                float alpha = smoothstep(1.0, 0.2, p);
+
+                return color * alpha;
+            }"
+          '';
           enable = true;
-          kind = null;
+          kind.easing = {
+            duration-ms = 500;
+            curve = "ease-out-cubic";
+          };
         };
 
         window-movement = {
@@ -477,9 +485,30 @@
         };
 
         window-open = {
-          custom-shader = null;
+          custom-shader = ''
+            r"
+            vec4 open_color(vec3 coords_geo, vec3 size_geo) {
+              float p = niri_clamped_progress;
+              vec2 uv = coords_geo.xy;
+
+              vec2 center = vec2(0.5, 0.5);
+              float scale = mix(0.95, 1.0, p);
+              vec2 scaled_uv = (uv - center) / scale + center;
+
+              vec3 tex_coords = niri_geo_to_tex * vec3(scaled_uv, 1.0);
+              vec4 color = texture2D(niri_tex, tex_coords.st);
+
+              float alpha = smoothstep(0.0, 0.8, p);
+
+              return color * alpha;
+            }"
+          '';
           enable = true;
-          kind = null;
+
+          kind.easing = {
+            duration-ms = 500;
+            curve = "ease-out-cubic";
+          };
         };
 
         window-resize = {
@@ -512,7 +541,20 @@
 
       environment = { };
 
-      window-rules = [ ];
+      window-rules = [
+        {
+          matches = [ ];
+          excludes = [ ];
+
+          geometry-corner-radius = {
+            bottom-left = 10.0;
+            bottom-right = 10.0;
+            top-left = 10.0;
+            top-right = 10.0;
+          };
+          clip-to-geometry = true;
+        }
+      ];
 
       layer-rules = [ ];
 
