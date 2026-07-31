@@ -8,7 +8,7 @@
         builtins.readFile (
           pkgs.fetchurl {
             url = "https://api.github.com/repos/AChep/keyguard-app/releases/latest";
-            sha256 = "sha256-z7MLhWx2+9uVc34F2nHNl1DXK2BTTZgGGK+QalGo/mo=";
+            sha256 = "sha256-igwgN1UkSIRyiK37qU4oBClSt9revJvJaVZvqjdJIk8=";
           }
         )
       );
