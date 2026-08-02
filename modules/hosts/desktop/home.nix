@@ -137,7 +137,7 @@
             via
             vial
             (discord.override {
-              withOpenASAR = false;
+              withOpenASAR = true;
               withVencord = false;
               withEquicord = true;
               withMoonlight = false;
