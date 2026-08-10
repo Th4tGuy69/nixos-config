@@ -72,11 +72,11 @@
         fsType = "vfat";
       };
       
-      # fileSystems."/data" = {
-      #   device = "/dev/disk/by-label/Data";
-      #   fsType = "ntfs-3g";
-      #   options = [ "rw" "exec" "nofail" ];
-      # };
+      fileSystems."/data" = {
+        device = "/dev/disk/by-label/Data";
+        fsType = "ntfs-3g";
+        options = [ "rw" "exec" "nofail" ];
+      };
 
       # Enable NTFS support
       boot.supportedFilesystems = [ "ntfs" ];
