@@ -8,7 +8,6 @@
         stylix
         musnix
         scroll
-        niri
       ];
     };
 }

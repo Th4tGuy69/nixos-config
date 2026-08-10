@@ -59,11 +59,6 @@
       inputs.nixpkgs.follows = "nixpkgs"; # this assumes nixos unstable
     };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # sysc-greet = {
     #   url = "github:Nomadcxx/sysc-greet";
     #   inputs.nixpkgs.follows = "nixpkgs";
