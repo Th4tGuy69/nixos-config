@@ -71,22 +71,32 @@
         device = "/dev/disk/by-label/BOOT";
         fsType = "vfat";
       };
-      
-      fileSystems."/data" = {
-        device = "/dev/disk/by-label/Data";
-        fsType = "ntfs-3g";
-        options = [ "rw" "exec" "nofail" ];
-      };
 
       # Enable NTFS support
       boot.supportedFilesystems = [ "ntfs" ];
 
-      fileSystems."/windows" = {
-        device = "/dev/disk/by-label/Windows";
-        fsType = "ntfs-3g";
+      fileSystems."/data" = {
+        device = "/dev/disk/by-label/Data";
+        fsType = "ntfs3";
         options = [
           "rw"
+          "exec"
           "uid=1000"
+          "gid=100"
+          "umask=022"
+          "nofail"
+        ];
+      };
+
+      fileSystems."/windows" = {
+        device = "/dev/disk/by-label/Windows";
+        fsType = "ntfs3";
+        options = [
+          "rw"
+          "exec"
+          "uid=1000"
+          "gid=100"
+          "umask=022"
           "nofail"
         ];
       };
