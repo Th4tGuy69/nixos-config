@@ -62,7 +62,7 @@
       };
 
       fileSystems."/" = {
-        device = "/dev/disk/by-uuid/4cc70096-48c2-4d52-9f3f-e99205266b94";
+        device = "/dev/disk/by-label/NixOS";
         fsType = "btrfs";
         options = [ "subvol=@" ];
       };
@@ -71,12 +71,12 @@
         device = "/dev/disk/by-label/BOOT";
         fsType = "vfat";
       };
-
-      fileSystems."/data" = {
-        device = "/dev/disk/by-label/Data";
-        fsType = "btrfs";
-        options = [ "exec" ];
-      };
+      
+      # fileSystems."/data" = {
+      #   device = "/dev/disk/by-label/Data";
+      #   fsType = "ntfs-3g";
+      #   options = [ "rw" "exec" "nofail" ];
+      # };
 
       # Enable NTFS support
       boot.supportedFilesystems = [ "ntfs" ];
@@ -87,16 +87,17 @@
         options = [
           "rw"
           "uid=1000"
+          "nofail"
         ];
       };
 
-      swapDevices = [
-        {
-          device = "/data/swapfile";
-          size = 32 * 1024; # 32 GB
-          options = [ "discard" ];
-        }
-      ];
+      # swapDevices = [
+      #   {
+      #     device = "/data/swapfile";
+      #     size = 32 * 1024; # 32 GB
+      #     options = [ "discard" ];
+      #   }
+      # ];
 
       # Networking
       networking = {

@@ -5,7 +5,7 @@
     { pkgs, ... }:
     {
       services.ollama = {
-        enable = true;
+        enable = false;
         package = pkgs.ollama-rocm;
         home = "/data/Ollama";
         loadModels = [ "qwen2.5-coder:14b" ];
