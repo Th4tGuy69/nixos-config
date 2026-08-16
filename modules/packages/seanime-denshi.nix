@@ -21,7 +21,7 @@
         inherit sha512;
       };
 
-      appimageContents = pkgs.appimageTools.extractType2 {
+      appimageContents = pkgs.appimageTools.extract {
         inherit pname version src;
       };
     in
