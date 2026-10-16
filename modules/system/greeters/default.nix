@@ -5,7 +5,7 @@
     { lib, ... }:
     {
       imports = with self.nixosModules; [
-        sysc-greet
+        # sysc-greet
         greetd
         regreet
       ];

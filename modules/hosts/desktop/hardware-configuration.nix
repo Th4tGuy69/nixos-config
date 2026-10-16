@@ -13,7 +13,7 @@
 
       boot = {
         loader = {
-          systemd-boot.enable = pkgs.lib.mkForce false; # Set to false when using lanzaboote
+          systemd-boot.enable = pkgs.lib.mkForce (!config.boot.lanzaboote.enable); # Set to false when using lanzaboote
           efi.canTouchEfiVariables = true;
           # grub = {
           #   theme = "${(pkgs.sleek-grub-theme.override { withStyle = "dark"; })}/theme.txt";
@@ -22,7 +22,7 @@
         };
 
         lanzaboote = {
-          enable = true;
+          enable = false;
           pkiBundle = "/var/lib/sbctl";
           autoGenerateKeys.enable = true;
           autoEnrollKeys.enable = true;

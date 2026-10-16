@@ -106,9 +106,9 @@
         packages =
           (with self.packages.${pkgs.system}; [
             # my packages
-            seanime-denshi
+            # seanime-denshi
             nerdshade
-            keyguard
+            # keyguard
           ])
           ++ (with pkgs; [
             # nixpkgs

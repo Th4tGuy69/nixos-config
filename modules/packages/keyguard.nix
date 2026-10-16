@@ -8,7 +8,7 @@
         builtins.readFile (
           pkgs.fetchurl {
             url = "https://api.github.com/repos/AChep/keyguard-app/releases/latest";
-            sha256 = "sha256-eDE8iX/d1la8atHDH+bI4gQlVmDj3RQI1i68edXyl4U=";
+            sha256 = "sha256-5DWqbM8dA28fr0SWZ1dYJ6wB1Zb6cz05K3qWtAeGiX8=";
           }
         )
       );
@@ -23,7 +23,7 @@
 
         src = pkgs.fetchurl {
           url = "https://github.com/AChep/keyguard-app/releases/download/${tag}/Keyguard-${appVersion}-linux-x86_64.tar.gz";
-          sha256 = "sha256-V+VXWJnpDUgHvsbr52ltDT0G+nh/RPcYWoaJRokIXPc=";
+          sha256 = "sha256-14CTSrZGbJJDQvNIYf7o6eoejubtncFVANlT6XZPMlA=";
         };
 
         nativeBuildInputs = [

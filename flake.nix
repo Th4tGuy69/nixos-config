@@ -9,10 +9,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # disko = {
-    #   url = "github:nix-community/disko";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
 
     musnix.url = "github:musnix/musnix";
 
@@ -59,10 +72,10 @@
       inputs.nixpkgs.follows = "nixpkgs"; # this assumes nixos unstable
     };
 
-    # sysc-greet = {
-    #   url = "github:Nomadcxx/sysc-greet";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    sysc-greet = {
+      url = "github:Nomadcxx/sysc-greet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     anyrun = {
       url = "github:anyrun-org/anyrun";

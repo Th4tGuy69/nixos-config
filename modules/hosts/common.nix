@@ -9,6 +9,12 @@
         sops
       ];
 
+      networking.networkmanager.enable = true;
+
+      hardware.enableRedistributableFirmware = true;
+
+      users.mutableUsers = false;
+
       # Nix
       nixpkgs.config.allowUnfree = true;
 
