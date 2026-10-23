@@ -4,7 +4,6 @@
     { ... }:
     {
       imports = with self.nixosModules; [
-        regreet
         appimage
         nix-ld
         steam

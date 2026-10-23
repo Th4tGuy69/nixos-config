@@ -6,8 +6,10 @@
     {
       programs.zoxide = {
         enable = true;
-        enableBashIntegration = true;  # bash is system default, always enable
+        enableBashIntegration = true; # bash is system default, always enable
         enableNushellIntegration = config.programs.nushell.enable;
       };
+
+      persistence.directories = [ ".local/share/zoxide" ];
     };
 }

@@ -1,18 +1,9 @@
-{ inputs, ... }:
+{ ... }:
 
 {
   flake.nixosModules.sysc-greet =
+    { ... }:
     {
-      pkgs,
-      lib,
-      config,
-      ...
-    }:
-    {
-      # imports = [ inputs.sysc-greet.nixosModules.default ];
-    }
-    // lib.mkIf config.greeter.sysc-greet.enable {
-
       services.sysc-greet = {
         enable = true;
         compositor = "hyprland";

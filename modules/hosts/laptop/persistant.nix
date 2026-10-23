@@ -1,14 +1,11 @@
-{ inputs, ... }:
+{ self, ... }:
 
 {
+
   flake.nixosModules.laptopPersistence =
     { ... }:
     {
-      imports = [ inputs.impermanence.nixosModules.impermanence ];
-
-      environment.persistence."/persistent" = {
-        hideMounts = true;
-
+      persistence = {
         directories = [
           "/etc/NetworkManager/system-connections"
           "/var/lib/NetworkManager"
@@ -25,6 +22,7 @@
             group = "users";
           }
         ];
+
         files = [
           "/etc/machine-id"
         ];

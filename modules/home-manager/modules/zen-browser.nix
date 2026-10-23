@@ -8,6 +8,8 @@
         inputs.zen-browser.homeModules.beta
       ];
 
+      persistence.directories = [ ".cache/zen" ];
+
       programs.zen-browser = {
         enable = true;
         setAsDefaultBrowser = true;

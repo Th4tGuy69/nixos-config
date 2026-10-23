@@ -5,7 +5,8 @@
     { ... }:
     {
       imports = with self.nixosModules; [
-        greeter
+        tuigreet
+        # ./tuigreet.nix
         audio
         udev
         # ollama
@@ -20,6 +21,7 @@
         flatpak.enable = true;
         gvfs.enable = true; # Trash folder and networking for nautilus
         syncthing.openDefaultPorts = true;
+        fprintd.enable = true;
       };
     };
 }

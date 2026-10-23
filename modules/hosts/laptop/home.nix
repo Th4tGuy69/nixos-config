@@ -25,12 +25,13 @@
         # quickshell # Uncomment if gui.bar = "quickshell"
         anyrun # Uncomment if gui.runner = "anyrun"
         # sherlock  # Uncomment if gui.runner = "sherlock"
-        linux-wallpaperengine
+        # linux-wallpaperengine
         mpv
         nushell
         pay-respects
+        persistence
         pipewire
-        prismlauncher
+        # prismlauncher
         qemu
         rbw
         sops
@@ -63,36 +64,31 @@
         terminal = "ghostty";
         fileManager = "nautilus";
         monitors = [
-          {
-            name = "DP-1";
-            preferred = true;
-            x = 0;
-            y = 0;
-            scale = 1;
-          }
-          {
-            description = "LG Electronics 27GL650F 008NTHM5V961";
-            preferred = true;
-            x = -1080;
-            y = -56;
-            scale = 1;
-            transform = 270;
-          }
-          {
-            description = "Hisense Electric Co. Ltd. HISENSE 0x00000001";
-            width = 3840;
-            height = 2160;
-            refreshRate = 60;
-            x = 0;
-            y = 0;
-            scale = 2;
-          }
         ];
         startupApps = [
           "zen-beta"
-          "discord"
-          "spotify"
-          "steam -silent"
+        ];
+      };
+
+      persistence = {
+        directories = [
+          ".local/share/direnv"
+          "Downloads"
+          {
+            directory = ".gnupg";
+            mode = "0700";
+          }
+          {
+            directory = ".local/share/keyrings";
+            mode = "0700";
+          }
+          {
+            directory = ".ssh";
+            mode = "0700";
+          }
+        ];
+        files = [
+
         ];
       };
 
@@ -106,7 +102,7 @@
         packages =
           (with self.packages.${pkgs.system}; [
             # my packages
-            seanime-denshi
+            # seanime-denshi
             nerdshade
             keyguard
           ])
@@ -116,9 +112,9 @@
             spotify
             pavucontrol
             # lutris
-            mangohud
-            gamemode
-            gamescope
+            # mangohud
+            # gamemode
+            # gamescope
             # protonplus
             # protonup-qt
             nautilus
@@ -133,17 +129,17 @@
             goverlay
             #kodi-wayland
             # stremio
-            playerctl
-            via
-            vial
-            (discord.override {
-              withOpenASAR = true;
-              withVencord = false;
-              withEquicord = true;
-              withMoonlight = false;
-              withTTS = false;
-              enableAutoscroll = true;
-            })
+            # playerctl
+            # via
+            # vial
+            # (discord.override {
+            #   withOpenASAR = true;
+            #   withVencord = false;
+            #   withEquicord = true;
+            #   withMoonlight = false;
+            #   withTTS = false;
+            #   enableAutoscroll = true;
+            # })
             #equibop
             #goofcord
             p7zip
@@ -168,11 +164,11 @@
             #android-tools
             #flutter
             gimp
-            r2modman
+            # r2modman
             obs-studio
             blender
             #gcc
-            wayvr
+            # wayvr
             # bottles
             # networkmanagerapplet
             # helvum
@@ -181,32 +177,10 @@
             # pakku
             gdu
             # bottom
-            lumafly
+            # lumafly
             element-desktop
-            deadlock-mod-manager
+            # deadlock-mod-manager
           ]);
-
-        persistence."/persistent" = {
-          directories = [
-            ".local/share/direnv"
-            "Downloads"
-            {
-              directory = ".gnupg";
-              mode = "0700";
-            }
-            {
-              directory = ".local/share/keyrings";
-              mode = "0700";
-            }
-            {
-              directory = ".ssh";
-              mode = "0700";
-            }
-          ];
-          files = [
-
-          ];
-        };
 
         stateVersion = "26.05"; # Don't change me
       };

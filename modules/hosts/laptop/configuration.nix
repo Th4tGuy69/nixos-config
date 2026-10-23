@@ -6,7 +6,6 @@
     {
       environment.systemPackages = with pkgs; [
         sbctl
-        openrgb-with-all-plugins
         curlFull
         helix
       ];
