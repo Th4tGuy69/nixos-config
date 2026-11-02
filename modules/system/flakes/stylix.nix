@@ -29,6 +29,7 @@
         };
 
         targets = {
+          limine.enable = false;
           plymouth.enable = false;
           regreet.enable = false;
         };

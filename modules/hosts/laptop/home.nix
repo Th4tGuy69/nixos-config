@@ -68,6 +68,7 @@
         ];
         startupApps = [
           "zen-beta"
+          "ironbar"
         ];
       };
 
@@ -183,7 +184,7 @@
             # deadlock-mod-manager
           ]);
 
-        stateVersion = "26.05"; # Don't change me
+        stateVersion = "26.11"; # Don't change me
       };
 
       programs.home-manager.enable = true;

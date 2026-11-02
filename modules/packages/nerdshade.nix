@@ -10,7 +10,7 @@
 
         src = pkgs.fetchurl {
           url = "https://github.com/sstark/nerdshade/releases/latest/download/nerdshade";
-          sha256 = "sha256-ADS3/Ux9p99ZOY4PYUWhy6FaMuStmnhshklJcUfrzBM=";
+          sha256 = "sha256-nvcBnv0YPSvFDXtXrnaPbd4wPuKMu9gkc3/kT0tob/k=";
         };
 
         dontUnpack = true;

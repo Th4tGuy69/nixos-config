@@ -53,12 +53,6 @@
             dimensions=$(magick "$raw" -trim +repage \
               -format '%[fx:max(w,h)]' info:)
 
-            # ORIGINAL:
-            # magick "$raw" "$output"
-            #
-            # CHANGED:
-            # Preserve the original rendered icon dimensions while adding
-            # transparent padding to accommodate rotation.
             local padding=$((size * 21 / 100))
             local canvasSize=$((size + padding * 2))
 
@@ -67,14 +61,6 @@
               -gravity center \
               -extent "''${canvasSize}x''${canvasSize}" \
               "$output"
-
-            # ORIGINAL (previously commented out):
-            # magick "$raw" \
-            #   -trim +repage \
-            #   -background none \
-            #   -gravity center \
-            #   -extent "''${dimensions}x''${dimensions}" \
-            #   "$output"
           }
 
           renderIcon ${frameworkSvg} 512 "$themeDir/spinner.png"
@@ -121,7 +107,7 @@
 
           MAX_DOTS = 8;
           dotSpacing = barWidth / MAX_DOTS;
-          dotSize = Math.Int(dotSpacing * 0.8);
+          dotSize = Math.Int(dotSpacing * 0.75);
 
           spinnerGap = Math.Int(logoSize * 0.35);
           barGap = Math.Int(logoSize * 0.07);
@@ -133,17 +119,6 @@
           PI = 3.14159265;
           FRAMES = 540;
 
-          # ORIGINAL:
-          # spinnerBase = Image("spinner.png").Scale(logoSize, logoSize);
-          # spinner = Sprite(spinnerBase);
-          # spinner.SetX(cx - logoSize / 2);
-          # spinner.SetY(cy - logoSize / 2);
-          # spinner.SetZ(10);
-
-          # CHANGED:
-          # spinner.png now contains a larger transparent canvas.
-          # Scale the canvas to 1.42x while keeping the visible logo
-          # approximately the same size as the original logoSize.
           spinnerCanvasSize = Math.Int(logoSize * 1.42);
 
           spinnerBase = Image("spinner.png").Scale(

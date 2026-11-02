@@ -35,7 +35,6 @@
         };
 
         boot.initrd.systemd = {
-          enable = true;
           initrdBin = with pkgs; [
             btrfs-progs
             findutils

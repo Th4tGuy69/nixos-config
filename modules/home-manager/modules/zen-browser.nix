@@ -11,7 +11,29 @@
         inputs.zen-browser.homeModules.beta
       ];
 
-      # persistence.directories = [ ".config/zen/${profile}" ];
+      persistence =
+        let
+          profilePath = ".config/zen/${profile}";
+        in
+        {
+          directories = map (dir: "${profilePath}/${dir}") [
+            "bookmarkbackups"
+            "extensions"
+            "extension-store"
+            "storage"
+            "zen-sessions-backup"
+            "sessionstore-backups"
+          ];
+
+          files = map (file: "${profilePath}/${file}") [
+            "places.sqlite"
+            "cookies.sqlite"
+            "permissions.sqlite"
+            "containers.json"
+            "zen-sessions.jsonlz4"
+            "zen-live-folders.jsonlz4"
+          ];
+        };
 
       programs.zen-browser = {
         enable = true;
@@ -237,6 +259,9 @@
 
         policies = {
           DisableAppUpdate = true;
+          OverrideFirstRunPage = "";
+          OverridePostUpdatePage = "";
+          SkipTermsOfUse = true;
           DisableTelemetry = true;
           HttpsOnlyMode = true;
           SSLVersionMin = "tls1.2";
