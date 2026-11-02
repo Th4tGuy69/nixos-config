@@ -53,12 +53,13 @@
             dimensions=$(magick "$raw" -trim +repage \
               -format '%[fx:max(w,h)]' info:)
 
-            magick "$raw" \
-              -trim +repage \
-              -background none \
-              -gravity center \
-              -extent "''${dimensions}x''${dimensions}" \
-              "$output"
+            magick "$raw" "$output"
+            # magick "$raw" \
+              # -trim +repage \
+              # -background none \
+              # -gravity center \
+              # -extent "''${dimensions}x''${dimensions}" \
+              # "$output"
           }
 
           renderIcon ${frameworkSvg} 512 "$themeDir/spinner.png"
