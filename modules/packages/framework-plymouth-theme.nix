@@ -53,13 +53,28 @@
             dimensions=$(magick "$raw" -trim +repage \
               -format '%[fx:max(w,h)]' info:)
 
-            magick "$raw" "$output"
+            # ORIGINAL:
+            # magick "$raw" "$output"
+            #
+            # CHANGED:
+            # Preserve the original rendered icon dimensions while adding
+            # transparent padding to accommodate rotation.
+            local padding=$((size * 21 / 100))
+            local canvasSize=$((size + padding * 2))
+
+            magick "$raw" \
+              -background none \
+              -gravity center \
+              -extent "''${canvasSize}x''${canvasSize}" \
+              "$output"
+
+            # ORIGINAL (previously commented out):
             # magick "$raw" \
-              # -trim +repage \
-              # -background none \
-              # -gravity center \
-              # -extent "''${dimensions}x''${dimensions}" \
-              # "$output"
+            #   -trim +repage \
+            #   -background none \
+            #   -gravity center \
+            #   -extent "''${dimensions}x''${dimensions}" \
+            #   "$output"
           }
 
           renderIcon ${frameworkSvg} 512 "$themeDir/spinner.png"
@@ -118,10 +133,27 @@
           PI = 3.14159265;
           FRAMES = 540;
 
-          spinnerBase = Image("spinner.png").Scale(logoSize, logoSize);
+          # ORIGINAL:
+          # spinnerBase = Image("spinner.png").Scale(logoSize, logoSize);
+          # spinner = Sprite(spinnerBase);
+          # spinner.SetX(cx - logoSize / 2);
+          # spinner.SetY(cy - logoSize / 2);
+          # spinner.SetZ(10);
+
+          # CHANGED:
+          # spinner.png now contains a larger transparent canvas.
+          # Scale the canvas to 1.42x while keeping the visible logo
+          # approximately the same size as the original logoSize.
+          spinnerCanvasSize = Math.Int(logoSize * 1.42);
+
+          spinnerBase = Image("spinner.png").Scale(
+            spinnerCanvasSize,
+            spinnerCanvasSize
+          );
+
           spinner = Sprite(spinnerBase);
-          spinner.SetX(cx - logoSize / 2);
-          spinner.SetY(cy - logoSize / 2);
+          spinner.SetX(cx - spinnerCanvasSize / 2);
+          spinner.SetY(cy - spinnerCanvasSize / 2);
           spinner.SetZ(10);
 
           for (i = 0; i < FRAMES; i++) {
