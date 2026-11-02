@@ -12,8 +12,8 @@
           nixos-hardware.nixosModules.framework-amd-ai-300-series
 
           laptopDisko
+          laptopPlymouth
           impermanence
-          plymouth
         ];
 
       boot = {
