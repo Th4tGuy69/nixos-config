@@ -29,7 +29,7 @@
             mkdir -p $d
 
             # spinner: render large, trim margin, pad back to a square
-            rsvg-convert -w 512 -h 512 ${framework-svg} -o raw.png
+            rsvg-convert -w 512 ${framework-svg} -o raw.png
             sz=$(magick raw.png -trim +repage -format '%[fx:max(w,h)]' info:)
             magick raw.png -trim +repage -background none -gravity center \
               -extent "$sz"x"$sz" $d/spinner.png
