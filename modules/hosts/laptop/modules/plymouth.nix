@@ -81,34 +81,37 @@
             dots_y = cy + ls / 2 + gap1;
             line_y = dots_y + bd + gap2;
 
-            # ---- spinner: centered, keeps running during the prompt ----
+            # ---- spinner: smooth continuous rotation ----
             base = Image("spinner.png").Scale(ls, ls);
+
             spinner = Sprite(base);
             spinner.SetX(cx - base.GetWidth() / 2);
             spinner.SetY(cy - base.GetHeight() / 2);
             spinner.SetZ(10);
 
-            # hexagon has 6-fold symmetry: animate 60 degrees and loop
             PI = 3.14159265;
-            TURN = 40;   # frames spent rotating
-            HOLD = 15;   # frames resting between ticks (0 = continuous)
 
-            for (i = 0; i < TURN; i++) {
-              phase = i / TURN;
-              ease = (1 - Math.Cos(phase * PI)) / 2;
-              frames[i] = base.Rotate(ease * PI / 3);
+            # Six-fold symmetry: one full visual cycle is 60 degrees.
+            FRAMES = 120;
+
+            for (i = 0; i < FRAMES; i++) {
+              phase = i / FRAMES;
+              frames[i] = base.Rotate(phase * PI / 3);
             }
 
             t = 0;
+
             fun refresh() {
               t++;
-              k = t % (TURN + HOLD);
-              if (k >= TURN) k = 0;
+              k = t % FRAMES;
+
               img = frames[k];
+
               spinner.SetImage(img);
               spinner.SetX(cx - img.GetWidth() / 2);
               spinner.SetY(cy - img.GetHeight() / 2);
             }
+
             Plymouth.SetRefreshFunction(refresh);
 
             # ---- lock: center of the screen, inside the ring ----
