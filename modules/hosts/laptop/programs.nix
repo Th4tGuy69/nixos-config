@@ -6,14 +6,9 @@
       imports = with self.nixosModules; [
         appimage
         nix-ld
-        steam
+        teleport
       ];
 
-      programs = {
-        hyprland.enable = true;
-        gamescope.enable = true;
-        gamemode.enable = true;
-        coolercontrol.enable = true;
-      };
+      # programs = { };
     };
 }

@@ -3,18 +3,21 @@
 {
   flake.homeModules.zen-browser =
     { inputs, pkgs, ... }:
+    let
+      profile = "That Guy";
+    in
     {
       imports = [
         inputs.zen-browser.homeModules.beta
       ];
 
-      persistence.directories = [ ".cache/zen" ];
+      # persistence.directories = [ ".config/zen/${profile}" ];
 
       programs.zen-browser = {
         enable = true;
         setAsDefaultBrowser = true;
 
-        profiles."That Guy" =
+        profiles.${profile} =
           let
             containers = {
               Personal = {

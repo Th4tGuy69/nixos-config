@@ -19,6 +19,7 @@
         # hyprland
         niri # Uncomment to use niri
         helium
+        ironbar
         scroll # Uncomment to use scroll
         # hyprpanel  # Uncomment if gui.bar = "hyprpanel"
         # eww        # Uncomment if gui.bar = "eww"
