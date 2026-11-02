@@ -104,7 +104,7 @@
         homeDirectory = "/home/thatguy";
 
         packages =
-          (with self.packages.${pkgs.system}; [
+          (with self.packages.${pkgs.stdenv.hostPlatform.tsystem}; [
             # my packages
             # seanime-denshi
             nerdshade

@@ -1,8 +1,18 @@
-{ config, lib, inputs, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
 
 {
   flake.homeModules.quickshell =
-    { pkgs, config, inputs, ... }:
+    {
+      pkgs,
+      config,
+      inputs,
+      ...
+    }:
     let
       quickshellDir = ./quickshell;
       c = config.lib.stylix.colors.withHashtag;
@@ -57,7 +67,7 @@
     in
     {
       # Only configure if user imported this module
-      home.packages = [ inputs.quickshell.packages.${pkgs.system}.default ];
+      home.packages = [ inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default ];
 
       home.activation.copyQuickshellConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
         rm -rf $HOME/.config/quickshell

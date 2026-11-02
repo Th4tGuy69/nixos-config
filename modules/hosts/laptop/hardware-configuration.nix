@@ -2,7 +2,7 @@
 
 {
   flake.nixosModules.laptopHardwareConfiguration =
-    { lib, ... }:
+    { lib, pkgs, ... }:
     {
       imports =
         with inputs;
@@ -12,7 +12,7 @@
           nixos-hardware.nixosModules.framework-amd-ai-300-series
 
           laptopDisko
-          laptopPlymouth
+          plymouth
           impermanence
         ];
 
@@ -52,6 +52,11 @@
         };
         kernelModules = [ "kva-amd" ];
         extraModulePackages = [ ];
+
+        plymouth = {
+          theme = "framework";
+          themePackages = [ self.packages.${pkgs.stdenv.hostPlatform.system}.framework-plymouth-theme ];
+        };
       };
 
       security.tpm2.enable = true;

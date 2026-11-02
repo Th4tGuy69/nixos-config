@@ -7,7 +7,7 @@
       services.greetd = {
         enable = true;
         settings.default_session.command = "${
-          inputs.scroll-flake.packages.${pkgs.system}.scroll-stable
+          inputs.scroll-flake.packages.${pkgs.stdenv.hostPlatform.system}.scroll-stable
         }/bin/scroll --config /etc/greetd/scroll.conf";
       };
 
