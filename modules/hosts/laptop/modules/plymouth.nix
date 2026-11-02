@@ -91,12 +91,12 @@
 
             PI = 3.14159265;
 
-            # Six-fold symmetry: one full visual cycle is 60 degrees.
+            # Full rotation: 360 degrees.
             FRAMES = 120;
 
             for (i = 0; i < FRAMES; i++) {
               phase = i / FRAMES;
-              frames[i] = base.Rotate(phase * PI / 3);
+              frames[i] = base.Rotate(phase * 2 * PI);
             }
 
             t = 0;
