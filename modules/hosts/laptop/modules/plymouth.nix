@@ -92,7 +92,7 @@
             PI = 3.14159265;
 
             # Full rotation: 360 degrees.
-            FRAMES = 120;
+            FRAMES = 40;
 
             for (i = 0; i < FRAMES; i++) {
               phase = i / FRAMES;
@@ -108,8 +108,8 @@
               img = frames[k];
 
               spinner.SetImage(img);
-              spinner.SetX(cx - img.GetWidth() / 2);
-              spinner.SetY(cy - img.GetHeight() / 2);
+              spinner.SetX(cx - ls / 2);
+              spinner.SetY(cy - ls / 2);
             }
 
             Plymouth.SetRefreshFunction(refresh);
