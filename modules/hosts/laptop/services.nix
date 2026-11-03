@@ -22,6 +22,7 @@
         gvfs.enable = true; # Trash folder and networking for nautilus
         syncthing.openDefaultPorts = true;
         fprintd.enable = true;
+        upower.enable = true; # Battery information for bar
       };
     };
 }
