@@ -55,6 +55,8 @@
                 disable_popup = true;
               }
             ];
+
+            margin.bottom = 4;
           };
         };
 
@@ -79,7 +81,7 @@
             background: rgba(0, 0, 0, 0.5);
             border-radius: 999px;
             padding: 0 8px;
-            margin: 4px 12px;
+            margin: 0;
           }
 
           #clock,
